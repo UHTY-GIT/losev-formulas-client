@@ -1,0 +1,1115 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+.background_main {
+    box-sizing: border-box;
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 94px;
+}
+a:hover {
+    text-decoration: none;
+}
+
+/*Fonts start*/
+font-face {
+    font-family: 'Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-Regular.eot');
+    src: local('Gilroy Regular'), local('Gilroy-Regular'),
+        url('@/assets/fonts/Gilroy/Gilroy-Regular.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-Regular.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-Regular.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-ExtraboldItalic.eot');
+    src: local('Gilroy Extrabold Italic'), local('Gilroy-ExtraboldItalic'),
+        url('@/assets/fonts/Gilroy/Gilroy-ExtraboldItalic.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-ExtraboldItalic.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-ExtraboldItalic.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-ExtraboldItalic.ttf') format('truetype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-Bold.eot');
+    src: local('Gilroy Bold'), local('Gilroy-Bold'),
+        url('@/assets/fonts/Gilroy/Gilroy-Bold.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-Bold.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-Bold.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-Black.eot');
+    src: local('Gilroy Black'), local('Gilroy-Black'),
+        url('@/assets/fonts/Gilroy/Gilroy-Black.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-Black.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-Black.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-Light.eot');
+    src: local('Gilroy Light'), local('Gilroy-Light'),
+        url('@/assets/fonts/Gilroy/Gilroy-Light.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-Light.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-Light.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-Semibold.eot');
+    src: local('Gilroy Semibold'), local('Gilroy-Semibold'),
+        url('@/assets/fonts/Gilroy/Gilroy-Semibold.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-Semibold.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-Semibold.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-Semibold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-Medium.eot');
+    src: local('Gilroy Medium'), local('Gilroy-Medium'),
+        url('@/assets/fonts/Gilroy/Gilroy-Medium.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-Medium.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-Medium.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: '/fonts/Gilroy/Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-MediumItalic.eot');
+    src: local('Gilroy Medium Italic'), local('Gilroy-MediumItalic'),
+        url('@/assets/fonts/Gilroy/Gilroy-MediumItalic.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-MediumItalic.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-MediumItalic.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-BlackItalic.eot');
+    src: local('Gilroy Black Italic'), local('Gilroy-BlackItalic'),
+        url('@/assets/fonts/Gilroy/Gilroy-BlackItalic.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-BlackItalic.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-BlackItalic.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-BlackItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-UltraLight.eot');
+    src: local('Gilroy UltraLight'), local('Gilroy-UltraLight'),
+        url('@/assets/fonts/Gilroy/Gilroy-UltraLight.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-UltraLight.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-UltraLight.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-UltraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-RegularItalic.eot');
+    src: local('Gilroy Regular Italic'), local('Gilroy-RegularItalic'),
+        url('@/assets/fonts/Gilroy/Gilroy-RegularItalic.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-RegularItalic.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-RegularItalic.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-RegularItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-SemiboldItalic.eot');
+    src: local('Gilroy Semibold Italic'), local('Gilroy-SemiboldItalic'),
+        url('@/assets/fonts/Gilroy/Gilroy-SemiboldItalic.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-SemiboldItalic.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-SemiboldItalic.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-SemiboldItalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-HeavyItalic.eot');
+    src: local('Gilroy Heavy Italic'), local('Gilroy-HeavyItalic'),
+        url('@/assets/fonts/Gilroy/Gilroy-HeavyItalic.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-HeavyItalic.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-HeavyItalic.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-HeavyItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-Extrabold.eot');
+    src: local('Gilroy Extrabold'), local('Gilroy-Extrabold'),
+        url('@/assets/fonts/Gilroy/Gilroy-Extrabold.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-Extrabold.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-Extrabold.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-Extrabold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-BoldItalic.eot');
+    src: local('Gilroy Bold Italic'), local('Gilroy-BoldItalic'),
+        url('@/assets/fonts/Gilroy/Gilroy-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-BoldItalic.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-BoldItalic.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-UltraLightItalic.eot');
+    src: local('Gilroy UltraLight Italic'), local('Gilroy-UltraLightItalic'),
+        url('@/assets/fonts/Gilroy/Gilroy-UltraLightItalic.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-UltraLightItalic.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-UltraLightItalic.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-UltraLightItalic.ttf') format('truetype');
+    font-weight: 200;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-LightItalic.eot');
+    src: local('Gilroy Light Italic'), local('Gilroy-LightItalic'),
+        url('@/assets/fonts/Gilroy/Gilroy-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-LightItalic.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-LightItalic.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-Heavy.eot');
+    src: local('Gilroy Heavy'), local('Gilroy-Heavy'),
+        url('@/assets/fonts/Gilroy/Gilroy-Heavy.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-Heavy.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-Heavy.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-Heavy.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-Thin.eot');
+    src: local('Gilroy Thin'), local('Gilroy-Thin'),
+        url('@/assets/fonts/Gilroy/Gilroy-Thin.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-Thin.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-Thin.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('@/assets/fonts/Gilroy/Gilroy-ThinItalic.eot');
+    src: local('Gilroy Thin Italic'), local('Gilroy-ThinItalic'),
+        url('@/assets/fonts/Gilroy/Gilroy-ThinItalic.eot?#iefix') format('embedded-opentype'),
+        url('@/assets/fonts/Gilroy/Gilroy-ThinItalic.woff2') format('woff2'),
+        url('@/assets/fonts/Gilroy/Gilroy-ThinItalic.woff') format('woff'),
+        url('@/assets/fonts/Gilroy/Gilroy-ThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+/*Fonts end*/
+/*Зміна кольору виділення текста курсором*/
+::selection {
+    background: #56a442;
+    color: #fff;
+}
+::-moz-selection {
+	background: #56a442; 
+	color:#fff;
+}
+::-webkit-selection {
+	background: #56a442; 
+	color:#fff;
+}
+/*Зміна кольору виділення текста курсором - кінець*/
+/*Кастомний Скролбар*/
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #13180f;
+    border-radius: 20px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #56a442; 
+}
+/*Кастомний Скролбар - кінець*/
+body {
+	font-family: 'Gilroy', sans-serif;
+	overflow: hidden;
+}
+header {
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.50);
+    backdrop-filter: blur(12.5px);
+    margin: 10px 15px 0;
+}
+/*Main page start*/
+.background_main {
+    background: url(@/assets/photo/background-main-photo.png) no-repeat center;
+    width: 100vw;
+/*    height: 100vh;*/
+    overflow: hidden;
+    background-size: cover;
+
+}
+.logotype {
+    height: 45px;
+    position: relative;
+    top: 4px;
+}
+.header_items {
+    display: flex;
+    padding: 22px 33px;
+    align-items: center;
+    justify-content: space-between;
+    align-content: center;
+    flex-wrap: wrap;
+}
+.autorizhate {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+.autorizhate a {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 5px;
+}
+.autorizhate a img {
+    width: 20px;
+    display: flex;
+    align-items: center;
+}
+.search {
+    position: relative;
+    width: 500px;
+}
+
+.search input[type="text"] {
+    /* max-width: 515px; */
+    padding: 6px 20px 6px 53px !important;
+    border-radius: 30px !important;
+    background: #FFF !important;
+    margin: 0 !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    border: none !important;
+    height: 32px !important;
+    color: #000 !important;
+}
+.search input[type="text"]:focus {
+	border: none;
+}
+.search input[type="text"]::placeholder {
+    color: #272D33;
+}
+.search .search-icon {
+    position: absolute;
+    left: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+}
+.main-section {
+    display: flex;
+    margin: 10px 15px;
+    height: calc(100vh - 217px);
+}
+.sidebar-menu {
+    width: 230px;
+    height: 100%;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.50);
+    -webkit-backdrop-filter: blur(12.5px);
+    backdrop-filter: blur(12.5px);
+    margin-right: 15px;
+    color: #FFF;
+    font-size: 22px;
+    font-weight: 700;
+    transition: .3s ease-in-out;
+}
+.site-content {
+    width: calc(100% - 230px);
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.50);
+    backdrop-filter: blur(12.5px);
+    overflow: auto;
+    height: 100%;
+    transition: .3s ease-in-out;
+}
+.site-content.full {
+    width: calc(100% - 70px);
+}
+.sidebar-menu .menu-header {
+    display: flex;
+    align-items: center;
+    margin: 15px 25px 0px;
+    font-size: 20px;
+    font-weight: 700;
+}
+.sidebar-menu li {
+    display: flex;
+    align-items: center;
+    line-height: 24px;
+    padding: 8px 25px;
+    transition: .3s;
+}
+.sidebar-menu li:hover {
+    background-color: #56A442;
+    width: 100%;
+}
+nav ul li.active {
+    width: 100%;
+    background-color: #56A442;
+}
+.sidebar-menu li a {
+    display: flex;
+    padding: 0;
+    font-size: 18px;
+    font-weight: 600;
+    align-items: center;
+    align-content: center;
+    flex-wrap: nowrap;
+}
+.sidebar-menu .menu-header, .sidebar-menu li a:hover {
+    background-color: transparent;
+}
+
+.sidebar-menu .menu-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+.site-content {
+	padding: 30px 50px;
+}
+.page_title p {
+    color: #FFF;
+    font-size: 30px;
+    font-family: Gilroy;
+    font-weight: 700;
+}
+.recommendations {
+    margin: 25px 0 0 0;
+}
+.Categories_main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-bottom: 25px;
+}
+.Categories_main p {
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 600;
+}
+.Categories_main a {
+    color: #FFF;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration-line: underline;
+}
+.id_0001 {
+	background: url(@/assets/photo/coconut-palm-tree.png) no-repeat center;
+}
+.id_0002 {
+	background: url(@/assets/photo/beautiful-girl-standing-in-thailand.png) no-repeat center;
+}
+.block_content_podcast {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.podcast {
+    width: 300px;
+    height: 200px;
+    background-size: cover;
+    border-radius: 5px;
+    position: relative;
+    padding: 16px;
+    margin: 0 8px 10px;
+}
+.podcast::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.positions_in_block {
+	position: relative;
+    z-index: 3;
+}
+.upper_tittle {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+.context {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+.context.reversed {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: column-reverse;
+}
+.info_podcast {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.title_podcast {
+	color: #FFF;
+	font-size: 28px;
+	font-weight: 700;
+}
+.author_podcast {
+	color: #FFF;
+	font-size: 18px;
+	font-weight: 400;
+}
+.time_podcast {
+	color: #FFF;
+	font-size: 14px;
+	font-weight: 600;
+}
+.under_title {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    align-content: flex-end;
+    height: 48.5px;
+}
+.heart-button {
+    background: url('@/assets/icons/heart-1.png') no-repeat center;
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-size: cover;
+    cursor: pointer;
+    transition: background 0.5s ease;
+}
+
+.heart-button.active {
+    background: url('@/assets/icons/heart-full-1.png') no-repeat center;
+    background-size: cover;
+}
+.heart-button:focus {
+    outline: none;
+    background-color: transparent;
+}
+.categories_podcast {
+	color: #FFF;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 300;
+	line-height: normal;
+	text-decoration-line: underline;
+}
+.categories_podcast::before {
+    content: "#";
+    text-decoration: underline;
+}
+/*.play-button {
+    background: url('./assets/icons/play-button-1.png') no-repeat center;
+    width: 50px;
+    height: 50px;
+    border: none;
+    background-size: cover;
+    cursor: pointer;
+    transition: background 0.5s ease;
+}
+
+.play-button.active {
+    background: url('./assets/icons/pause-button-1.png') no-repeat center;
+    background-size: cover;
+}
+.play-button:focus {
+    outline: none;
+    background-color: transparent;
+}*/
+.play-button {
+	background-color: transparent;
+	cursor: pointer;
+	transition: transform 0.5s ease;
+}
+.play-icon {
+	transition: transform 0.5s ease;
+}
+.play-button svg {
+	width: 50px;
+    height: 50px;
+    border: none;    
+    background-color: transparent;
+}
+.play-button.expanded svg {
+    width: 69px;
+    height: 69px;
+    border: none;
+    position: relative;
+    left: 83px;
+    top: 2px;    
+    background-color: transparent;
+}
+.play-button:active {
+	outline: none;
+    background-color: transparent;
+}
+.play-button:focus {
+    outline: none;
+    background-color: transparent;
+}
+
+
+.positions_in_block.active {
+    
+}
+.podcast.active::after {
+    background-color: rgba(0, 0, 0, 0.5); /* Додано зміну колірного фону псевдоелемента */
+    backdrop-filter: blur(2px);
+}
+.positions_in_block.active .context .title_podcast {
+    font-size: 20px;
+}
+
+.positions_in_block.active .context .author_podcast {
+    font-size: 13px;
+}
+
+
+.rating_and_categories {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+}
+.podcast-rating {
+    display: none;
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: normal;
+}
+.podcast-rating::after {
+    content: "";
+    display: inline-block;
+    background-image: url('@/assets/icons/star-all-1.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 14px;
+    height: 14px;
+    margin-left: 3px;
+}
+
+.positions_in_block.active .podcast-rating {
+    display: flex;
+    align-items: center;
+}
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100px;
+    background: rgba(0, 0, 0, 0.50);
+    backdrop-filter: blur(12.5px);
+}
+svg {
+	fill:#ffffff
+}
+/*Вспливашка шо показує число на яке зібльшується гучність*/
+input[type=range]+.thumb {
+	display: none;
+}
+
+
+.audio-player {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-content: center;
+    flex-wrap: nowrap;
+    height: 100%;
+    padding: 10px 30px;
+    --seek-before-width: 0%;
+    --volume-before-width: 100%;
+}
+.audio-photo-names {
+    display: flex;
+    align-items: center;
+}
+.audio-photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+.audio-photo img {
+    width: 55px;
+    height: 55px;
+    border-radius: 5px;
+}
+.audio-names {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: nowrap;
+    margin-left: 10px;
+}
+.podcast_name {
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: normal;
+}
+.podcast_autor {
+    color: #FFF;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: normal;
+}
+.audio_usage {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.audio-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+.audio-track {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+}
+.time {
+    width: 30px;
+    text-align: center;
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: normal;
+}
+input[type=range] {
+    margin: 5px 15px;
+    border: none;
+}
+#seek-slider {
+	width: 400px;
+}
+.audio-prev,
+.audio-play,
+.audio-next {
+    background-color: transparent;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+.audio-prev:focus,
+.audio-play:focus,
+.audio-next:focus {
+    outline: none;
+    background-color: transparent;
+}
+.audio-play {
+    margin: 0 12px;
+}
+.audio-play svg {
+    width: 35px;
+    height: 35px;
+}
+.audio-prev svg,
+.audio-next svg {
+	width: 20px;
+    height: 20px;
+}
+
+
+
+
+.audio-setting {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+}
+.audio-favorite {
+    background: url('@/assets/icons/heart-1.png') no-repeat center;
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-size: cover;
+    cursor: pointer;
+    transition: background 0.5s ease;
+}
+
+.audio-favorite.active {
+    background: url('@/assets/icons/heart-full-1.png') no-repeat center;
+    background-size: cover;
+}
+.audio-favorite:focus {
+    outline: none;
+    background-color: transparent;
+}
+
+#volume-slider {
+    width: 90px;
+    margin-left: 10px;
+}
+.audio-volume {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    margin: 0 0 0 10px;
+}
+
+#volume-output {
+	color: #FFF;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.volume-icons {
+    background-color: transparent;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    width: 27px;
+    height: 27px;
+    justify-content: center;
+}
+.volume-icons:focus {
+    outline: none;
+    background-color: transparent;
+}
+#volume-icon-very-low {
+	width: 19px;
+	height: 19px;
+}
+#volume-icon-low {
+	width: 19px;
+	height: 19px;
+}
+#volume-icon-high {
+	width: 23px;
+	height: 23px;
+}
+#volume-icon-mute {
+	width: 21px;
+	height: 21px;
+}
+.volume-icons svg {
+	width: 20px;
+	height: 20px;
+}
+
+input[type="range"] {
+    position: relative;
+    -webkit-appearance: none;
+    padding: 0;
+    height: 19px;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 3px;
+    cursor: pointer;
+    background: #414141;
+    border-radius: 10px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    background: #fff;
+    position: relative;
+    z-index: 3;
+}
+input[type="range"]:active::-webkit-slider-thumb {
+    transform: scale(1.2);
+    background: #56A442;
+}
+input[type="range"]::before {
+    position: absolute;
+    content: "";
+    top: 8px;
+    left: 0;
+    width: var(--seek-before-width);
+    height: 3px;
+    background-color: #56A442;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 0px solid #56A442;
+    z-index: 1;
+}
+#volume-slider::before {
+    width: var(--volume-before-width);
+}
+#volume-slider::-webkit-slider-runnable-track {
+    background: #414141;
+}
+
+
+
+/*Main page end*/
+
+/*Login & Register pages start*/
+.background_login {
+	background: url(@/assets/photo/login-background.jpg) no-repeat center;
+    width: 100vw;
+/*    height: 100vh;*/
+    overflow: hidden;
+    background-size: cover;
+}
+
+.empty-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+}
+.auth-card {
+    width: 800px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12.5px);
+    border-radius: 12px;
+}
+
+.input-field input::placeholder {
+    font-size: 20px;
+    color: #272D33;
+}
+.helper-text.invalid {
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 3px 7px;
+    display: inline-block;
+    background-color: #f44336;
+}
+.card .card-action {
+    background-color: transparent;
+    border-top: 1px solid rgba(160,160,160,0.2);
+    position: relative;
+    padding: 16px 24px;
+}
+
+.input-field>label {
+    color: #fff;
+}
+.card .card-content .card-title {
+    display: block;
+    line-height: 32px;
+    margin-top: 10px;
+    margin-bottom: 35px;
+    font-size: 35px;
+    font-weight: 600;
+}
+input:not([type]):focus:not([readonly])+label, input[type=text]:not(.browser-default):focus:not([readonly])+label, input[type=password]:not(.browser-default):focus:not([readonly])+label, input[type=email]:not(.browser-default):focus:not([readonly])+label, input[type=url]:not(.browser-default):focus:not([readonly])+label, input[type=time]:not(.browser-default):focus:not([readonly])+label, input[type=date]:not(.browser-default):focus:not([readonly])+label, input[type=datetime]:not(.browser-default):focus:not([readonly])+label, input[type=datetime-local]:not(.browser-default):focus:not([readonly])+label, input[type=tel]:not(.browser-default):focus:not([readonly])+label, input[type=number]:not(.browser-default):focus:not([readonly])+label, input[type=search]:not(.browser-default):focus:not([readonly])+label, textarea.materialize-textarea:focus:not([readonly])+label {
+	color: #fff;
+}
+.butt_login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+.butt_register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+.auth-submit {
+    font-size: 18px;
+    width: auto;
+    padding: 12px 35px;
+    height: auto;
+    line-height: 20px;
+    background-color: #56A442;
+    border-radius: 20px;
+    font-family: 'Gilroy', sans-serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+.btn:hover, .btn-large:hover, .btn-small:hover {
+    background-color: #407a31;
+}
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+    color: #56a442;
+    margin-right: 0px;
+    -webkit-transition: color .3s ease;
+    transition: color .3s ease;
+    text-transform: none;
+}
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
+    color: #7ed840;
+}
+
+.background_register {
+	background: url(@/assets/photo/register-background.jpg) no-repeat top;
+    width: 100vw;
+/*    height: 100vh;*/
+    overflow: hidden;
+    background-size: cover;
+}
+.under_butt_auth {
+	font-family: 'Gilroy', sans-serif;
+	font-size: 15px;
+}
+label {
+    color: #ffff;
+}
+[type="checkbox"]+span:not(.lever):before, [type="checkbox"]:not(.filled-in)+span:not(.lever):after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    z-index: 0;
+    border: 2px solid #ffffff;
+    border-radius: 1px;
+    margin-top: 3px;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+[type="checkbox"]:checked+span:not(.lever):before {
+    top: -4px;
+    left: -5px;
+    width: 12px;
+    height: 22px;
+    border-top: 3px solid transparent;
+    border-left: 3px solid transparent;
+    border-right: 3px solid #56a442;
+    border-bottom: 3px solid #56a442;
+    -webkit-transform: rotate(40deg);
+    transform: rotate(40deg);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+}
+input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    border-radius: 0;
+    outline: none;
+    height: 3rem;
+    width: 100%;
+    font-family: 'Gilroy', sans-serif;
+    color: #fff;
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    padding: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    -webkit-transition: border .3s, -webkit-box-shadow .3s;
+    transition: border .3s, -webkit-box-shadow .3s;
+    transition: box-shadow .3s, border .3s;
+    transition: box-shadow .3s, border .3s, -webkit-box-shadow .3s;
+}
+
+input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #FFF;
+    -webkit-box-shadow: 0 1px 0 0 #fff;
+    box-shadow: 0 1px 0 0 #fff;
+}
+
+/* Додані стилі для іконки на пароль */
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+/*Login & Register pages end*/
