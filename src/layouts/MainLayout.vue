@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import NavbarNonLogin from "@/components/app/Navbar.vue";
-import SidebarNonLogin from "@/components/app/Sidebar.vue";
-import BottombarNonLogin from "@/components/app/Bottombar.vue";
+import NavbarNonLogin from "@/components/app/NavBar.vue";
+import SidebarNonLogin from "@/components/app/SideBar.vue";
+import BottombarNonLogin from "@/components/app/BottomBar.vue";
 export default {
   name: 'main-layout',
   components: {
