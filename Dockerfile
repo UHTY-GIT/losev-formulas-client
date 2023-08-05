@@ -1,5 +1,5 @@
 # Використовуємо базовий образ для Node.js
-FROM node:14 as build-stage
+FROM node:20.5.0 as build-stage
 
 # Встановлюємо робочу директорію у контейнері
 WORKDIR /app
@@ -8,10 +8,11 @@ WORKDIR /app
 COPY package*.json ./
 
 # Встановлюємо залежності
+RUN npm install -g npm@9.8.1
 RUN npm install
 
 # Копіюємо весь проект у контейнер
-COPY src .
+COPY . .
 
 # Збираємо проект для продакшнього режиму
 RUN npm run build
