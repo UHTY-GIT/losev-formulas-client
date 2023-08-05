@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install
 
 # Копіюємо весь проект у контейнер
-COPY . .
+COPY src .
 
 # Збираємо проект для продакшнього режиму
 RUN npm run build
