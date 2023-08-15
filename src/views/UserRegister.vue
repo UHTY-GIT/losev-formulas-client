@@ -93,7 +93,7 @@ import { ref } from 'vue';
 import { inject } from 'vue';
 import useVuelidate from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
-//import { useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 //import apiService from '@/services/apiService';
 
 export default {
@@ -109,7 +109,7 @@ export default {
     const password = ref('');
     const name = ref(''); // Реактивний стан для імені користувача
 
-    //const router = useRouter(); // Переміщено сюди з submitHandler
+    const router = useRouter(); // Переміщено сюди з submitHandler
     const v$ = useVuelidate(); // Визначено тут для спрощення
     const submitHandler = async () => {
       if (v$.value.$invalid) {
@@ -124,7 +124,7 @@ export default {
         name: name.value // Додайте ім'я користувача в дані форми
       };
       console.log(formData);
-
+      router.push('/');
       // const response = await apiService.registerUser(formData.email, formData.password, formData.name);
       //
       // if (response.data.success) {
@@ -153,7 +153,10 @@ export default {
       submitHandler, // Повертаємо функцію з setup
       isPasswordVisible,
       togglePassword,
-      passwordIconClass
+      passwordIconClass,
+      email,
+      password,
+      name
     }
   },
   validations () {
