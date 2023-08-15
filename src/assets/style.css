@@ -1113,3 +1113,7 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
   cursor: pointer;
 }
 /*Login & Register pages end*/
+
+/*.invalid{*/
+/*    color:#f44336*/
+/*}*/

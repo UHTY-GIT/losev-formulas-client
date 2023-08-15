@@ -9,10 +9,12 @@
         <img class="search-icon" src="@/assets/icons/search-1.png" alt="search icon">
       </div>
       <div class="autorizhate">
-        <a href="#"><img src="@/assets/icons/settings-1.png" alt="settings"></a>
-        <a href="#">Login</a>
-        <a href="#">Sign up</a>
+        <router-link to="/settings"><img src="@/assets/icons/settings-1.png" alt="settings"></router-link>
+        <router-link to="/login">Login</router-link>
+        <router-link to="/register">Sign up</router-link>
       </div>
     </div>
   </header>
 </template>
+<script setup>
+</script>

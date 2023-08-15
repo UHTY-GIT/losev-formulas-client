@@ -33,14 +33,18 @@
 <script>
 import homeIcon from '@/assets/icons/home-1.png';
 import allPodcastIcon from '@/assets/icons/all-podcast-1.png';
+import mypodcastIcon from '@/assets/icons/my-podcast-1.png';
+import mysavedIcon from '@/assets/icons/my-saved-1.png';
 import categoriesIcon from '@/assets/icons/categories-1.png';
 
 export default {
   data: () => ({
     links: [
-      {title: 'Головна', url: '/main', icon: homeIcon},
-      {title: 'Всі подкасти', url: '/', exact:true, icon: allPodcastIcon},
-      {title: 'Категорії', url: '/', exact:true, icon: categoriesIcon},
+      {title: 'Головна', url: '/', icon: homeIcon},
+      {title: 'Всі подкасти', url: '/allpodcast', exact:true, icon: allPodcastIcon},
+      {title: 'Мої подкасти', url: '/podcast', exact:true, icon: mypodcastIcon},
+      {title: 'Збереження', url: '/saved', exact:true, icon: mysavedIcon},
+      {title: 'Категорії', url: '/categories', exact:true, icon: categoriesIcon},
     ],
     isSmall: false
   }),
