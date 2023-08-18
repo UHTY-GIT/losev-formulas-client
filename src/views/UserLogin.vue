@@ -76,7 +76,8 @@ import useVuelidate from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
 import {inject} from "vue";
 import {useRouter} from "vue-router";
-import apiService from '@/services/apiService';
+import messages from "@/utils/messages";
+//import apiService from '@/services/apiService';
 
 export default {
   name: 'loginPage',
@@ -102,15 +103,15 @@ export default {
         password: password.value
       };
       console.log(formData);
-      //
-      // router.push('/');
 
-      const response = await apiService.loginUser(email.value, password.value);
-      console.log(response.data);
-      if (response.data && response.data.token) {
-        localStorage.setItem('token', response.data.token);
-        router.push('/');
-      }
+      router.push('/');
+
+      // const response = await apiService.loginUser(email.value, password.value);
+      // console.log(response.data);
+      // if (response.data && response.data.token) {
+      //   localStorage.setItem('token', response.data.token);
+      //   router.push('/');
+      // }
     }
 
     // Реактивний стан для перевірки видимості пароля
@@ -147,6 +148,12 @@ export default {
   created() {
     this.backgroundClass = inject('backgroundClass');
   },
+  mounted() {
+    //повідомлення про вихід з системи переться по ключу з get запиту
+    if (messages[this.$route.query.message]) {
+      this.$message(messages[this.$route.query.message])
+    }
+  }
 }
 
 </script>

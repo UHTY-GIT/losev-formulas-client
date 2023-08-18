@@ -12,7 +12,18 @@
 a:hover {
     text-decoration: none;
 }
-
+button {
+    transition: .3s;
+}
+/*button:hover {*/
+/*    outline: none;*/
+/*    background-color: #56A442;*/
+/*    color: #fff;*/
+/*}*/
+/*button:focus {*/
+/*    outline: none;*/
+/*    background-color: #407a31;*/
+/*}*/
 /*Fonts start*/
 font-face {
     font-family: 'Gilroy';
@@ -1117,3 +1128,115 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 /*.invalid{*/
 /*    color:#f44336*/
 /*}*/
+
+/*Profile page start*/
+.profile-content {
+    position: relative;
+    min-height: 90%;
+    padding-bottom: 50px;
+}
+.name-edit {
+    border-radius: 13px;
+    background: #FFF;
+    padding: 9px 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    cursor: pointer;
+
+}
+.edit-link {
+    text-decoration: none;
+    color: #000;
+    font-family: Gilroy;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+.name-edit img {
+    padding: 0 7px 0 0;
+    width: 28px;
+
+}
+.my_profile_input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+.my_profile_input input {
+    width: 250px !important;
+}
+.logout-section {
+    position: absolute;
+    bottom: 0;
+    border-radius: 13px;
+    background: #FFF;
+    transition: .3s;
+}
+.logout-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 17px;
+}
+.logout-link img {
+    padding: 0 7px 0 0;
+}
+.logout-section:hover {
+    background-color: #56A442;
+}
+.logout-section:hover .edit-link {
+    color: #fff;
+}
+.logout-section:hover .logout-link img {
+    filter: invert(1);
+}
+.name-edit:hover .edit-link {
+    color: #fff;
+}
+.name-edit:hover img {
+    filter: invert(1);
+}
+.name-edit:focus .edit-link {
+    color: #fff;
+}
+.name-edit:focus img {
+    filter: invert(1);
+}
+.user-page-password {
+    color: #FFFFFF;
+    left: 225px !important;
+}
+/*Profile page end*/
+
+
+/*All Podcast Page start*/
+.all-podcast-block{
+    margin: 25px 0 0 0;
+}
+.dropdown span {
+    color: #FFF;
+    font-family: Gilroy;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 0 10px 0 0;
+}
+.dropdown-content {
+    color: #FFF;
+    font-family: Gilroy;
+    font-size: 18px;
+    font-weight: 600;
+}
+.dropdown-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 500px;
+    padding-bottom: 25px;
+}
+
+/*All Podcast Page end*/

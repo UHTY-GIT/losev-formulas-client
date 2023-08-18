@@ -21,6 +21,11 @@ const apiService = {
         });
     },
 
+    // Функція для реєстрації користувача
+    mainPage: () => {
+        return axios.get(`${BASE_URL}/api/v1/podcasts`);
+    },
+
     // Тут можна додати інші функції для різних API запитів
 };
 

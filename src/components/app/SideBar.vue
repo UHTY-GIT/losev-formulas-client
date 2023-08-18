@@ -6,12 +6,13 @@
         <span v-show="!isSmall">МЕНЮ</span>
       </a>
     </div>
+<!--    Видалив :exact="link.exact" після :to="link.url бо матюкався Vue 3"-->
     <ul class="menu-ul">
       <router-link
           v-for="link in links"
           :key="link.url"
           :to="link.url"
-          :exact="link.exact"
+
           active-class="active"
           custom
           v-slot="{ navigate, isActive }"

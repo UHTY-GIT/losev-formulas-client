@@ -43,7 +43,12 @@
             </div>
           </div>
         </div>
-        <div class="podcast id_0002">
+        <div
+            v-for="podcast in podcasts"
+            :key="podcast.id"
+            :class="['podcast', `id_${podcast.id}`]"
+            :style="{ backgroundImage: `url(${podcast.image_url})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }"
+        >
           <div class="positions_in_block">
             <div class="upper_tittle">
               <div class="context">
@@ -54,10 +59,10 @@
                 </button>
                 <div class="info_podcast">
                   <span class="title_podcast">
-                    Зірочка
+                    {{ podcast.title }}
                   </span>
                   <span class="author_podcast">
-                    Станіслав Лосєв
+                    {{ podcast.description }}
                   </span>
                 </div>
               </div>
@@ -67,8 +72,8 @@
             </div>
             <div class="under_title">
               <div class="rating_and_categories">
-                <div class="podcast-rating">3</div>
-                <span class="categories_podcast">безлогічний метод</span>
+                <div class="podcast-rating">4</div>
+                <span class="categories_podcast">{{ podcast.categories[0].name }}</span>
               </div>
               <button class="heart-button" aria-label="favorite"></button>
             </div>
@@ -79,4 +84,24 @@
 </template>
 
 <script>
+import apiService from '@/services/apiService.js';
+
+export default {
+  name: "MainPage",
+  data() {
+    return {
+      podcasts: [],
+      loading: false,
+    };
+  },
+  async created() {
+    this.loading = true;
+
+    const response = await apiService.mainPage();
+    this.podcasts = response.data.data;
+
+    console.log(this.podcasts);
+
+  }
+}
 </script>

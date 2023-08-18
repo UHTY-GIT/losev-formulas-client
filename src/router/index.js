@@ -45,6 +45,12 @@ const routes = [
     component: () => import('../views/UserSettings.vue')
   },
   {
+    path: '/profile',
+    name: 'profile',
+    meta: {layout: 'main'},
+    component: () => import('../views/UserProfile.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     meta: {layout: 'LoginRegister'},
