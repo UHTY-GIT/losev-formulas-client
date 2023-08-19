@@ -1217,26 +1217,141 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 .all-podcast-block{
     margin: 25px 0 0 0;
 }
+.dropdown {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
 .dropdown span {
     color: #FFF;
     font-family: Gilroy;
     font-size: 18px;
     font-weight: 600;
     padding: 0 10px 0 0;
+    user-select: none;
 }
+
 .dropdown-content {
+    display: flex;
+    background-color: #56a442;
+    padding: 8px 8px 3px 8px;
+    border-radius: 5px;
+    margin: 0;
+    opacity: 1;
+    position: absolute;
+    left: 140px;
+    top: 130px;
+    z-index: 100;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.dropdown-content a {
     color: #FFF;
     font-family: Gilroy;
     font-size: 18px;
     font-weight: 600;
+    padding: 0 0 5px 0;
+}
+.dropdown-category {
+    left: 380px;
 }
 .dropdown-container {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
-    width: 500px;
+    width: 520px;
     padding-bottom: 25px;
 }
+
+.selected-item-name {
+    cursor: pointer;
+}
+.selected-item {
+    cursor: pointer;
+    position: relative;
+}
+.dropdown-category a::before {
+    content: "#";
+    margin-right: 2px;
+}
+.selected-item::before {
+    content: "#";
+    margin-right: 2px;
+}
+
+.arrow-icon {
+    position: relative;
+    border-radius: 4px;
+    top: 5px;
+    left: -10px;
+}
+.left-bar {
+    position: absolute;
+    background-color: transparent;
+    top: 0;
+    left: 0;
+    width: 34px;
+    height: 10px;
+    display: block;
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    float: right;
+    border-radius: 2px;
+}
+.left-bar:after {
+    content: "";
+    background-color: white;
+    width: 15px;
+    height: 4px;
+    display: block;
+    float: right;
+    border-radius: 6px 10px 10px 6px;
+    transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+    z-index: -1;
+}
+.right-bar {
+    position: absolute;
+    background-color: transparent;
+    top: 0px;
+    left: 4px;
+    width: 35px;
+    height: 10px;
+    display: block;
+    transform: rotate(45deg);
+    float: right;
+    border-radius: 2px;
+}
+.right-bar:after {
+    content: "";
+    background-color: white;
+    width: 15px;
+    height: 4px;
+    display: block;
+    float: right;
+    border-radius: 10px 6px 6px 10px;
+    transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+    z-index: -1;
+}
+.open .left-bar:after {
+    -webkit-transform-origin: center center;
+    -ms-transform-origin: center center;
+    transform-origin: center center;
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+.open .right-bar:after {
+    -webkit-transform-origin: center center;
+    -ms-transform-origin: center center;
+    transform-origin: center center;
+    -webkit-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+
 
 /*All Podcast Page end*/

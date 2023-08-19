@@ -22,8 +22,13 @@ const apiService = {
     },
 
     // Функція для реєстрації користувача
-    mainPage: () => {
+    AllPodcastPage: () => {
         return axios.get(`${BASE_URL}/api/v1/podcasts`);
+    },
+
+    // Функція для всіх категорій і їх типу
+    allCategories: () => {
+        return axios.get(`${BASE_URL}/api/v1/categories`);
     },
 
     // Тут можна додати інші функції для різних API запитів

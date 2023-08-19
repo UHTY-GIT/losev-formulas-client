@@ -7,17 +7,38 @@
   <div class="all-podcast-block">
     <div class="dropdown-container">
       <div class="dropdown">
-        <span>Сортування:</span><span>За назвою</span>
-        <div class="dropdown-content">
-          <a href="#">За назвою</a>
-          <a href="#">За популярністю</a>
+        <span>Сортування:</span>
+        <div class="selected-item-name" @click="toggleDropdown('name')">
+          <span>{{ sortDisplayNames[sortType] }}</span>
+          <a :class="['arrow-icon', { 'open': dropdowns.name }]">
+            <span class="left-bar"></span>
+            <span class="right-bar"></span>
+					</a>
+        </div>
+        <div class="dropdown-content" v-show="dropdowns.name">
+          <a href="#" @click="sortPodcasts('title')">За назвою</a>
+          <a href="#" @click="sortPodcasts('rating')">За популярністю</a>
         </div>
       </div>
       <div class="dropdown">
-        <span>Фільтр:</span><span>психологія людини</span>
-        <div class="dropdown-content">
-          <a href="#">психологія людини</a>
-          <a href="#">безлогічний метод</a>
+        <span>Фільтр:</span>
+        <div class="selected-item-category" @click="toggleDropdown('category')">
+          <span class="selected-item">{{ selectedCategory }}</span>
+          <a :class="['arrow-icon', { 'open': dropdowns.category }]">
+            <span class="left-bar"></span>
+            <span class="right-bar"></span>
+          </a>
+        </div>
+        <div class="dropdown-content dropdown-category" v-show="dropdowns.category">
+          <a href="#" @click="filterPodcasts('all')">Всі подкасти</a>
+          <a
+              v-for="category in allcategories"
+              :key="category.name"
+              href="#"
+              @click="filterPodcasts(category.name)"
+          >
+            {{ category.name }}
+          </a>
         </div>
       </div>
     </div>
@@ -28,6 +49,7 @@
           :key="podcast.id"
           :class="['podcast', `id_${podcast.id}`]"
           :style="{ backgroundImage: `url(${podcast.image_url})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }"
+          v-show="podcast.isVisible"
       >
         <div class="positions_in_block">
           <div class="upper_tittle">
@@ -52,7 +74,7 @@
           </div>
           <div class="under_title">
             <div class="rating_and_categories">
-              <div class="podcast-rating">4</div>
+              <div class="podcast-rating">3</div>
               <span class="categories_podcast">{{ podcast.categories[0].name }}</span>
             </div>
             <button class="heart-button" aria-label="favorite"></button>
@@ -72,16 +94,70 @@ export default {
     return {
       podcasts: [],
       loading: false,
+      dropdowns: {
+        name: false,
+        category: false
+      },
+      sortType: 'title',
+      allcategories: [],
+      selectedCategory: 'Всі подкасти',
+      sortDisplayNames: {
+        'title': 'За назвою',
+        'rating': 'За популярністю'
+      }
     };
+  },
+  methods: {
+    async toggleDropdown(type) {
+      console.log("Toggle dropdown called with:", type);
+      this.dropdowns[type] = !this.dropdowns[type];
+    },
+    // Сортування за рейтингом і назвою
+    sortPodcasts(type) {
+      this.sortType = type;
+      if (type === 'title') {
+        console.log("Сортування по тайтл ", type);
+        this.podcasts.sort((a, b) => a.title.localeCompare(b.title));
+      } else if (type === 'rating') {
+        console.log("Сортування по рейтингу ", type);
+        this.podcasts.sort((a, b) => b.rating - a.rating);  // assuming higher rating is better
+      }
+    },
+    // Фільтр по категоріям
+    filterPodcasts(categoryName) {
+      if (categoryName === 'all') {
+        this.podcasts.forEach(p => p.isVisible = true);
+        this.selectedCategory = 'Всі подкасти';  // Оновлюємо selectedCategory
+      } else {
+        this.podcasts.forEach(podcast => {
+          if (podcast.categories[0].name === categoryName) {
+            podcast.isVisible = true;
+          } else {
+            podcast.isVisible = false;
+          }
+        });
+        this.selectedCategory = categoryName;  // Оновлюємо selectedCategory
+      }
+    }
   },
   async created() {
     this.loading = true;
 
-    const response = await apiService.mainPage();
-    this.podcasts = response.data.data;
+    // отримання даних всіх подкастів
+    const responseAllPodcast = await apiService.AllPodcastPage();
+    // this.podcasts = responseAllPodcast.data.data;
+    this.podcasts = responseAllPodcast.data.data.map(podcast => ({ ...podcast, isVisible: true }));
 
     console.log(this.podcasts);
 
+    // Отримання даних всіх категорій
+    const responseCategories = await apiService.allCategories();
+    this.allcategories = responseCategories.data.data;
+
+    console.log(this.allcategories);
+
+    // Ініціалізація методу сортування
+    this.sortPodcasts(this.sortType);
   }
 }
 </script>
