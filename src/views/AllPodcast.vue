@@ -16,29 +16,24 @@
 					</a>
         </div>
         <div class="dropdown-content" v-show="dropdowns.name">
+          <a href="#" @click="sortPodcasts('default')">За замовчуванням</a>
           <a href="#" @click="sortPodcasts('title')">За назвою</a>
           <a href="#" @click="sortPodcasts('rating')">За популярністю</a>
         </div>
       </div>
       <div class="dropdown">
         <span>Фільтр:</span>
-        <div class="selected-item-category" @click="toggleDropdown('category')">
-          <span class="selected-item">{{ selectedCategory }}</span>
-          <a :class="['arrow-icon', { 'open': dropdowns.category }]">
+        <div class="selected-item-category" @click="toggleDropdown('filterPrice')">
+          <span class="selected-item-filter">{{ selectedFilterPrice }}</span>
+          <a :class="['arrow-icon', { 'open': dropdowns.filterPrice }]">
             <span class="left-bar"></span>
             <span class="right-bar"></span>
           </a>
         </div>
-        <div class="dropdown-content dropdown-category" v-show="dropdowns.category">
-          <a href="#" @click="filterPodcasts('all')">Всі подкасти</a>
-          <a
-              v-for="category in allcategories"
-              :key="category.name"
-              href="#"
-              @click="filterPodcasts(category.name)"
-          >
-            {{ category.name }}
-          </a>
+        <div class="dropdown-content dropdown-filter" v-show="dropdowns.filterPrice">
+          <a href="#" @click="filterByPriceType('all')">Всі подкасти</a>
+          <a href="#" @click="filterByPriceType('free')">Безкоштовні</a>
+          <a href="#" @click="filterByPriceType('paid')">Платні</a>
         </div>
       </div>
     </div>
@@ -64,7 +59,7 @@
                     {{ podcast.title }}
                   </span>
                 <span class="author_podcast">
-                    {{ podcast.description }}
+                    {{ podcast.author }}
                   </span>
               </div>
             </div>
@@ -96,15 +91,17 @@ export default {
       loading: false,
       dropdowns: {
         name: false,
-        category: false
+        filterPrice: false
       },
-      sortType: 'title',
+      sortType: 'default',
       allcategories: [],
-      selectedCategory: 'Всі подкасти',
+      selectedFilterPrice: 'Всі подкасти',
       sortDisplayNames: {
+        'default': 'За замовчуванням',
         'title': 'За назвою',
         'rating': 'За популярністю'
-      }
+      },
+      initialPodcasts: []
     };
   },
   methods: {
@@ -121,22 +118,26 @@ export default {
       } else if (type === 'rating') {
         console.log("Сортування по рейтингу ", type);
         this.podcasts.sort((a, b) => b.rating - a.rating);  // assuming higher rating is better
+      } else if (type === 'default') {
+        console.log("Сортування за замовчуванням");
+        this.podcasts = JSON.parse(JSON.stringify(this.initialPodcasts));
+        this.podcasts.forEach(p => p.isVisible = true);
       }
     },
-    // Фільтр по категоріям
-    filterPodcasts(categoryName) {
-      if (categoryName === 'all') {
+    // Фільтр по цінам з категорій
+    filterByPriceType(priceType) {
+      if (priceType === 'all') {
         this.podcasts.forEach(p => p.isVisible = true);
-        this.selectedCategory = 'Всі подкасти';  // Оновлюємо selectedCategory
-      } else {
+        this.selectedFilterPrice = 'Всі подкасти';
+      } else if (priceType === 'free' || priceType === 'paid') {
         this.podcasts.forEach(podcast => {
-          if (podcast.categories[0].name === categoryName) {
+          if (podcast.categories[0].category_type === priceType) {
             podcast.isVisible = true;
           } else {
             podcast.isVisible = false;
           }
         });
-        this.selectedCategory = categoryName;  // Оновлюємо selectedCategory
+        this.selectedFilterPrice = priceType === 'free' ? 'Безкоштовні' : 'Платні';
       }
     }
   },
@@ -150,11 +151,9 @@ export default {
 
     console.log(this.podcasts);
 
-    // Отримання даних всіх категорій
-    const responseCategories = await apiService.allCategories();
-    this.allcategories = responseCategories.data.data;
+    // Зберігаємо первісний список
+    this.initialPodcasts = JSON.parse(JSON.stringify(responseAllPodcast.data.data));
 
-    console.log(this.allcategories);
 
     // Ініціалізація методу сортування
     this.sortPodcasts(this.sortType);

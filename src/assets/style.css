@@ -1253,8 +1253,8 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
     font-weight: 600;
     padding: 0 0 5px 0;
 }
-.dropdown-category {
-    left: 380px;
+.dropdown-filter {
+    left: 447px;
 }
 .dropdown-container {
     display: flex;
@@ -1271,6 +1271,9 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 .selected-item {
     cursor: pointer;
     position: relative;
+}
+selected-item-filter {
+    cursor: pointer;
 }
 .dropdown-category a::before {
     content: "#";
@@ -1355,3 +1358,41 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 
 
 /*All Podcast Page end*/
+
+
+/*Category Page start*/
+.all-categories-block {
+    padding: 0px 0 10px 0;
+    margin: 25px 0 0 0;
+}
+.title-category {
+    padding: 0 0 20px 0;
+}
+.title-category p span{
+    color: #FFF;
+    font-family: Gilroy;
+    font-size: 25px;
+    font-weight: 600;
+}
+.title-category p span::before {
+    content: "#";
+    margin-right: 2px;
+}
+.categories-list-block span {
+    color: #FFF;
+    font-family: Gilroy;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 40px;
+    background: #56A442;
+    padding: 8px 20px;
+    margin: 5px;
+}
+.categories-list-block span::before {
+    content: "#";
+    margin-right: -3px;
+}
+.block-podcasts {
+    padding: 15px 0 0 0;
+}
+/*Category Page end*/

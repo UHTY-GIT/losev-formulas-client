@@ -47,7 +47,8 @@
             v-for="podcast in podcasts"
             :key="podcast.id"
             :class="['podcast', `id_${podcast.id}`]"
-            :style="{ backgroundImage: `url(${podcast.image_url})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }"
+            :style="{ backgroundImage: `url(http://dev-api.losev-formulas.com${podcast.image_url})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }"
+
         >
           <div class="positions_in_block">
             <div class="upper_tittle">
@@ -84,7 +85,7 @@
 </template>
 
 <script>
-import apiService from '@/services/apiService.js';
+//import apiService from '@/services/apiService.js';
 
 export default {
   name: "MainPage",
@@ -97,10 +98,10 @@ export default {
   async created() {
     this.loading = true;
 
-    const response = await apiService.mainPage();
-    this.podcasts = response.data.data;
-
-    console.log(this.podcasts);
+    // const response = await apiService.mainPage();
+    // this.podcasts = response.data.data;
+    //
+    // console.log(this.podcasts);
 
   }
 }
