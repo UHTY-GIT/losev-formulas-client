@@ -1387,10 +1387,15 @@ selected-item-filter {
     background: #56A442;
     padding: 8px 20px;
     margin: 5px;
+    cursor: pointer;
+    transition: .3s;
+}
+.categories-list-block span:hover {
+    background: #438133;
 }
 .categories-list-block span::before {
     content: "#";
-    margin-right: -3px;
+    margin-right: 2px;
 }
 .block-podcasts {
     padding: 15px 0 0 0;

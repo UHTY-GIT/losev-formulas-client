@@ -31,56 +31,34 @@
           </a>
         </div>
         <div class="dropdown-content dropdown-filter" v-show="dropdowns.filterPrice">
-<!--          <a href="#" @click="filterByPriceType('all')">Всі подкасти</a>-->
+          <a href="#" @click="filterByPriceType('all')">Всі подкасти</a>
           <a href="#" @click="filterByPriceType('free')">Безкоштовні</a>
           <a href="#" @click="filterByPriceType('paid')">Платні</a>
         </div>
       </div>
-<!--      <div class="dropdown">-->
-<!--        <span>Фільтр:</span>-->
-<!--        <div class="selected-item-category" @click="toggleDropdown('category')">-->
-<!--          <span class="selected-item">{{ selectedCategory }}</span>-->
-<!--          <a :class="['arrow-icon', { 'open': dropdowns.category }]">-->
-<!--            <span class="left-bar"></span>-->
-<!--            <span class="right-bar"></span>-->
-<!--          </a>-->
-<!--        </div>-->
-<!--        <div class="dropdown-content dropdown-category" v-show="dropdowns.category">-->
-<!--          <a href="#" @click="filterPodcasts('all')">Всі подкасти</a>-->
-<!--          <a-->
-<!--              v-for="category in allcategories"-->
-<!--              :key="category.name"-->
-<!--              href="#"-->
-<!--              @click="filterPodcasts(category.name)"-->
-<!--          >-->
-<!--            {{ category.name }}-->
-<!--          </a>-->
-<!--        </div>-->
-<!--      </div>-->
+
     </div>
     <div class="categories-list-block">
-      <span>
-        всі подкасти
-      </span>
-      <span>
-          Самознавство
-      </span>
-      <span>
-          Психологія Людини
-      </span>
+      <span @click="filterPodcasts('all')">Всі подкасти</span>
+      <span v-for="category in allcategories" :key="category.id" @click="filterPodcasts(category.name)">{{ category.name }}</span>
     </div>
+
   </div>
-  <div class="podcast-block-with-categories">
+  <div
+      class="podcast-block-with-categories"
+      v-for="category in allcategories"
+      :key="category.id"
+  >
     <div class="block-podcasts">
       <div class="title-category">
         <p>
-            <span>Самознавство</span>
+          <span>{{ category.name }}</span>
         </p>
       </div>
       <div class="block-of-podcasts-by-category">
         <div class="block_content_podcast">
           <div
-              v-for="podcast in podcasts"
+              v-for="podcast in filteredPodcasts(category.name)"
               :key="podcast.id"
               :class="['podcast', `id_${podcast.id}`]"
               :style="{ backgroundImage: `url(${podcast.image_url})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }"
@@ -143,7 +121,8 @@ export default {
         'title': 'За назвою',
         'rating': 'За популярністю'
       },
-      initialPodcasts: []
+      initialPodcasts: [],
+      selectedCategory: 'all'
     };
   },
   methods: {
@@ -166,8 +145,42 @@ export default {
         this.podcasts.forEach(p => p.isVisible = true);
       }
     },
-    // Фільтр по цінам з категорій
+    // // Фільтр по цінам з категорій
+    // filterByPriceType(priceType) {
+    //   if (priceType === 'all') {
+    //     this.podcasts.forEach(p => p.isVisible = true);
+    //     this.selectedFilterPrice = 'Всі подкасти';
+    //   } else if (priceType === 'free' || priceType === 'paid') {
+    //     this.podcasts.forEach(podcast => {
+    //       if (podcast.categories[0].category_type === priceType) {
+    //         podcast.isVisible = true;
+    //       } else {
+    //         podcast.isVisible = false;
+    //       }
+    //     });
+    //     this.selectedFilterPrice = priceType === 'free' ? 'Безкоштовні' : 'Платні';
+    //   }
+    // },
+    // // Фільтр по категоріям
+    // filterPodcasts(categoryName) {
+    //   if (categoryName === 'all') {
+    //     this.podcasts.forEach(p => p.isVisible = true);
+    //   } else {
+    //     this.podcasts.forEach(podcast => {
+    //       if (podcast.categories[0].name === categoryName) {
+    //         podcast.isVisible = true;
+    //       } else {
+    //         podcast.isVisible = false;
+    //       }
+    //     });
+    //   }
+    // },
+    // filteredPodcasts(categoryName) {
+    //   return this.podcasts.filter(podcast => podcast.categories[0].name === categoryName && podcast.isVisible);
+    // },
+    // Фільтр по цінам з категорій та імені категорії
     filterByPriceType(priceType) {
+      this.selectedCategory = 'all'; // Скидаємо фільтр категорії при зміні типу
       if (priceType === 'all') {
         this.podcasts.forEach(p => p.isVisible = true);
         this.selectedFilterPrice = 'Всі подкасти';
@@ -181,23 +194,27 @@ export default {
         });
         this.selectedFilterPrice = priceType === 'free' ? 'Безкоштовні' : 'Платні';
       }
-    }
-    // Фільтр по категоріям
-    // filterPodcasts(categoryName) {
-    //   if (categoryName === 'all') {
-    //     this.podcasts.forEach(p => p.isVisible = true);
-    //     this.selectedCategory = 'Всі подкасти';  // Оновлюємо selectedCategory
-    //   } else {
-    //     this.podcasts.forEach(podcast => {
-    //       if (podcast.categories[0].name === categoryName) {
-    //         podcast.isVisible = true;
-    //       } else {
-    //         podcast.isVisible = false;
-    //       }
-    //     });
-    //     this.selectedCategory = categoryName;  // Оновлюємо selectedCategory
-    //   }
-    // }
+    },
+
+    // Фільтр по категоріям і цінам
+    filterPodcasts(categoryName) {
+      this.selectedCategory = categoryName; // Запам'ятовуємо обрану категорію
+      this.applyFilters();
+    },
+    filteredPodcasts(categoryName) {
+      return this.podcasts.filter(podcast => podcast.categories[0].name === categoryName && podcast.isVisible);
+    },
+    // Застосовуємо фільтри для категорій та цін
+    applyFilters() {
+      this.podcasts.forEach(podcast => {
+        if ((this.selectedCategory === 'all' || podcast.categories[0].name === this.selectedCategory) &&
+            (this.selectedFilterPrice === 'Всі подкасти' || podcast.categories[0].category_type === (this.selectedFilterPrice === 'Безкоштовні' ? 'free' : 'paid'))) {
+          podcast.isVisible = true;
+        } else {
+          podcast.isVisible = false;
+        }
+      });
+    },
   },
   async created() {
     this.loading = true;
@@ -213,10 +230,10 @@ export default {
     this.initialPodcasts = JSON.parse(JSON.stringify(responseAllPodcast.data.data));
 
     // Отримання даних всіх категорій
-    // const responseCategories = await apiService.allCategories();
-    // this.allcategories = responseCategories.data.data;
-    //
-    // console.log(this.allcategories);
+    const responseCategories = await apiService.allCategories();
+    this.allcategories = responseCategories.data.data;
+
+    console.log(this.allcategories);
 
     // Ініціалізація методу сортування
     this.sortPodcasts(this.sortType);
