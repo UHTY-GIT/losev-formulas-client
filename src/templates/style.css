@@ -632,9 +632,7 @@ nav ul li.active {
     border: none;
     position: relative;
     left: 83px;
-    top: 2px;
-    /*left: 44px;*/
-    /*top: 8px;*/
+    top: 2px;    
     background-color: transparent;
 }
 .play-button:active {

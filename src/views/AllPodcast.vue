@@ -49,7 +49,7 @@
         <div class="positions_in_block">
           <div class="upper_tittle">
             <div class="context">
-              <button class="play-button" aria-label="Play podcast">
+              <button class="play-button" aria-label="Play podcast" @click="handlePlayButtonClick">
                 <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
                   <path class="play-path" d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z"/>
                 </svg>
@@ -72,7 +72,7 @@
               <div class="podcast-rating">3</div>
               <span class="categories_podcast">{{ podcast.categories[0].name }}</span>
             </div>
-            <button class="heart-button" aria-label="favorite"></button>
+            <button class="heart-button" aria-label="favorite" @click="handleHeartButtonClick"></button>
           </div>
         </div>
       </div>
@@ -105,6 +105,38 @@ export default {
     };
   },
   methods: {
+    // Метод для анімації кнопки лайку на блоці постів
+    handleHeartButtonClick(event) {
+      event.target.classList.toggle('active');
+    },
+
+    // Метод для анімації кнопки плей у блоці підкастів
+    handlePlayButtonClick(event) {
+      let podcastBlock = event.target.closest('.positions_in_block');
+      podcastBlock.classList.toggle('active');
+
+      let podcastElement = event.target.closest('.podcast');
+      podcastElement.classList.toggle('active');
+
+      const contextElement = podcastElement.querySelector('.context');
+      contextElement.classList.toggle('reversed');
+
+      const PlayElement = podcastElement.querySelector('.play-button');
+      PlayElement.classList.toggle('expanded');
+
+      let playPath = event.target.querySelector('.play-path');
+      if (playPath) {
+        if (podcastBlock.classList.contains('active')) {
+          // Якщо відтворення, то змінюємо форму на "pause"
+          playPath.setAttribute('d', 'M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM224 192V320c0 17.7-14.3 32-32 32s-32-14.3-32-32V192c0-17.7 14.3-32 32-32s32 14.3 32 32zm128 0V320c0 17.7-14.3 32-32 32s-32-14.3-32-32V192c0-17.7 14.3-32 32-32s32 14.3 32 32z');
+        } else {
+          // Якщо пауза, то змінюємо форму на "play"
+          playPath.setAttribute('d', 'M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z');
+        }
+      }
+    },
+
+    // Метод що відкриває випадаючий список
     async toggleDropdown(type) {
       console.log("Toggle dropdown called with:", type);
       this.dropdowns[type] = !this.dropdowns[type];

@@ -1,7 +1,7 @@
 <template>
   <footer>
     <div id="audio-player" class="audio-player">
-      <audio src="@/assets/music/Madonna-Backthatuptothebeat.mp3" preload="metadata"></audio>
+      <audio ref="audioElement" src="#" preload="metadata"></audio>
       <div class="audio-photo-names">
         <div class="audio-photo">
           <img src="@/assets/photo/coconut-palm-tree.png" alt="audio-photo">
@@ -13,26 +13,26 @@
       </div>
       <div class="audio_usage">
         <div class="audio-controls">
-          <button class="audio-prev">
+          <button class="audio-prev" @click="prevTrack">
             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
               <path d="M459.5 440.6c9.5 7.9 22.8 9.7 34.1 4.4s18.4-16.6 18.4-29V96c0-12.4-7.2-23.7-18.4-29s-24.5-3.6-34.1 4.4L288 214.3V256v41.7L459.5 440.6zM256 352V256 128 96c0-12.4-7.2-23.7-18.4-29s-24.5-3.6-34.1 4.4l-192 160C4.2 237.5 0 246.5 0 256s4.2 18.5 11.5 24.6l192 160c9.5 7.9 22.8 9.7 34.1 4.4s18.4-16.6 18.4-29V352z"/>
             </svg>
           </button>
-          <button id="play-pause-button" class="play-icon audio-play">
+          <button id="play-pause-button" class="play-icon audio-play" @click="playPause">
             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
               <path class="play-svg" d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/>
             </svg>
           </button>
-          <button class="audio-next">
+          <button class="audio-next"  @click="nextTrack">
             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
               <path d="M52.5 440.6c-9.5 7.9-22.8 9.7-34.1 4.4S0 428.4 0 416V96C0 83.6 7.2 72.3 18.4 67s24.5-3.6 34.1 4.4L224 214.3V256v41.7L52.5 440.6zM256 352V256 128 96c0-12.4 7.2-23.7 18.4-29s24.5-3.6 34.1 4.4l192 160c7.3 6.1 11.5 15.1 11.5 24.6s-4.2 18.5-11.5 24.6l-192 160c-9.5 7.9-22.8 9.7-34.1 4.4s-18.4-16.6-18.4-29V352z"/>
             </svg>
           </button>
         </div>
         <div class="audio-track">
-          <span id="current-time" class="time">0:00</span>
-          <input type="range" id="seek-slider" max="100" value="0">
-          <span id="duration" class="time">0:00</span>
+          <span id="current-time" class="time">{{ currentTime }}</span>
+          <input type="range" id="seek-slider" max="100" value="0"  @input="onSliderChange">
+          <span id="duration" class="time">{{ duration }}</span>
         </div>
       </div>
       <div class="audio-setting">
@@ -43,7 +43,7 @@
           <button class="audio-star"><!-- Вставте SVG іконку "star" --></button>
           <button class="audio-star"><!-- Вставте SVG іконку "star" --></button>
         </div>
-        <button class="audio-favorite" aria-label="favorite">
+        <button class="audio-favorite" :class="{'active': isFavorite}" @click="toggleFavorite" aria-label="favorite">
         </button>
         <div class="audio-volume">
           <button id="volume-icon" class="volume-icons">
@@ -70,3 +70,52 @@
     </div>
   </footer>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      currentTime: "0:00",
+      duration: "0:00",
+      isPlaying: false,
+      isFavorite: false,
+      audioDuration: 0,
+      volume: 50, // assuming a default value
+    };
+  },
+  computed: {
+
+  },
+  mounted() {
+
+  },
+  methods: {
+    playPause() {
+      const audio = this.$refs.audioElement;
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    },
+    prevTrack() {
+      // логіка для попередньої доріжки
+    },
+    nextTrack() {
+      // логіка для наступної доріжки
+    },
+    onSliderChange() {
+      const audio = this.$refs.audioElement;
+      const slider = this.$refs.seekSlider;
+      audio.currentTime = (audio.duration / 100) * slider.value;
+    },
+    //Сердечко анімація
+    toggleFavorite() {
+      this.isFavorite = !this.isFavorite;
+    }
+  },
+  beforeUnmount() {
+    this.$refs.audioElement.removeEventListener('loadedmetadata', this.updateAudioDuration);
+  }
+};
+</script>
