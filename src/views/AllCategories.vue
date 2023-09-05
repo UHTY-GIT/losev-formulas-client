@@ -87,7 +87,7 @@
               </div>
               <div class="under_title">
                 <div class="rating_and_categories">
-                  <div class="podcast-rating">3</div>
+                  <div class="podcast-rating">{{ podcast.rating }}</div>
                   <span class="categories_podcast">{{ podcast.categories[0].name }}</span>
                 </div>
                 <button class="heart-button" aria-label="favorite"></button>

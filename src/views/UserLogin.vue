@@ -77,7 +77,8 @@ import { required, email, minLength } from '@vuelidate/validators'
 import {inject} from "vue";
 import {useRouter} from "vue-router";
 import messages from "@/utils/messages";
-//import apiService from '@/services/apiService';
+import apiService from '@/services/apiService';
+import M from 'materialize-css';
 
 export default {
   name: 'loginPage',
@@ -98,20 +99,32 @@ export default {
         return;
       }
 
-      const formData = {
-        email: email.value,
-        password: password.value
-      };
-      console.log(formData);
+      // const formData = {
+      //   email: email.value,
+      //   password: password.value
+      // };
+      // console.log(formData);
+      //
+      // router.push('/');
 
-      router.push('/');
+      try {
+        const response = await apiService.loginUser(email.value, password.value);
+        console.log(response.data.data.token);
+        if (response.data && response.data.data.token) {
+          localStorage.setItem('token', response.data.data.token);
+          router.push('/');
+        }
+      } catch (error) {
+        // Перевіряємо, чи є помилка з кодом 422
+        if (error.response && error.response.status === 422) {
+          // Виводимо повідомлення про помилку
+          M.toast({ html: `[Помилка]: Введено невірно логін або пароль` });
+        } else {
+          // Виводимо інші помилки
+          M.toast({ html: `[Помилка]: ${error.message || "Невідома помилка"}` });
+        }
+      }
 
-      // const response = await apiService.loginUser(email.value, password.value);
-      // console.log(response.data);
-      // if (response.data && response.data.token) {
-      //   localStorage.setItem('token', response.data.token);
-      //   router.push('/');
-      // }
     }
 
     // Реактивний стан для перевірки видимості пароля

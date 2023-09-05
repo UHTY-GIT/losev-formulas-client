@@ -10,11 +10,38 @@
       </div>
       <div class="autorizhate">
         <router-link to="/settings"><img src="@/assets/icons/settings-1.png" alt="settings"></router-link>
-        <router-link to="/login">Login</router-link>
-        <router-link to="/register">Sign up</router-link>
+        <router-link v-if="username" to="/profile" class="username-account"><img :src="userphoto" alt="userphoto"> {{ username }}</router-link>
+        <router-link v-if="!username" to="/login">Login</router-link>
+        <router-link v-if="!username" to="/register">Sign up</router-link>
       </div>
     </div>
   </header>
 </template>
-<script setup>
+
+<script>
+import apiService from '@/services/apiService';
+import defaultUserPhoto from '@/assets/icons/user-photo-1.png';
+
+export default {
+  name: 'NavBar',
+  data() {
+    return {
+      username: null,
+      userphoto: defaultUserPhoto
+    };
+  },
+  async mounted() {
+    const token = localStorage.getItem('token');
+    console.log(token);
+    // перевіряємо чи є токен
+    if (token) {
+      const userProfile = await apiService.getUserProfile(token);
+      // Отримуємо дані такі як аватар і ім'я
+      if (userProfile && userProfile.data) {
+        this.username = userProfile.data.name;
+        this.userphoto = userProfile.data.avatar ? userProfile.data.avatar : defaultUserPhoto;
+      }
+    }
+  },
+};
 </script>

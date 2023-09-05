@@ -1,3 +1,5 @@
+// (utils/message.plugin.js)
+
 // Імпортуємо 'M' з materialize-css
 import M from 'materialize-css';
 

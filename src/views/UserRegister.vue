@@ -94,7 +94,8 @@ import { inject } from 'vue';
 import useVuelidate from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
 import { useRouter } from "vue-router";
-//import apiService from '@/services/apiService';
+import apiService from '@/services/apiService';
+import M from 'materialize-css';
 
 export default {
   name: 'RegisterPage',
@@ -124,7 +125,7 @@ export default {
         name: name.value // Додайте ім'я користувача в дані форми
       };
       console.log(formData);
-      router.push('/');
+      // router.push('/');
       // const response = await apiService.registerUser(formData.email, formData.password, formData.name);
       //
       // if (response.data.success) {
@@ -132,8 +133,34 @@ export default {
       // } else {
       //   console.log("Реєстрація не вдалася");
       // }
-    }
+      try {
+        const response = await apiService.registerUser(email.value, password.value, name.value);
 
+        // Перевіряємо, чи є реєстрація успішною
+        if (response.data.data && response.data.data.id) {
+          // Зберігаємо токен в локальному сховищі
+          if (response.data.data.token) {
+            localStorage.setItem('token', response.data.data.token);
+          }
+          // Перенаправляємо на головну сторінку
+          router.push('/');
+        } else {
+          M.toast({ html: `Реєстрація не вдалася` });
+        }
+      } catch (error) {
+        if (error.response && error.response.status === 422) {
+          // Перевіряємо, чи є помилка з електронною поштою
+          if (error.response.data.errors.email) {
+            // використовуємо $error для виведення помилки
+            M.toast({ html: `[Помилка]: Електронна пошта вже використовується` });
+          } else {
+            M.toast({ html: `[Помилка]: Реєстрація не вдалася` });
+          }
+        } else {
+          M.toast({ html: `[Помилка]: Помилка під час реєстрації:`, error});
+        }
+      }
+    }
     // Реактивний стан для перевірки видимості пароля
     const isPasswordVisible = ref(false);
 

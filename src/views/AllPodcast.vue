@@ -69,10 +69,14 @@
           </div>
           <div class="under_title">
             <div class="rating_and_categories">
-              <div class="podcast-rating">3</div>
+              <div class="podcast-rating">{{ podcast.rating }}</div>
               <span class="categories_podcast">{{ podcast.categories[0].name }}</span>
             </div>
-            <button class="heart-button" aria-label="favorite" @click="handleHeartButtonClick"></button>
+            <button
+                :class="['heart-button', podcast.isFavorite ? 'active' : '']"
+                aria-label="favorite"
+                @click="handleHeartButtonClick(podcast, $event)"
+            ></button>
           </div>
         </div>
       </div>
@@ -106,8 +110,22 @@ export default {
   },
   methods: {
     // Метод для анімації кнопки лайку на блоці постів
-    handleHeartButtonClick(event) {
+    handleHeartButtonClick(podcast, event) {
+      podcast.isFavorite = !podcast.isFavorite;
+      console.log(podcast.isFavorite);
       event.target.classList.toggle('active');
+
+      if (podcast.isFavorite) {
+        // Додавання до улюблених
+        const token = localStorage.getItem('token');
+        apiService.addToFavorite(token, podcast.id)
+            .then(response => {
+              console.log('Успішно додано до улюблених:', response);
+            })
+            .catch(error => {
+              console.error('Помилка при додаванні до улюблених:', error);
+            });
+      }
     },
 
     // Метод для анімації кнопки плей у блоці підкастів
@@ -176,19 +194,48 @@ export default {
   async created() {
     this.loading = true;
 
-    // отримання даних всіх подкастів
-    const responseAllPodcast = await apiService.AllPodcastPage();
-    // this.podcasts = responseAllPodcast.data.data;
-    this.podcasts = responseAllPodcast.data.data.map(podcast => ({ ...podcast, isVisible: true }));
+    const token = localStorage.getItem('token');
 
-    console.log(this.podcasts);
+    // Отримуємо улюблені подкасти
+    const favoritePodcastsResponse = await apiService.getFavoritePodcasts(token);
+    const DatafavoritePodcasts = favoritePodcastsResponse.data ? favoritePodcastsResponse.data.map(podcast => podcast.id) : [];
+    console.log(DatafavoritePodcasts);
+
+    // Отримуємо данні всіх подкастів
+    const responseAllPodcast = await apiService.AllPodcastPage();
+    //console.log(responseAllPodcast && responseAllPodcast.data && responseAllPodcast.data.data)
+
+    if(responseAllPodcast && responseAllPodcast.data && responseAllPodcast.data.data) {
+      this.podcasts = responseAllPodcast.data.data.map(podcast => {
+        return {
+          ...podcast,
+          isVisible: true,
+          isFavorite: DatafavoritePodcasts.includes(podcast.id)
+        };
+      });
+
+      // Зберігаємо первісний список
+      this.initialPodcasts = JSON.parse(JSON.stringify(this.podcasts));
+
+      // Ініціалізація методу сортування
+      this.sortPodcasts(this.sortType);
+    }
+
+
+
+    // // отримання даних всіх подкастів
+    // const responseAllPodcast = await apiService.AllPodcastPage();
+    // // this.podcasts = responseAllPodcast.data.data;
+    // this.podcasts = responseAllPodcast.data.data.map(podcast => ({ ...podcast, isVisible: true }));
+    //
+    // console.log(this.podcasts);
 
     // Зберігаємо первісний список
-    this.initialPodcasts = JSON.parse(JSON.stringify(responseAllPodcast.data.data));
-
-
-    // Ініціалізація методу сортування
-    this.sortPodcasts(this.sortType);
+    // this.initialPodcasts = JSON.parse(JSON.stringify(responseAllPodcast.data.data));
+    //
+    //
+    // // Ініціалізація методу сортування
+    // this.sortPodcasts(this.sortType);
   }
 }
 </script>

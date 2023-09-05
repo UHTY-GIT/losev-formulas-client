@@ -1191,6 +1191,12 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 .logout-section:hover .logout-link img {
     filter: invert(1);
 }
+.name-edit:hover {
+    background-color: #56A442;
+}
+.name-edit:focus {
+    background-color: #407a31;
+}
 .name-edit:hover .edit-link {
     color: #fff;
 }
