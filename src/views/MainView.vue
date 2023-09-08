@@ -5,104 +5,54 @@
       </p>
     </div>
     <div class="recommendations">
-      <div class="Categories_main">
-        <p>Топ прослуховувань</p>
-        <a href="#">
-          Показати всі
-        </a>
-      </div>
-      <div class="block_content_podcast">
-        <div class="podcast id_0001">
-          <div class="positions_in_block">
-            <div class="upper_tittle">
-              <div class="context">
-                <button class="play-button" aria-label="Play podcast">
-                  <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
-                    <path class="play-path" d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z"/>
-                  </svg>
-                </button>
-                <div class="info_podcast">
-                  <span class="title_podcast">
-                    Lorem
-                  </span>
-                  <span class="author_podcast">
-                    Станіслав Лосєв
-                  </span>
-                </div>
-              </div>
-              <span class="time_podcast">
-                55:15
-              </span>
-            </div>
-            <div class="under_title">
-              <div class="rating_and_categories">
-                <div class="podcast-rating">4</div>
-                <span class="categories_podcast">безлогічний метод</span>
-              </div>
-              <button class="heart-button" aria-label="favorite"></button>
-            </div>
-          </div>
-        </div>
-        <div
-            v-for="podcast in podcasts"
-            :key="podcast.id"
-            :class="['podcast', `id_${podcast.id}`]"
-            :style="{ backgroundImage: `url(http://dev-api.losev-formulas.com${podcast.image_url})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }"
-
-        >
-          <div class="positions_in_block">
-            <div class="upper_tittle">
-              <div class="context">
-                <button class="play-button" aria-label="Play podcast">
-                  <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
-                    <path class="play-path" d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z"/>
-                  </svg>
-                </button>
-                <div class="info_podcast">
-                  <span class="title_podcast">
-                    {{ podcast.title }}
-                  </span>
-                  <span class="author_podcast">
-                    {{ podcast.description }}
-                  </span>
-                </div>
-              </div>
-              <span class="time_podcast">
-                55:15
-              </span>
-            </div>
-            <div class="under_title">
-              <div class="rating_and_categories">
-                <div class="podcast-rating">4</div>
-                <span class="categories_podcast">{{ podcast.categories[0].name }}</span>
-              </div>
-              <button class="heart-button" aria-label="favorite"></button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <TopPodcasts :podcasts="topresponse" :loading="loading"/>
+      <Recommendations :podcasts="recpodcasts" :loading="loading"/>
     </div>
 </template>
 
 <script>
-//import apiService from '@/services/apiService.js';
+import TopPodcasts from '@/components/Main/MainTopPodcasts.vue';
+import Recommendations from '@/components/Main/MainRecommendations.vue';
+import apiService from '@/services/apiService.js';
 
 export default {
   name: "MainPage",
+  components: {
+    TopPodcasts,
+    Recommendations
+  },
   data() {
     return {
-      podcasts: [],
+      topresponse: [],
+      recpodcasts: [],
       loading: false,
     };
   },
   async created() {
     this.loading = true;
 
-    // const response = await apiService.mainPage();
-    // this.podcasts = response.data.data;
-    //
-    // console.log(this.podcasts);
+    const topresponse = await apiService.TopPodcastPage();
+    console.log(topresponse.data.data);
+    if(topresponse && topresponse.data && topresponse.data.data) {
+      //console.log(topresponse.data.data);
+      this.topresponse = topresponse.data.data.map(podcast => {
+        return {
+          ...podcast
+        };
+      });
+    }
 
+    const Recresponse = await apiService.RecomendationPodcastPage();
+    console.log(Recresponse.data.data)
+    if(Recresponse && Recresponse.data && Recresponse.data.data) {
+      //console.log(Recresponse.data.data);
+      this.recpodcasts = Recresponse.data.data.map(podcast => {
+        return {
+          ...podcast
+        };
+      });
+    }
+    this.loading = false; // Помічаємо завантаження як завершене
   }
 }
 </script>

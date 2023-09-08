@@ -74,7 +74,7 @@
                   </button>
                   <div class="info_podcast">
                   <span class="title_podcast">
-                    {{ podcast.title }}
+                    {{ truncateTitle(podcast.title) }}
                   </span>
                     <span class="author_podcast">
                     {{ podcast.author }}
@@ -82,15 +82,19 @@
                   </div>
                 </div>
                 <span class="time_podcast">
-                55:15
-              </span>
+                  55:15
+                </span>
               </div>
               <div class="under_title">
                 <div class="rating_and_categories">
                   <div class="podcast-rating">{{ podcast.rating }}</div>
                   <span class="categories_podcast">{{ podcast.categories[0].name }}</span>
                 </div>
-                <button class="heart-button" aria-label="favorite"></button>
+                <button
+                    :class="['heart-button', podcast.isFavorite ? 'active' : '']"
+                    aria-label="favorite"
+                    @click="handleHeartButtonClick(podcast, $event)"
+                ></button>
               </div>
             </div>
           </div>
@@ -102,9 +106,10 @@
 
 <script>
 import apiService from '@/services/apiService.js';
+import M from 'materialize-css';
 
 export default {
-  name: "AllPodcastPage",
+  name: "AllCategoriesPage",
   data() {
     return {
       podcasts: [],
@@ -126,6 +131,34 @@ export default {
     };
   },
   methods: {
+    // Метод для анімації кнопки лайку на блоці постів
+    async handleHeartButtonClick(podcast, event) {
+      podcast.isFavorite = !podcast.isFavorite;
+      console.log(podcast.isFavorite);
+
+      event.target.classList.toggle('active');
+
+      const token = localStorage.getItem('token');
+
+      try {
+        const response = await apiService.addAndRemoveToFavorite(token, podcast.id, `${podcast.isFavorite}`);
+
+        if (response.data === true) {
+          console.log('Операція успішна', response);
+        } else if (
+            response.error &&
+            response.error.message &&
+            response.error.message === "You need to login before continue"
+        ) {
+          M.toast({ html: `Ви не авторизовані` });
+        } else {
+          console.error('Отримана неочікувана відповідь з сервера:', response);
+        }
+      } catch (error) {
+        console.error('Помилка при додаванні або видаленні з улюблених:', error);
+      }
+    },
+
     async toggleDropdown(type) {
       console.log("Toggle dropdown called with:", type);
       this.dropdowns[type] = !this.dropdowns[type];
@@ -145,39 +178,6 @@ export default {
         this.podcasts.forEach(p => p.isVisible = true);
       }
     },
-    // // Фільтр по цінам з категорій
-    // filterByPriceType(priceType) {
-    //   if (priceType === 'all') {
-    //     this.podcasts.forEach(p => p.isVisible = true);
-    //     this.selectedFilterPrice = 'Всі подкасти';
-    //   } else if (priceType === 'free' || priceType === 'paid') {
-    //     this.podcasts.forEach(podcast => {
-    //       if (podcast.categories[0].category_type === priceType) {
-    //         podcast.isVisible = true;
-    //       } else {
-    //         podcast.isVisible = false;
-    //       }
-    //     });
-    //     this.selectedFilterPrice = priceType === 'free' ? 'Безкоштовні' : 'Платні';
-    //   }
-    // },
-    // // Фільтр по категоріям
-    // filterPodcasts(categoryName) {
-    //   if (categoryName === 'all') {
-    //     this.podcasts.forEach(p => p.isVisible = true);
-    //   } else {
-    //     this.podcasts.forEach(podcast => {
-    //       if (podcast.categories[0].name === categoryName) {
-    //         podcast.isVisible = true;
-    //       } else {
-    //         podcast.isVisible = false;
-    //       }
-    //     });
-    //   }
-    // },
-    // filteredPodcasts(categoryName) {
-    //   return this.podcasts.filter(podcast => podcast.categories[0].name === categoryName && podcast.isVisible);
-    // },
     // Фільтр по цінам з категорій та імені категорії
     filterByPriceType(priceType) {
       this.selectedCategory = 'all'; // Скидаємо фільтр категорії при зміні типу
@@ -215,28 +215,50 @@ export default {
         }
       });
     },
+    //Метод для обрізання довгих назв подкастів
+    truncateTitle(title) {
+      if (title.length > 14) {
+        return title.substring(0, 14) + '...';
+      }
+      return title;
+    }
   },
   async created() {
     this.loading = true;
 
+    const token = localStorage.getItem('token');
+    // Отримуємо улюблені подкасти
+    const favoritePodcastsResponse = await apiService.getFavoritePodcasts(token);
+    //console.log(favoritePodcastsResponse);
+    const DatafavoritePodcasts = favoritePodcastsResponse.data ? favoritePodcastsResponse.data.map(podcast => podcast.id) : [];
+    console.log(DatafavoritePodcasts);
+
     // отримання даних всіх подкастів
     const responseAllPodcast = await apiService.AllPodcastPage();
     // this.podcasts = responseAllPodcast.data.data;
-    this.podcasts = responseAllPodcast.data.data.map(podcast => ({ ...podcast, isVisible: true }));
+    if(responseAllPodcast && responseAllPodcast.data && responseAllPodcast.data.data) {
+      this.podcasts = responseAllPodcast.data.data.map(podcast => {
+        return {
+          ...podcast,
+          isVisible: true,
+          isFavorite: DatafavoritePodcasts.includes(podcast.id)
+        };
+      });
 
-    console.log(this.podcasts);
+      console.log(this.podcasts);
 
-    // Зберігаємо первісний список
-    this.initialPodcasts = JSON.parse(JSON.stringify(responseAllPodcast.data.data));
+      // Зберігаємо первісний список
+      this.initialPodcasts = JSON.parse(JSON.stringify(responseAllPodcast.data.data));
 
-    // Отримання даних всіх категорій
-    const responseCategories = await apiService.allCategories();
-    this.allcategories = responseCategories.data.data;
+      // Отримання даних всіх категорій
+      const responseCategories = await apiService.allCategories();
+      this.allcategories = responseCategories.data.data;
 
-    console.log(this.allcategories);
+      console.log(this.allcategories);
 
-    // Ініціалізація методу сортування
-    this.sortPodcasts(this.sortType);
+      // Ініціалізація методу сортування
+      this.sortPodcasts(this.sortType);
+    }
   }
 }
 </script>

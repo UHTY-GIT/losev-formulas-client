@@ -21,7 +21,7 @@
             </button>
             <div class="info_podcast">
                   <span class="title_podcast">
-                    {{ podcast.title }}
+                    {{ truncateTitle(podcast.title) }}
                   </span>
               <span class="author_podcast">
                     {{ podcast.author }}
@@ -61,9 +61,25 @@ export default {
   },
   methods: {
     // Метод для анімації кнопки лайку на блоці постів
-    handleHeartButtonClick(podcast, event) {
+    async handleHeartButtonClick(podcast, event) {
       podcast.isFavorite = !podcast.isFavorite;
+      console.log(podcast.isFavorite);
+
       event.target.classList.toggle('active');
+
+      const token = localStorage.getItem('token');
+
+      try {
+        const response = await apiService.addAndRemoveToFavorite(token, podcast.id, `${podcast.isFavorite}`);
+
+        if(response.data === true) {
+          console.log('Операція успішна', response);
+        } else {
+          console.error('Отримана неочікувана відповідь з сервера:', response);
+        }
+      } catch (error) {
+        console.error('Помилка при додаванні або видаленні з улюблених:', error);
+      }
     },
     // Метод для анімації кнопки плей у блоці підкастів
     handlePlayButtonClick(event) {
@@ -90,6 +106,13 @@ export default {
         }
       }
     },
+    //Метод для обрізання довгих назв подкастів
+    truncateTitle(title) {
+      if (title.length > 14) {
+        return title.substring(0, 14) + '...';
+      }
+      return title;
+    }
   },
   async created() {
     this.loading = true;

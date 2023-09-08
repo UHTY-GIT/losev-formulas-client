@@ -26,6 +26,21 @@ const apiService = {
         return axios.get(`${BASE_URL}/api/v1/podcasts`);
     },
 
+    // Функція для ТОПу подкастів всіх користувачів
+    TopPodcastPage: () => {
+        return axios.get(`${BASE_URL}/api/v1/podcasts/top`);
+    },
+
+    // Функція для Рекомендацій подкастів всіх користувачів
+    RecomendationPodcastPage: () => {
+        return axios.get(`${BASE_URL}/api/v1/podcasts/recommendation`);
+    },
+
+    // Функція для пошуку подкастів за назвою або автором
+    searchPodcasts: (query) => {
+        return axios.get(`${BASE_URL}/api/v1/podcasts?search=${query}`);
+    },
+
     // Функція для всіх категорій і їх типу
     allCategories: () => {
         return axios.get(`${BASE_URL}/api/v1/categories`);
@@ -72,12 +87,12 @@ const apiService = {
             });
     },
 
-    // Функція для додавання подкасту до улюблених
-    addToFavorite: (token, podcastId) => {
+    // Функція для додавання і видалення подкасту з улюблених
+    addAndRemoveToFavorite: (token, podcastId, isFavorite) => {
         const config = {
             headers: { 'authtoken': token },
         };
-        return axios.post(`${BASE_URL}/api/v1/podcasts/add_to_favorite`,{ podcast_id: podcastId }, config)
+        return axios.post(`${BASE_URL}/api/v1/podcasts/add_to_favorite`, { podcast_id: podcastId, add_podcast: isFavorite }, config)
             .then(response => {
                 return response.data;
             })

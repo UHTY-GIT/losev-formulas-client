@@ -462,14 +462,15 @@ nav ul li.active {
     font-weight: 700;
 }
 .recommendations {
-    margin: 25px 0 0 0;
+    margin: 10px 0 0 0;
 }
 .Categories_main {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding-bottom: 25px;
+    padding-bottom: 15px;
+    padding-top: 10px;
 }
 .Categories_main p {
     color: #FFF;
@@ -1220,7 +1221,7 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 
 /*All Podcast Page start*/
 .all-podcast-block{
-    margin: 25px 0 0 0;
+    margin: 20px 0 0 0;
 }
 .dropdown {
     display: flex;
@@ -1368,7 +1369,7 @@ selected-item-filter {
 /*Category Page start*/
 .all-categories-block {
     padding: 0px 0 10px 0;
-    margin: 25px 0 0 0;
+    margin: 20px 0 0 0;
 }
 .title-category {
     padding: 0 0 20px 0;

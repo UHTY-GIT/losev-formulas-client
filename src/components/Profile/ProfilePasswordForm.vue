@@ -36,7 +36,7 @@
       <small
           class="helper-text invalid"
           v-else-if="v$.newPassword.$dirty && v$.newPassword.minLength.$invalid"
-      >Новий пароль повинен бути {{ v$.newPassword.minLength.$params.min }} символів. Зараз він {{newPassword.length}}</small>
+      >Новий пароль повинен бути мінімум {{ v$.newPassword.minLength.$params.min }} символів. Зараз він {{newPassword.length}}</small>
       <i class="toggle-password user-page-password" :class="NewPasswordIconClass" @click="NewTogglePassword"></i>
     </div>
 

@@ -86,7 +86,7 @@ export default {
         // Користувач не залогінений, приховуємо сторінки "Мої подкасти" і "Збереження"
         this.links.find(link => link.title === 'Мої подкасти').isVisible = false;
         this.links.find(link => link.title === 'Збереження').isVisible = false;
-        M.toast({ html: `Ви вийшли з аккаунту` });
+        M.toast({ html: `Ви не авторизовані` });
       }
     } catch (error) {
       console.log('Помилка при отриманні профілю користувача:', error);
