@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkvue_losev_frontend"]=self["webpackChunkvue_losev_frontend"]||[]).push([[594],{4594:function(e,n,r){r.r(n),r.d(n,{default:function(){return f}});var t=r(3396);const u={class:"home"};function o(e,n,r,o,s,c){return(0,t.wg)(),(0,t.iD)("div",u," 1 ")}var s={name:"HomeView"},c=r(89);const a=(0,c.Z)(s,[["render",o]]);var f=a}}]);
+//# sourceMappingURL=594.0f53fe42.js.map
