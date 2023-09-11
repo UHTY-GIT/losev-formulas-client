@@ -158,7 +158,6 @@ export default {
         console.error('Помилка при додаванні або видаленні з улюблених:', error);
       }
     },
-
     async toggleDropdown(type) {
       console.log("Toggle dropdown called with:", type);
       this.dropdowns[type] = !this.dropdowns[type];
