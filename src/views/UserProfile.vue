@@ -1,3 +1,4 @@
+<!--src/views/UserProfile.vue-->
 <template>
   <div class="page_title">
     <p>

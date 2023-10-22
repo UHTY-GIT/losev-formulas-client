@@ -26,6 +26,21 @@ const apiService = {
         return axios.get(`${BASE_URL}/api/v1/podcasts`);
     },
 
+    // Функція для моїх подкастів користувача
+    getUserPodcasts: (token) => {
+        const config = {
+            headers: { 'authtoken': token },
+        };
+        return axios.get(`${BASE_URL}/api/v1/podcasts/user_podcasts`, config)
+            .then(response => {
+                return response.data;
+            })
+            .catch(error => {
+                console.error('Під час отримання подкастів користувача сталася помилка: ', error);
+            });
+    },
+
+
     // Функція для ТОПу подкастів всіх користувачів
     TopPodcastPage: () => {
         return axios.get(`${BASE_URL}/api/v1/podcasts/top`);
@@ -62,9 +77,9 @@ const apiService = {
     // Функція для виходу користувача
     logoutUser: (token) => {
         const config = {
-            headers: { 'authtoken': token },
+            headers: { 'authtoken': token }
         };
-        return axios.post(`${BASE_URL}/api/v1/users/logout`, config)
+        return axios.post(`${BASE_URL}/api/v1/users/logout`, {}, config)
             .then(response => {
                 return response.data;
             })
@@ -116,6 +131,51 @@ const apiService = {
             })
             .catch(error => {
                 console.error('Під час зміни паролю сталася помилка: ', error);
+            });
+    },
+
+    // Функція для зміни імені користувача
+    updateUserName: (token, name) => {
+        const config = {
+            headers: { 'authtoken': token },
+        };
+        const data = {
+            name: name
+        };
+        return axios.put(`${BASE_URL}/api/v1/users/profile_update`, data, config)
+            .then(response => {
+                return response.data;
+            })
+            .catch(error => {
+                console.error('Під час зміни імені сталася помилка: ', error);
+            });
+    },
+
+    // Функція для рейтингування аудіо
+    submitPodcastRating: (token, podcastId, rating) => {
+        const config = {
+            headers: { 'authtoken': token }, // Assuming you need an auth token
+        };
+        return axios.post(`${BASE_URL}/api/v1/ratings/set_rating`, { podcast_id: podcastId, rating_value: rating, }, config)
+            .then(response => {
+                return response.data;
+            })
+            .catch(error => {
+                console.error('Error submitting podcast rating:', error);
+            });
+    },
+
+    // Функція для надсилання оплати
+    submitPaymentPodcast: (token, podcastId, paymentMethod) => {
+        const config = {
+            headers: { 'authtoken': token },
+        };
+        return axios.post(`${BASE_URL}/api/v1/orders`, { podcast_id: podcastId, payment_method: paymentMethod }, config)
+            .then(response => {
+                return response.data;
+            })
+            .catch(error => {
+                console.error('Під час відправки запиту на оплату сталася помилка: ', error);
             });
     },
 

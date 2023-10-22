@@ -85,6 +85,9 @@ export default {
         const response = await apiService.changeUserPassword(token, oldPassword, newPass);
         M.toast({ html: `Пароль успішно змінено` });
         console.log('Пароль успішно змінено:', response);
+        // Очищення поля вводу
+        password.value = '';
+        newPassword.value = '';
       } catch (error) {
         M.toast({ html: `[Помилка]: Пароль змінити не вдалося` });
         console.log('Помилка при зміні паролю:', error);

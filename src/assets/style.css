@@ -495,7 +495,7 @@ nav ul li.active {
     flex-wrap: wrap;
 }
 .podcast {
-    width: 300px;
+    width: 330px;
     height: 200px;
     background-size: cover;
     border-radius: 5px;
@@ -632,8 +632,8 @@ nav ul li.active {
     height: 69px;
     border: none;
     position: relative;
-    left: 83px;
-    top: 2px;
+    left: 35px;
+    top: 8px;
     /*left: 44px;*/
     /*top: 8px;*/
     background-color: transparent;
@@ -661,6 +661,9 @@ nav ul li.active {
 
 .positions_in_block.active .context .author_podcast {
     font-size: 13px;
+}
+.positions_in_block.active .upper_tittle .context .info_podcast {
+    width: 220px;
 }
 
 
@@ -727,6 +730,7 @@ input[type=range]+.thumb {
 .audio-photo-names {
     display: flex;
     align-items: center;
+    width: 200px;
 }
 .audio-photo {
     display: flex;
@@ -746,6 +750,19 @@ input[type=range]+.thumb {
     justify-content: center;
     flex-wrap: nowrap;
     margin-left: 10px;
+}
+.audio-rating button {
+    background: transparent;
+}
+.audio-rating {
+    display: flex;
+    padding: 0 10px 0 0;
+    align-items: center;
+}
+.audio-rating button svg {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
 .podcast_name {
     color: #FFF;
@@ -946,6 +963,25 @@ input[type="range"]::before {
 }
 #volume-slider::-webkit-slider-runnable-track {
     background: #414141;
+}
+.view_all {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-bottom: 15px;
+    padding-top: 10px;
+}
+.view_all p {
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 600;
+}
+.view_all a {
+     color: #FFF;
+     font-size: 20px;
+     font-weight: 500;
+     text-decoration-line: underline;
 }
 /*Main page end*/
 
@@ -1247,7 +1283,7 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
     position: absolute;
     left: 140px;
     top: 130px;
-    z-index: 100;
+    z-index: 200;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -1413,6 +1449,132 @@ selected-item-filter {
 .play-path {
 
 }
+.play-button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+.blocked-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+.blocked-overlay::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+.lock-icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 10px;
+}
+.buy-button {
+    padding: 7px 18px;
+    border-radius: 15px;
+    background: #FFF;
+    color: #000000;
+    cursor: pointer;
+    font-family: Gilroy;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+}
+.buy-button:hover {
+    color: #ffffff;
+    background: #56A442;
+}
+.buy-button:focus {
+    color: #ffffff;
+    background: #438133;
+}
+
+.payment-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 130;
+}
+.payment-popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 365px;
+}
+.payment-popup-content p {
+    color: #000000;
+    font-family: Gilroy;
+    font-size: 22px;
+    font-weight: 700;
+}
+.payment-popup-content button {
+    padding: 8px 18px;
+    border-radius: 15px;
+    background: #56A442;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: Gilroy;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    margin: 5px 5px;
+}
+.container_payment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.container_payment label {
+    display: flex;
+    color: #000000;
+    align-items: center;
+    justify-content: center;
+}
+.container_payment label span {
+    font-family: Gilroy;
+    font-size: 17px;
+    font-weight: 600;
+}
+.container_payment label svg {
+    width: 120px;
+    margin: 10px 0;
+}
+.button_payment {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.ones_payment_metod {
+    display: flex;
+    margin: 15px 0 15px;
+}
+[type="radio"]:not(:checked), [type="radio"]:checked {
+    margin: 0 8px 0 0;
+    position: initial;
+    opacity: 1;
+}
 /*All Podcast Page end*/
 
 /*NavBar start*/
@@ -1425,3 +1587,10 @@ selected-item-filter {
     margin-right: 10px;
 }
 /*NavBar end*/
+
+.loading {
+    color: #FFFFFF;
+    font-family: Gilroy;
+    font-size: 18px;
+    font-weight: 600;
+}

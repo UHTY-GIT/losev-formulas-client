@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkvue_losev_frontend"]=self["webpackChunkvue_losev_frontend"]||[]).push([[372],{7372:function(e,n,t){t.r(n),t.d(n,{default:function(){return v}});var r=t(3396);const u={class:"page_title"},s=(0,r._)("p",null," Мої подкасти ",-1),c=[s];function l(e,n){return(0,r.wg)(),(0,r.iD)("div",u,c)}var o=t(89);const a={},f=(0,o.Z)(a,[["render",l]]);var v=f}}]);
-//# sourceMappingURL=372.5ecd95ca.js.map

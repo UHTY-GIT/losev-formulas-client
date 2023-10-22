@@ -106,6 +106,9 @@ export default {
     }
   },
   setup () {
+    const token = localStorage.removeItem('token');
+    console.log("token now " + token);
+
     const email = ref('');
     const password = ref('');
     const name = ref(''); // Реактивний стан для імені користувача

@@ -88,6 +88,9 @@ export default {
     }
   },
   setup () {
+    const token = localStorage.removeItem('token');
+    console.log("token now " + token);
+
     const email = ref('');
     const password = ref('');
     const router = useRouter(); // Переміщено сюди з submitHandler

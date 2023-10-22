@@ -1,15 +1,14 @@
-<!--scr/components/Main/MainTopPodcasts.vue-->
+<!--scr/components/Main/AllTopPodcasts.vue-->
 <template>
-  <div class="Categories_main">
-    <p>Топ прослуховувань</p>
-    <router-link to="/all-top-podcasts">
-      Показати всі
-    </router-link>
+  <div class="view_all">
+    <p>
+      <router-link to="/">Головна</router-link> > <router-link to="/all-top-podcasts">Топ прослуховувань</router-link>
+    </p>
   </div>
   <div class="loading" v-if="loading">Завантаження...</div>
   <div v-else class="block_content_podcast">
     <div
-        v-for="podcast in topPodcasts"
+        v-for="podcast in podcasts"
         :key="podcast.id"
         :class="['podcast', `id_${podcast.id}`, { 'podcast_blocked': podcast.blocked }]"
         :style="{ backgroundImage: `url(${podcast.image_url})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }"
@@ -29,26 +28,23 @@
               </svg>
             </button>
             <div class="info_podcast">
-              <span class="title_podcast">
-                {{ truncateTitle(podcast.title) }}
-              </span>
+                  <span class="title_podcast">
+                    {{ truncateTitle(podcast.title) }}
+                  </span>
               <span class="author_podcast">
-                {{ podcast.author }}
-              </span>
+                    {{ podcast.author }}
+                  </span>
             </div>
           </div>
           <span class="time_podcast">
-            {{ podcast.duration }}
-          </span>
+                {{ podcast.duration }}
+            </span>
         </div>
         <div class="under_title">
           <div class="rating_and_categories">
             <div class="podcast-rating">{{ podcast.rating }}</div>
-<!--            <span class="categories_podcast">{{ podcast.categories[0].name }}</span>-->
             <span class="categories_podcast">{{ podcast.categories && podcast.categories.length > 0 ? podcast.categories[0].name : 'Невідомо' }}</span>
           </div>
-          <!--            isPodcastFavorite(podcast) ?-->
-          <!--            podcast.isFavorite ?-->
           <button
               :class="['heart-button', podcast.isFavorite ? 'active' : '']"
               aria-label="favorite"
@@ -83,8 +79,11 @@
 import apiService from '@/services/apiService.js';
 import M from 'materialize-css';
 export default {
+  name: "AllTopPodcast",
   data() {
     return {
+      podcasts: [],
+      loading: false,
       initialPodcasts: [],
       playingPodcast: null,
       audio: new Audio(),
@@ -94,22 +93,9 @@ export default {
       selectedPaymentMethod: '',
       selectedPodcastId: null,
       isAuthenticated: false,
-    };
-  },
-  props: {
-    podcasts: {
-      type: Array,
-      required: true
-    },
-    loading: {
-      type: Boolean,
-      default: false
     }
   },
   computed: {
-    topPodcasts() {
-      return this.podcasts.slice(0, 4);
-    },
     isPlaying() {
       console.log('isPlaying value from store:', this.$store.getters.isPlaying);
       return this.$store.getters.isPlaying;
@@ -239,9 +225,6 @@ export default {
       const activePodcastElement = document.querySelector(`.podcast.id_${this.playingPodcast}`);
       if (activePodcastElement) {
         activePodcastElement.classList.remove('active');
-        //const activePlayButton = activePodcastElement.querySelector('.play-button');
-        // const activePlayPath = activePlayButton.querySelector('.play-path');
-        // activePlayPath.setAttribute('d', 'M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z'); // вказуємо значення "play"
       }
       // потрібно видалити клас 'active' з .positions_in_block:
       const allActiveBlocks = document.querySelectorAll('.positions_in_block.active');
@@ -286,9 +269,7 @@ export default {
         if(this.playingPodcast !== null){
           this.stopPlayingPodcast();
         }
-        //this.audio.src = podcast.audio_url;
-        //this.playAudio(podcast.audio_url); //Передаємо посилання на аудіо
-        //this.playPodcast(); // Використовуємо метод playPodcast
+
         this.playingPodcast = podcast.id;
         // Передаю через vuex дані про підкаст
         //console.log("this.$store.getters.isFavorite(podcast.id)= "+this.$store.getters.isFavorite(podcast.id))
@@ -320,6 +301,23 @@ export default {
         PlayElement.classList.toggle('expanded');
       }
     },
+    // Метод що витягує з метаданих аудіо час, скільки йде подкаст
+    async fetchPodcastDurations() {
+      for (let podcast of this.podcasts) {
+        let audio = new Audio(podcast.audio_url);
+        audio.addEventListener('loadedmetadata', () => {
+          podcast.duration = this.formatTime(audio.duration);
+        });
+      }
+    },
+    formatTime(timeInSeconds) {
+      const minutes = Math.floor(timeInSeconds / 60);
+      const seconds = Math.floor(timeInSeconds - minutes * 60);
+      return `${this.padZero(minutes)}:${this.padZero(seconds)}`;
+    },
+    padZero(num) {
+      return num < 10 ? `0${num}` : num;
+    },
     //Метод для обрізання довгих назв подкастів
     truncateTitle(title) {
       if (title.length > 14) {
@@ -340,8 +338,31 @@ export default {
     this.applyAnimationBasedOnState();
   },
   async created() {
+    this.loading = true;
     const token = localStorage.getItem('token');
     this.isAuthenticated = Boolean(token);
+    // Отримуємо улюблені подкасти
+    const favoritePodcastsResponse = await apiService.getFavoritePodcasts(token);
+    //console.log(favoritePodcastsResponse);
+    const DatafavoritePodcasts = favoritePodcastsResponse.data ? favoritePodcastsResponse.data.map(podcast => podcast.id) : [];
+    console.log(DatafavoritePodcasts);
+
+    const podcasts = await apiService.TopPodcastPage();
+    console.log(podcasts.data.data);
+    if(podcasts && podcasts.data && podcasts.data.data) {
+      //console.log(topresponse.data.data);
+      this.podcasts = podcasts.data.data.map(podcast => {
+        return {
+          ...podcast,
+          isVisible: true,
+          isFavorite: DatafavoritePodcasts.includes(podcast.id)
+        };
+      });
+      // дістаємо довжину для кожного подкасту:
+      await this.fetchPodcastDurations();
+    }
+
+    this.loading = false;
   }
 }
 </script>

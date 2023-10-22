@@ -51,6 +51,24 @@ const routes = [
     component: () => import('../views/UserProfile.vue')
   },
   {
+    path: '/search-result',
+    name: 'searchresult',
+    meta: {layout: 'main'},
+    component: () => import('../views/SearchResult.vue')
+  },
+  {
+    path: '/all-top-podcasts',
+    name: 'AllTopPodcasts',
+    meta: {layout: 'main'},
+    component: () => import('../views/AllTopPodcasts.vue')
+  },
+  {
+    path: '/all-recommendation-podcasts',
+    name: 'AllRecommendationPodcasts',
+    meta: {layout: 'main'},
+    component: () => import('../views/AllRecommendationsPodcasts.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     meta: {layout: 'LoginRegister'},

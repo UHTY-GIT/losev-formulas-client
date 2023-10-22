@@ -1,3 +1,4 @@
+<!--src/layouts/MainLayout.vue-->
 <template>
   <div class="background_main">
     <NavbarNonLogin />

@@ -1,3 +1,4 @@
+<!--src/components/Profile/ProfileNameForm.vue-->
 <template>
   <form class="form name-update-form" @submit.prevent="submitUserName">
     <div class="input-field my_profile_input">
@@ -27,11 +28,17 @@
 import { ref } from "vue";
 import useVuelidate from '@vuelidate/core';
 import { required } from "@vuelidate/validators";
+import apiService from "@/services/apiService";
+import { useRouter } from "vue-router";
+import M from "materialize-css";
+import { useStore } from 'vuex';
 
 export default {
   setup() {
     const name = ref('');
     const v$ = useVuelidate();
+    const router = useRouter();
+    const store = useStore();
 
     // Відправка форми по зміні імені
     const submitUserName = async () => {
@@ -44,6 +51,24 @@ export default {
         name: name.value
       };
       console.log(formDataUserName);
+
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.log("Токен не знайдений. Перенаправлення на сторінку входу.");
+        router.push('/login');
+        return;
+      }
+
+      try {
+        await apiService.updateUserName(token, formDataUserName.name);
+
+        store.commit('setUsername', formDataUserName.name);
+        M.toast({ html: `Ім'я успішно змінено` });
+        // Очищення поля вводу
+        name.value = '';
+      } catch (error) {
+        console.error("Помилка при спробі змінити ім'я:", error);
+      }
     }
     return {
       v$,

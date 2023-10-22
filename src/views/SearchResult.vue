@@ -1,62 +1,61 @@
-<!--scr/components/Main/MainTopPodcasts.vue-->
+<!--scr/views/SearchResult.vue-->
 <template>
-  <div class="Categories_main">
-    <p>Топ прослуховувань</p>
-    <router-link to="/all-top-podcasts">
-      Показати всі
-    </router-link>
+  <div class="page_title">
+    <p>
+      Результати пошуку
+    </p>
   </div>
-  <div class="loading" v-if="loading">Завантаження...</div>
-  <div v-else class="block_content_podcast">
+  <div class="all-podcast-block">
+    <div v-if="searchResults && searchResults.length" class="block_content_podcast">
     <div
-        v-for="podcast in topPodcasts"
-        :key="podcast.id"
-        :class="['podcast', `id_${podcast.id}`, { 'podcast_blocked': podcast.blocked }]"
-        :style="{ backgroundImage: `url(${podcast.image_url})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }"
-        v-show="podcast.isVisible"
+        v-for="result in processedSearchResults"
+        :key="result.id"
+        :class="['podcast', `id_${result.id}`, { 'podcast_blocked': result.blocked }]"
+        :style="{ backgroundImage: `url(${result.image_url})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }"
+        v-show="result.isVisible"
     >
-      <div v-if="podcast.blocked" class="blocked-overlay">
+      <div v-if="result.blocked" class="blocked-overlay">
         <svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
           <path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/></svg>
-        <button class="buy-button" @click="openPaymentPopup(podcast.id)">Купити</button>
+        <button class="buy-button" @click="openPaymentPopup(result.id)">Купити</button>
       </div>
       <div class="positions_in_block">
         <div class="upper_tittle">
           <div class="context">
-            <button class="play-button" :disabled="podcast.blocked" aria-label="Play podcast" @click="!podcast.blocked && handlePlayButtonClick(podcast, $event)">
+            <button class="play-button" :disabled="result.blocked" aria-label="Play podcast" @click="!result.blocked && handlePlayButtonClick(result, $event)">
               <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
-                <path class="play-path" :d="isPlaying && playingPodcast === podcast.id ? pausePath : playPath" />
+                <path class="play-path" :d="isPlaying && playingPodcast === result.id ? pausePath : playPath" />
               </svg>
             </button>
             <div class="info_podcast">
-              <span class="title_podcast">
-                {{ truncateTitle(podcast.title) }}
-              </span>
+                  <span class="title_podcast">
+                    {{ truncateTitle(result.title) }}
+                  </span>
               <span class="author_podcast">
-                {{ podcast.author }}
-              </span>
+                    {{ result.author }}
+                  </span>
             </div>
           </div>
           <span class="time_podcast">
-            {{ podcast.duration }}
-          </span>
+                {{ result.duration }}
+            </span>
         </div>
         <div class="under_title">
           <div class="rating_and_categories">
-            <div class="podcast-rating">{{ podcast.rating }}</div>
-<!--            <span class="categories_podcast">{{ podcast.categories[0].name }}</span>-->
-            <span class="categories_podcast">{{ podcast.categories && podcast.categories.length > 0 ? podcast.categories[0].name : 'Невідомо' }}</span>
+            <div class="podcast-rating">{{ result.rating }}</div>
+            <span class="categories_podcast">{{ result.categories[0].name }}</span>
           </div>
           <!--            isPodcastFavorite(podcast) ?-->
           <!--            podcast.isFavorite ?-->
           <button
-              :class="['heart-button', podcast.isFavorite ? 'active' : '']"
+              :class="['heart-button', result.isFavorite ? 'active' : '']"
               aria-label="favorite"
-              @click="handleHeartButtonClick(podcast)"
+              @click="handleHeartButtonClick(result)"
           ></button>
         </div>
       </div>
     </div>
+  </div>
   </div>
   <div v-if="showPaymentPopup" class="payment-popup">
     <div class="payment-popup-content">
@@ -80,11 +79,15 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import apiService from '@/services/apiService.js';
 import M from 'materialize-css';
+
 export default {
+  name: 'SearchResult',
   data() {
     return {
+      loading: false,
       initialPodcasts: [],
       playingPodcast: null,
       audio: new Audio(),
@@ -94,21 +97,19 @@ export default {
       selectedPaymentMethod: '',
       selectedPodcastId: null,
       isAuthenticated: false,
-    };
-  },
-  props: {
-    podcasts: {
-      type: Array,
-      required: true
-    },
-    loading: {
-      type: Boolean,
-      default: false
+      favoritePodcasts: [],
     }
   },
   computed: {
-    topPodcasts() {
-      return this.podcasts.slice(0, 4);
+    ...mapGetters(['searchResults']),
+    processedSearchResults() {
+      return this.searchResults.map(result => {
+        return {
+          ...result,
+          isVisible: true,
+          isFavorite: this.favoritePodcasts.includes(result.id)
+        };
+      });
     },
     isPlaying() {
       console.log('isPlaying value from store:', this.$store.getters.isPlaying);
@@ -203,24 +204,24 @@ export default {
       console.log("stop this.playingPodcast= "+ this.playingPodcast)
     },
     // Метод для анімації кнопки лайку на блоці постів
-    async handleHeartButtonClick(podcast) {
+    async handleHeartButtonClick(result) {
       //this.isPodcastFavorite(podcast.id);
-      podcast.isFavorite = !podcast.isFavorite;
-      console.log(podcast.isFavorite);
+      result.isFavorite = !result.isFavorite;
+      console.log(result.isFavorite);
       //
       // event.target.classList.toggle('active');
 
-      this.$store.dispatch('toggleFavorite', podcast.id);
+      this.$store.dispatch('toggleFavorite', result.id);
       const token = localStorage.getItem('token');
 
       //console.log("this.$store.getters.isFavorite(podcast.id)= " + this.$store.getters.isFavorite(podcast.id))
       try {
-        const response = await apiService.addAndRemoveToFavorite(token, podcast.id,  `${this.$store.getters.isFavorite(podcast.id)}`);
+        const response = await apiService.addAndRemoveToFavorite(token, result.id,  `${this.$store.getters.isFavorite(result.id)}`);
 
         if (response.data === true) {
           console.log('Операція успішна', response);
 
-          this.$store.dispatch('updateIsFavoriteForPlayingPodcast', this.$store.getters.isFavorite(podcast.id));
+          this.$store.dispatch('updateIsFavoriteForPlayingPodcast', this.$store.getters.isFavorite(result.id));
         } else if (
             response.error &&
             response.error.message &&
@@ -268,10 +269,9 @@ export default {
       // Видаляємо обробник події "ended" для того, щоб уникнути плутанини при повторному відтворенні
       this.audio.removeEventListener('ended', this.stopPlayingPodcast.bind(this));
     },
-
     // Метод для анімації кнопки плей у блоці підкастів
-    handlePlayButtonClick(podcast, event) {
-      if (this.playingPodcast === podcast.id) {
+    handlePlayButtonClick(result, event) {
+      if (this.playingPodcast === result.id) {
         // Якщо клікнули по вже відтворюваному подкасту, зупиняємо відтворення
         //this.audio.pause();
         this.$store.dispatch('togglePlayStatus');
@@ -289,24 +289,24 @@ export default {
         //this.audio.src = podcast.audio_url;
         //this.playAudio(podcast.audio_url); //Передаємо посилання на аудіо
         //this.playPodcast(); // Використовуємо метод playPodcast
-        this.playingPodcast = podcast.id;
+        this.playingPodcast = result.id;
         // Передаю через vuex дані про підкаст
         //console.log("this.$store.getters.isFavorite(podcast.id)= "+this.$store.getters.isFavorite(podcast.id))
         this.$store.dispatch('updatePlayingPodcast', {
-          imageUrl: podcast.image_url,
-          author: podcast.author,
-          title: podcast.title,
-          duration: podcast.duration,
-          id: podcast.id,
-          audio_url: podcast.audio_url,
+          imageUrl: result.image_url,
+          author: result.author,
+          title: result.title,
+          duration: result.duration,
+          id: result.id,
+          audio_url: result.audio_url,
           //isFavorite: this.$store.getters.isFavorite(podcast.id)
-          isFavorite: podcast.isFavorite
+          isFavorite: result.isFavorite
         });
       }
       console.log("this.playingPodcast= "+ this.playingPodcast)
       console.log("this.isPlaying= "+ this.isPlaying)
 
-      if (this.playingPodcast == podcast.id && this.isPlaying == true) {
+      if (this.playingPodcast == result.id && this.isPlaying == true) {
         let podcastBlock = event.target.closest('.positions_in_block');
         podcastBlock.classList.toggle('active');
 
@@ -319,6 +319,24 @@ export default {
         const PlayElement = podcastElement.querySelector('.play-button');
         PlayElement.classList.toggle('expanded');
       }
+    },
+    // Метод що витягує з метаданих аудіо час, скільки йде подкаст
+    async fetchPodcastDurations() {
+      for (let result of this.searchResults) {
+        let audio = new Audio(result.audio_url);
+        audio.addEventListener('loadedmetadata', () => {
+          result.duration = this.formatTime(audio.duration);
+          console.log("result.duration= "+result.duration)
+        });
+      }
+    },
+    formatTime(timeInSeconds) {
+      const minutes = Math.floor(timeInSeconds / 60);
+      const seconds = Math.floor(timeInSeconds - minutes * 60);
+      return `${this.padZero(minutes)}:${this.padZero(seconds)}`;
+    },
+    padZero(num) {
+      return num < 10 ? `0${num}` : num;
     },
     //Метод для обрізання довгих назв подкастів
     truncateTitle(title) {
@@ -337,11 +355,46 @@ export default {
     },
   },
   mounted() {
+    //console.log("this.isPlaying1= "+ this.isPlaying)
+    //console.log("this.playingPodcast1= "+ this.playingPodcast)
     this.applyAnimationBasedOnState();
+
+    // дістаємо довжину аудіо для кожного подкасту
+    this.$nextTick(() => {
+      this.fetchPodcastDurations();
+    });
   },
   async created() {
+    this.loading = true;
+
     const token = localStorage.getItem('token');
     this.isAuthenticated = Boolean(token);
+    // Отримуємо улюблені подкасти
+    const favoritePodcastsResponse = await apiService.getFavoritePodcasts(token);
+    //console.log(favoritePodcastsResponse);
+    const DatafavoritePodcasts = favoritePodcastsResponse.data ? favoritePodcastsResponse.data.map(podcast => podcast.id) : [];
+    console.log(DatafavoritePodcasts);
+    // присвоюю занчення
+    this.favoritePodcasts = DatafavoritePodcasts;
+
+
+    // Отримуємо данні всіх подкастів
+    //const responseAllPodcast = await apiService.AllPodcastPage();
+    //console.log(responseAllPodcast && responseAllPodcast.data && responseAllPodcast.data.data)
+
+    // if(responseAllPodcast && responseAllPodcast.data && responseAllPodcast.data.data) {
+    //   this.searchResults = responseAllPodcast.data.data.map(podcast => {
+    //     return {
+    //       ...podcast,
+    //       isVisible: true,
+    //       isFavorite: DatafavoritePodcasts.includes(podcast.id)
+    //     };
+    //   });
+    //
+    //   // дістаємо довжину для кожного подкасту:
+    //   await this.fetchPodcastDurations();
+    // }
+    this.loading = false;
   }
-}
+};
 </script>
