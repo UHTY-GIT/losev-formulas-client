@@ -22,8 +22,17 @@ const apiService = {
     },
 
     // Функція для всіх подкастів користувача
-    AllPodcastPage: () => {
-        return axios.get(`${BASE_URL}/api/v1/podcasts`);
+    AllPodcastPage: (token) => {
+        const config = {
+            headers: { 'authtoken': token },
+        };
+        return axios.get(`${BASE_URL}/api/v1/podcasts`, config)
+            .then(response => {
+                return response.data;
+            })
+            .catch(error => {
+                console.error('Під час отримання всіх подкастів сталася помилка: ', error);
+            });
     },
 
     // Функція для моїх подкастів користувача
@@ -42,18 +51,45 @@ const apiService = {
 
 
     // Функція для ТОПу подкастів всіх користувачів
-    TopPodcastPage: () => {
-        return axios.get(`${BASE_URL}/api/v1/podcasts/top`);
+    TopPodcastPage: (token) => {
+        const config = {
+            headers: { 'authtoken': token },
+        };
+        return axios.get(`${BASE_URL}/api/v1/podcasts/top`, config)
+            .then(response => {
+                return response.data;
+            })
+            .catch(error => {
+                console.error('Під час отримання ТОПу подкастів сталася помилка: ', error);
+            });
     },
 
     // Функція для Рекомендацій подкастів всіх користувачів
-    RecomendationPodcastPage: () => {
-        return axios.get(`${BASE_URL}/api/v1/podcasts/recommendation`);
+    RecomendationPodcastPage: (token) => {
+        const config = {
+            headers: { 'authtoken': token },
+        };
+        return axios.get(`${BASE_URL}/api/v1/podcasts/recommendation`, config)
+            .then(response => {
+                return response.data;
+            })
+            .catch(error => {
+                console.error('Під час отримання ТОПу подкастів сталася помилка: ', error);
+            });
     },
 
     // Функція для пошуку подкастів за назвою або автором
-    searchPodcasts: (query) => {
-        return axios.get(`${BASE_URL}/api/v1/podcasts?search=${query}`);
+    searchPodcasts: (query, token) => {
+        const config = {
+            headers: { 'authtoken': token },
+        };
+        return axios.get(`${BASE_URL}/api/v1/podcasts?search=${query}`, config)
+            .then(response => {
+                return response.data;
+            })
+            .catch(error => {
+                console.error('Під час отримання результатів пошуку подкастів сталася помилка: ', error);
+            });
     },
 
     // Функція для всіх категорій і їх типу

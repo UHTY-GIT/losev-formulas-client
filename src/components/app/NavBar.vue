@@ -95,10 +95,11 @@ export default {
         return;
       }
       try {
-        const responseQuery = await apiService.searchPodcasts(this.searchQuery);
-        this.searchResults = responseQuery.data.data; // Оновлюємо результати пошуку, перетворюючи об'єкт Proxy в масив
+        const token = localStorage.getItem('token');
+        const responseQuery = await apiService.searchPodcasts(this.searchQuery, token);
+        this.searchResults = responseQuery.data; // Оновлюємо результати пошуку, перетворюючи об'єкт Proxy в масив
         this.showSearchResults = true; // Показуємо блок результатів при наявності даних
-        // console.log(this.searchResults);
+        //console.log(this.searchResults);
         // console.log(this.searchResults.data.length);
         // console.log(Array.isArray(this.searchResults), this.searchResults.length);
         // if (Array.isArray(this.searchResults)) {

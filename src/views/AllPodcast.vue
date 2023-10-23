@@ -10,7 +10,7 @@
       <div class="dropdown">
         <span>Сортування:</span>
         <div class="selected-item-name" @click="toggleDropdown('name')">
-          <span>{{ sortDisplayNames[sortType] }}</span>
+          <span class="selected-item-name-click">{{ sortDisplayNames[sortType] }}</span>
           <a :class="['arrow-icon', { 'open': dropdowns.name }]">
             <span class="left-bar"></span>
             <span class="right-bar"></span>
@@ -129,7 +129,6 @@ export default {
         filterPrice: false
       },
       sortType: 'default',
-      allcategories: [],
       selectedFilterPrice: 'Всі подкасти',
       sortDisplayNames: {
         'default': 'За замовчуванням',
@@ -430,8 +429,19 @@ export default {
       this.dropdowns.filterPrice = false;
     },
     checkOutsideClick(event) {
+      const selectedItemFilter = document.querySelector('.selected-item-filter');
+      const selectedItemName = document.querySelector('.selected-item-name-click');
       const dropdownContents = document.querySelectorAll('.dropdown-content');
       let isOutside = true;
+
+      // Якщо клік відбувся на selectedItemFilter або всередині його дочірніх елементів
+      if (selectedItemFilter && (selectedItemFilter === event.target || selectedItemFilter.contains(event.target))) {
+        return;  // Ігноруємо такий клік і не закриваємо випадаюче меню
+      }
+      // Якщо клік відбувся на selectedItemFilter або всередині його дочірніх елементів
+      if (selectedItemName && (selectedItemName === event.target || selectedItemName.contains(event.target))) {
+        return;  // Ігноруємо такий клік і не закриваємо випадаюче меню
+      }
 
       dropdownContents.forEach(dropdown => {
         if (dropdown.contains(event.target)) {
@@ -445,10 +455,53 @@ export default {
     }
   },
   mounted() {
+    this.loading = true;
     //console.log("this.isPlaying1= "+ this.isPlaying)
     //console.log("this.playingPodcast1= "+ this.playingPodcast)
     this.applyAnimationBasedOnState();
     document.addEventListener('mousedown', this.checkOutsideClick);
+
+    const token = localStorage.getItem('token');
+    // Отримуємо улюблені подкасти
+    Promise.all([
+      apiService.getFavoritePodcasts(token),
+      apiService.AllPodcastPage(token)
+    ])
+        .then(([favoritePodcastsResponse, responseAllPodcast]) => {
+          console.log('favoritePodcastsResponse:', favoritePodcastsResponse);
+          console.log('userPodcastsResponse:', responseAllPodcast.data);
+          const favoritePodcastIds = favoritePodcastsResponse.data
+              ? favoritePodcastsResponse.data.map(podcast => podcast.id)
+              : [];
+          console.log('userPodcastsResponse:', favoritePodcastIds);
+          console.log('Before setting podcasts:', this.podcasts);
+          // Adding isVisible and isFavorite to the podcasts data
+          this.podcasts = responseAllPodcast?.data?.map(podcast => ({
+            ...podcast,
+            isVisible: true,
+            isFavorite: favoritePodcastIds.includes(podcast.id)
+          })) || [];
+
+          console.log('After setting podcasts:', this.podcasts);
+          console.log('Number of podcasts:', this.podcasts.length);
+
+          // Зберігаємо первісний список
+          this.initialPodcasts = JSON.parse(JSON.stringify(this.podcasts));
+
+          // Ініціалізація методу сортування
+          this.sortPodcasts(this.sortType);
+
+          // дістаємо довжину для кожного подкасту:
+          this.$nextTick(() => {
+            this.fetchPodcastDurations();
+          });
+        })
+        .catch(error => {
+          console.error("Error:", error);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
   },
   beforeUnmount() {
     document.removeEventListener('mousedown', this.checkOutsideClick);
@@ -458,33 +511,33 @@ export default {
 
     const token = localStorage.getItem('token');
     this.isAuthenticated = Boolean(token);
-    // Отримуємо улюблені подкасти
-    const favoritePodcastsResponse = await apiService.getFavoritePodcasts(token);
-    //console.log(favoritePodcastsResponse);
-    const DatafavoritePodcasts = favoritePodcastsResponse.data ? favoritePodcastsResponse.data.map(podcast => podcast.id) : [];
-    console.log(DatafavoritePodcasts);
-
-    // Отримуємо данні всіх подкастів
-    const responseAllPodcast = await apiService.AllPodcastPage();
-    //console.log(responseAllPodcast && responseAllPodcast.data && responseAllPodcast.data.data)
-
-    if(responseAllPodcast && responseAllPodcast.data && responseAllPodcast.data.data) {
-      this.podcasts = responseAllPodcast.data.data.map(podcast => {
-        return {
-          ...podcast,
-          isVisible: true,
-          isFavorite: DatafavoritePodcasts.includes(podcast.id)
-        };
-      });
-
-      // Зберігаємо первісний список
-      this.initialPodcasts = JSON.parse(JSON.stringify(this.podcasts));
-
-      // Ініціалізація методу сортування
-      this.sortPodcasts(this.sortType);
-      // дістаємо довжину для кожного подкасту:
-      await this.fetchPodcastDurations();
-    }
+    // // Отримуємо улюблені подкасти
+    // const favoritePodcastsResponse = await apiService.getFavoritePodcasts(token);
+    // //console.log(favoritePodcastsResponse);
+    // const DatafavoritePodcasts = favoritePodcastsResponse.data ? favoritePodcastsResponse.data.map(podcast => podcast.id) : [];
+    // console.log(DatafavoritePodcasts);
+    //
+    // // Отримуємо данні всіх подкастів
+    // const responseAllPodcast = await apiService.AllPodcastPage();
+    // //console.log(responseAllPodcast && responseAllPodcast.data && responseAllPodcast.data.data)
+    //
+    // if(responseAllPodcast && responseAllPodcast.data && responseAllPodcast.data.data) {
+    //   this.podcasts = responseAllPodcast.data.data.map(podcast => {
+    //     return {
+    //       ...podcast,
+    //       isVisible: true,
+    //       isFavorite: DatafavoritePodcasts.includes(podcast.id)
+    //     };
+    //   });
+    //
+    //   // Зберігаємо первісний список
+    //   this.initialPodcasts = JSON.parse(JSON.stringify(this.podcasts));
+    //
+    //   // Ініціалізація методу сортування
+    //   this.sortPodcasts(this.sortType);
+    //   // дістаємо довжину для кожного подкасту:
+    //   await this.fetchPodcastDurations();
+    // }
     this.loading = false;
   }
 }

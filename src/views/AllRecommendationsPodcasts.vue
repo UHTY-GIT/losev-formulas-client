@@ -334,32 +334,69 @@ export default {
     },
   },
   mounted() {
+    this.loading = true;
     this.applyAnimationBasedOnState();
+
+    const token = localStorage.getItem('token');
+    // запит апі для рекомендацій подкастів
+    Promise.all([
+      apiService.getFavoritePodcasts(token),
+      apiService.RecomendationPodcastPage(token)
+    ])
+        .then(([favoritePodcastsResponse, podcasts]) => {
+          console.log('favoritePodcastsResponse:', favoritePodcastsResponse);
+          console.log('userPodcastsResponse:', podcasts.data);
+          const favoritePodcastIds = favoritePodcastsResponse.data
+              ? favoritePodcastsResponse.data.map(podcast => podcast.id)
+              : [];
+          console.log('userPodcastsResponse:', favoritePodcastIds);
+          console.log('Before setting podcasts:', this.podcasts);
+          // Adding isVisible and isFavorite to the podcasts data
+          this.podcasts = podcasts?.data?.map(podcast => ({
+            ...podcast,
+            isVisible: true,
+            isFavorite: favoritePodcastIds.includes(podcast.id)
+          })) || [];
+
+          console.log('After setting podcasts:', this.podcasts);
+          console.log('Number of podcasts:', this.podcasts.length);
+
+          // дістаємо довжину для кожного подкасту:
+          this.$nextTick(() => {
+            this.fetchPodcastDurations();
+          });
+        })
+        .catch(error => {
+          console.error("Error:", error);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
   },
   async created() {
     this.loading = true;
     const token = localStorage.getItem('token');
     this.isAuthenticated = Boolean(token);
-    // Отримуємо улюблені подкасти
-    const favoritePodcastsResponse = await apiService.getFavoritePodcasts(token);
-    //console.log(favoritePodcastsResponse);
-    const DatafavoritePodcasts = favoritePodcastsResponse.data ? favoritePodcastsResponse.data.map(podcast => podcast.id) : [];
-    console.log(DatafavoritePodcasts);
-
-    const podcasts = await apiService.RecomendationPodcastPage();
-    console.log(podcasts.data.data)
-    if(podcasts && podcasts.data && podcasts.data.data) {
-      //console.log(Recresponse.data.data);
-      this.podcasts = podcasts.data.data.map(podcast => {
-        return {
-          ...podcast,
-          isVisible: true,
-          isFavorite: DatafavoritePodcasts.includes(podcast.id)
-        };
-      });
-      // дістаємо довжину для кожного подкасту:
-      await this.fetchPodcastDurations();
-    }
+    // // Отримуємо улюблені подкасти
+    // const favoritePodcastsResponse = await apiService.getFavoritePodcasts(token);
+    // //console.log(favoritePodcastsResponse);
+    // const DatafavoritePodcasts = favoritePodcastsResponse.data ? favoritePodcastsResponse.data.map(podcast => podcast.id) : [];
+    // console.log(DatafavoritePodcasts);
+    //
+    // const podcasts = await apiService.RecomendationPodcastPage();
+    // console.log(podcasts.data.data)
+    // if(podcasts && podcasts.data && podcasts.data.data) {
+    //   //console.log(Recresponse.data.data);
+    //   this.podcasts = podcasts.data.data.map(podcast => {
+    //     return {
+    //       ...podcast,
+    //       isVisible: true,
+    //       isFavorite: DatafavoritePodcasts.includes(podcast.id)
+    //     };
+    //   });
+    //   // дістаємо довжину для кожного подкасту:
+    //   await this.fetchPodcastDurations();
+    // }
     this.loading = false;
   }
 }

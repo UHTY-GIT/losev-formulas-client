@@ -1,9 +1,10 @@
 * {
-	margin: 0;
-	padding: 0;
-	border: none;
+    margin: 0;
+    padding: 0;
+    border: none;
 }
 .background_main {
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     position: relative;
     min-height: 100vh;
@@ -13,6 +14,8 @@ a:hover {
     text-decoration: none;
 }
 button {
+    -webkit-transition: .3s;
+    -o-transition: .3s;
     transition: .3s;
 }
 /*button:hover {*/
@@ -29,10 +32,10 @@ font-face {
     font-family: 'Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-Regular.eot');
     src: local('Gilroy Regular'), local('Gilroy-Regular'),
-        url('@/assets/fonts/Gilroy/Gilroy-Regular.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-Regular.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-Regular.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-Regular.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-Regular.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-Regular.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-Regular.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -41,10 +44,10 @@ font-face {
     font-family: 'Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-ExtraboldItalic.eot');
     src: local('Gilroy Extrabold Italic'), local('Gilroy-ExtraboldItalic'),
-        url('@/assets/fonts/Gilroy/Gilroy-ExtraboldItalic.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-ExtraboldItalic.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-ExtraboldItalic.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-ExtraboldItalic.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-ExtraboldItalic.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-ExtraboldItalic.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-ExtraboldItalic.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-ExtraboldItalic.ttf') format('truetype');
     font-weight: 800;
     font-style: italic;
 }
@@ -53,10 +56,10 @@ font-face {
     font-family: 'Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-Bold.eot');
     src: local('Gilroy Bold'), local('Gilroy-Bold'),
-        url('@/assets/fonts/Gilroy/Gilroy-Bold.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-Bold.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-Bold.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-Bold.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-Bold.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-Bold.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-Bold.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-Bold.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
 }
@@ -65,10 +68,10 @@ font-face {
     font-family: 'Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-Black.eot');
     src: local('Gilroy Black'), local('Gilroy-Black'),
-        url('@/assets/fonts/Gilroy/Gilroy-Black.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-Black.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-Black.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-Black.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-Black.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-Black.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-Black.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-Black.ttf') format('truetype');
     font-weight: 900;
     font-style: normal;
 }
@@ -77,10 +80,10 @@ font-face {
     font-family: 'Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-Light.eot');
     src: local('Gilroy Light'), local('Gilroy-Light'),
-        url('@/assets/fonts/Gilroy/Gilroy-Light.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-Light.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-Light.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-Light.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-Light.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-Light.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-Light.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-Light.ttf') format('truetype');
     font-weight: 300;
     font-style: normal;
 }
@@ -89,10 +92,10 @@ font-face {
     font-family: 'Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-Semibold.eot');
     src: local('Gilroy Semibold'), local('Gilroy-Semibold'),
-        url('@/assets/fonts/Gilroy/Gilroy-Semibold.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-Semibold.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-Semibold.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-Semibold.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-Semibold.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-Semibold.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-Semibold.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-Semibold.ttf') format('truetype');
     font-weight: 600;
     font-style: normal;
 }
@@ -101,10 +104,10 @@ font-face {
     font-family: 'Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-Medium.eot');
     src: local('Gilroy Medium'), local('Gilroy-Medium'),
-        url('@/assets/fonts/Gilroy/Gilroy-Medium.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-Medium.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-Medium.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-Medium.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-Medium.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-Medium.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-Medium.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-Medium.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
 }
@@ -113,10 +116,10 @@ font-face {
     font-family: '/fonts/Gilroy/Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-MediumItalic.eot');
     src: local('Gilroy Medium Italic'), local('Gilroy-MediumItalic'),
-        url('@/assets/fonts/Gilroy/Gilroy-MediumItalic.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-MediumItalic.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-MediumItalic.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-MediumItalic.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-MediumItalic.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-MediumItalic.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-MediumItalic.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-MediumItalic.ttf') format('truetype');
     font-weight: 500;
     font-style: italic;
 }
@@ -125,10 +128,10 @@ font-face {
     font-family: 'Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-BlackItalic.eot');
     src: local('Gilroy Black Italic'), local('Gilroy-BlackItalic'),
-        url('@/assets/fonts/Gilroy/Gilroy-BlackItalic.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-BlackItalic.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-BlackItalic.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-BlackItalic.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-BlackItalic.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-BlackItalic.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-BlackItalic.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-BlackItalic.ttf') format('truetype');
     font-weight: 900;
     font-style: italic;
 }
@@ -137,10 +140,10 @@ font-face {
     font-family: 'Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-UltraLight.eot');
     src: local('Gilroy UltraLight'), local('Gilroy-UltraLight'),
-        url('@/assets/fonts/Gilroy/Gilroy-UltraLight.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-UltraLight.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-UltraLight.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-UltraLight.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-UltraLight.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-UltraLight.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-UltraLight.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-UltraLight.ttf') format('truetype');
     font-weight: 200;
     font-style: normal;
 }
@@ -149,10 +152,10 @@ font-face {
     font-family: 'Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-RegularItalic.eot');
     src: local('Gilroy Regular Italic'), local('Gilroy-RegularItalic'),
-        url('@/assets/fonts/Gilroy/Gilroy-RegularItalic.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-RegularItalic.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-RegularItalic.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-RegularItalic.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-RegularItalic.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-RegularItalic.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-RegularItalic.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-RegularItalic.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
 }
@@ -161,10 +164,10 @@ font-face {
     font-family: 'Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-SemiboldItalic.eot');
     src: local('Gilroy Semibold Italic'), local('Gilroy-SemiboldItalic'),
-        url('@/assets/fonts/Gilroy/Gilroy-SemiboldItalic.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-SemiboldItalic.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-SemiboldItalic.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-SemiboldItalic.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-SemiboldItalic.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-SemiboldItalic.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-SemiboldItalic.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-SemiboldItalic.ttf') format('truetype');
     font-weight: 600;
     font-style: italic;
 }
@@ -173,10 +176,10 @@ font-face {
     font-family: 'Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-HeavyItalic.eot');
     src: local('Gilroy Heavy Italic'), local('Gilroy-HeavyItalic'),
-        url('@/assets/fonts/Gilroy/Gilroy-HeavyItalic.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-HeavyItalic.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-HeavyItalic.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-HeavyItalic.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-HeavyItalic.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-HeavyItalic.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-HeavyItalic.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-HeavyItalic.ttf') format('truetype');
     font-weight: 900;
     font-style: italic;
 }
@@ -185,10 +188,10 @@ font-face {
     font-family: 'Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-Extrabold.eot');
     src: local('Gilroy Extrabold'), local('Gilroy-Extrabold'),
-        url('@/assets/fonts/Gilroy/Gilroy-Extrabold.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-Extrabold.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-Extrabold.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-Extrabold.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-Extrabold.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-Extrabold.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-Extrabold.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-Extrabold.ttf') format('truetype');
     font-weight: 800;
     font-style: normal;
 }
@@ -197,10 +200,10 @@ font-face {
     font-family: 'Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-BoldItalic.eot');
     src: local('Gilroy Bold Italic'), local('Gilroy-BoldItalic'),
-        url('@/assets/fonts/Gilroy/Gilroy-BoldItalic.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-BoldItalic.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-BoldItalic.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-BoldItalic.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-BoldItalic.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-BoldItalic.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-BoldItalic.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-BoldItalic.ttf') format('truetype');
     font-weight: bold;
     font-style: italic;
 }
@@ -209,10 +212,10 @@ font-face {
     font-family: 'Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-UltraLightItalic.eot');
     src: local('Gilroy UltraLight Italic'), local('Gilroy-UltraLightItalic'),
-        url('@/assets/fonts/Gilroy/Gilroy-UltraLightItalic.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-UltraLightItalic.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-UltraLightItalic.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-UltraLightItalic.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-UltraLightItalic.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-UltraLightItalic.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-UltraLightItalic.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-UltraLightItalic.ttf') format('truetype');
     font-weight: 200;
     font-style: italic;
 }
@@ -221,10 +224,10 @@ font-face {
     font-family: 'Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-LightItalic.eot');
     src: local('Gilroy Light Italic'), local('Gilroy-LightItalic'),
-        url('@/assets/fonts/Gilroy/Gilroy-LightItalic.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-LightItalic.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-LightItalic.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-LightItalic.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-LightItalic.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-LightItalic.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-LightItalic.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-LightItalic.ttf') format('truetype');
     font-weight: 300;
     font-style: italic;
 }
@@ -233,10 +236,10 @@ font-face {
     font-family: 'Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-Heavy.eot');
     src: local('Gilroy Heavy'), local('Gilroy-Heavy'),
-        url('@/assets/fonts/Gilroy/Gilroy-Heavy.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-Heavy.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-Heavy.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-Heavy.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-Heavy.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-Heavy.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-Heavy.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-Heavy.ttf') format('truetype');
     font-weight: 900;
     font-style: normal;
 }
@@ -245,10 +248,10 @@ font-face {
     font-family: 'Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-Thin.eot');
     src: local('Gilroy Thin'), local('Gilroy-Thin'),
-        url('@/assets/fonts/Gilroy/Gilroy-Thin.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-Thin.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-Thin.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-Thin.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-Thin.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-Thin.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-Thin.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-Thin.ttf') format('truetype');
     font-weight: 100;
     font-style: normal;
 }
@@ -257,26 +260,30 @@ font-face {
     font-family: 'Gilroy';
     src: url('@/assets/fonts/Gilroy/Gilroy-ThinItalic.eot');
     src: local('Gilroy Thin Italic'), local('Gilroy-ThinItalic'),
-        url('@/assets/fonts/Gilroy/Gilroy-ThinItalic.eot?#iefix') format('embedded-opentype'),
-        url('@/assets/fonts/Gilroy/Gilroy-ThinItalic.woff2') format('woff2'),
-        url('@/assets/fonts/Gilroy/Gilroy-ThinItalic.woff') format('woff'),
-        url('@/assets/fonts/Gilroy/Gilroy-ThinItalic.ttf') format('truetype');
+    url('@/assets/fonts/Gilroy/Gilroy-ThinItalic.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/Gilroy/Gilroy-ThinItalic.woff2') format('woff2'),
+    url('@/assets/fonts/Gilroy/Gilroy-ThinItalic.woff') format('woff'),
+    url('@/assets/fonts/Gilroy/Gilroy-ThinItalic.ttf') format('truetype');
     font-weight: 100;
     font-style: italic;
 }
 /*Fonts end*/
 /*Зміна кольору виділення текста курсором*/
+::-moz-selection {
+    background: #56a442;
+    color: #fff;
+}
 ::selection {
     background: #56a442;
     color: #fff;
 }
 ::-moz-selection {
-	background: #56a442; 
-	color:#fff;
+    background: #56a442;
+    color:#fff;
 }
 ::-webkit-selection {
-	background: #56a442; 
-	color:#fff;
+    background: #56a442;
+    color:#fff;
 }
 /*Зміна кольору виділення текста курсором - кінець*/
 /*Кастомний Скролбар*/
@@ -287,9 +294,9 @@ font-face {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: transparent; 
+    background: transparent;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: #13180f;
@@ -297,16 +304,17 @@ font-face {
 }
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #56a442; 
+    background: #56a442;
 }
 /*Кастомний Скролбар - кінець*/
 body {
-	font-family: 'Gilroy', sans-serif;
-	overflow: hidden;
+    font-family: 'Gilroy', sans-serif;
+    overflow: hidden;
 }
 header {
     border-radius: 30px;
     background: rgba(0, 0, 0, 0.50);
+    -webkit-backdrop-filter: blur(12.5px);
     backdrop-filter: blur(12.5px);
     margin: 10px 15px 0;
 }
@@ -314,7 +322,7 @@ header {
 .background_main {
     background: url(@/assets/photo/background-main-photo.png) no-repeat center;
     width: 100vw;
-/*    height: 100vh;*/
+    /*    height: 100vh;*/
     overflow: hidden;
     background-size: cover;
 
@@ -325,18 +333,35 @@ header {
     top: 4px;
 }
 .header_items {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     padding: 22px 33px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
+    -ms-flex-line-pack: center;
     align-content: center;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
 .autorizhate {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -ms-flex-line-pack: center;
     align-content: center;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row;
 }
 .autorizhate a {
@@ -347,7 +372,11 @@ header {
 }
 .autorizhate a img {
     width: 20px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
 }
 .search {
@@ -368,7 +397,19 @@ header {
     color: #000 !important;
 }
 .search input[type="text"]:focus {
-	border: none;
+    border: none;
+}
+.search input[type="text"]::-webkit-input-placeholder {
+    color: #272D33;
+}
+.search input[type="text"]::-moz-placeholder {
+    color: #272D33;
+}
+.search input[type="text"]:-ms-input-placeholder {
+    color: #272D33;
+}
+.search input[type="text"]::-ms-input-placeholder {
+    color: #272D33;
 }
 .search input[type="text"]::placeholder {
     color: #272D33;
@@ -377,11 +418,15 @@ header {
     position: absolute;
     left: 25px;
     top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     width: 18px;
     height: 18px;
 }
 .main-section {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     margin: 10px 15px;
     height: calc(100vh - 217px);
@@ -397,36 +442,51 @@ header {
     color: #FFF;
     font-size: 22px;
     font-weight: 700;
+    -webkit-transition: .3s ease-in-out;
+    -o-transition: .3s ease-in-out;
     transition: .3s ease-in-out;
 }
 .site-content {
     width: calc(100% - 230px);
     border-radius: 30px;
     background: rgba(0, 0, 0, 0.50);
+    -webkit-backdrop-filter: blur(12.5px);
     backdrop-filter: blur(12.5px);
     overflow: auto;
     height: 100%;
+    -webkit-transition: .3s ease-in-out;
+    -o-transition: .3s ease-in-out;
     transition: .3s ease-in-out;
 }
 .site-content.full {
     width: calc(100% - 70px);
 }
 .sidebar-menu .menu-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     margin: 15px 25px 0px;
     font-size: 20px;
     font-weight: 700;
 }
 .sidebar-menu li {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     line-height: 24px;
     padding: 8px 25px;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
     transition: .3s;
 }
 .sidebar-menu li:hover {
-    background-color: #56A442;
+    background-color: #438132;
     width: 100%;
 }
 nav ul li.active {
@@ -434,12 +494,18 @@ nav ul li.active {
     background-color: #56A442;
 }
 .sidebar-menu li a {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     padding: 0;
     font-size: 18px;
     font-weight: 600;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -ms-flex-line-pack: center;
     align-content: center;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }
 .sidebar-menu .menu-header, .sidebar-menu li a:hover {
@@ -450,10 +516,11 @@ nav ul li.active {
     width: 24px;
     height: 24px;
     margin-right: 10px;
+    -ms-flex-negative: 0;
     flex-shrink: 0;
 }
 .site-content {
-	padding: 30px 50px;
+    padding: 30px 50px;
 }
 .page_title p {
     color: #FFF;
@@ -465,9 +532,16 @@ nav ul li.active {
     margin: 10px 0 0 0;
 }
 .Categories_main {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     padding-bottom: 15px;
     padding-top: 10px;
@@ -481,17 +555,23 @@ nav ul li.active {
     color: #FFF;
     font-size: 15px;
     font-weight: 500;
+    -webkit-text-decoration-line: underline;
     text-decoration-line: underline;
 }
 .id_0001 {
-	background: url(@/assets/photo/coconut-palm-tree.png) no-repeat center;
+    background: url(@/assets/photo/coconut-palm-tree.png) no-repeat center;
 }
 .id_0002 {
-	background: url(@/assets/photo/beautiful-girl-standing-in-thailand.png) no-repeat center;
+    background: url(@/assets/photo/beautiful-girl-standing-in-thailand.png) no-repeat center;
 }
 .block_content_podcast {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
 .podcast {
@@ -514,54 +594,93 @@ nav ul li.active {
     left: 0;
     z-index: 2;
     border-radius: 5px;
+    -webkit-transition: background-color 0.3s ease;
+    -o-transition: background-color 0.3s ease;
     transition: background-color 0.3s ease;
 }
 .positions_in_block {
-	position: relative;
+    position: relative;
     z-index: 3;
 }
 .upper_tittle {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: flex-start;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }
 .context {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: flex-start;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }
 .context.reversed {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: column-reverse;
     flex-direction: column-reverse;
 }
 .info_podcast {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: flex-start;
 }
 .title_podcast {
-	color: #FFF;
-	font-size: 28px;
-	font-weight: 700;
+    color: #FFF;
+    font-size: 28px;
+    font-weight: 700;
 }
 .author_podcast {
-	color: #FFF;
-	font-size: 18px;
-	font-weight: 400;
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 400;
 }
 .time_podcast {
-	color: #FFF;
-	font-size: 14px;
-	font-weight: 600;
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 600;
 }
 .under_title {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: end;
+    -ms-flex-align: end;
     align-items: flex-end;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
+    -ms-flex-line-pack: end;
     align-content: flex-end;
     height: 48.5px;
 }
@@ -572,6 +691,8 @@ nav ul li.active {
     border: none;
     background-size: cover;
     cursor: pointer;
+    -webkit-transition: background 0.5s ease;
+    -o-transition: background 0.5s ease;
     transition: background 0.5s ease;
 }
 
@@ -584,12 +705,13 @@ nav ul li.active {
     background-color: transparent;
 }
 .categories_podcast {
-	color: #FFF;
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 300;
-	line-height: normal;
-	text-decoration-line: underline;
+    color: #FFF;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    -webkit-text-decoration-line: underline;
+    text-decoration-line: underline;
 }
 .categories_podcast::before {
     content: "#";
@@ -614,17 +736,25 @@ nav ul li.active {
     background-color: transparent;
 }*/
 .play-button {
-	background-color: transparent;
-	cursor: pointer;
-	transition: transform 0.5s ease;
+    background-color: transparent;
+    cursor: pointer;
+    -webkit-transition: -webkit-transform 0.5s ease;
+    transition: -webkit-transform 0.5s ease;
+    -o-transition: transform 0.5s ease;
+    transition: transform 0.5s ease;
+    transition: transform 0.5s ease, -webkit-transform 0.5s ease;
 }
 .play-icon {
-	transition: transform 0.5s ease;
+    -webkit-transition: -webkit-transform 0.5s ease;
+    transition: -webkit-transform 0.5s ease;
+    -o-transition: transform 0.5s ease;
+    transition: transform 0.5s ease;
+    transition: transform 0.5s ease, -webkit-transform 0.5s ease;
 }
 .play-button svg {
-	width: 50px;
+    width: 50px;
     height: 50px;
-    border: none;    
+    border: none;
     background-color: transparent;
 }
 .play-button.expanded svg {
@@ -639,7 +769,7 @@ nav ul li.active {
     background-color: transparent;
 }
 .play-button:active {
-	outline: none;
+    outline: none;
     background-color: transparent;
 }
 .play-button:focus {
@@ -649,10 +779,11 @@ nav ul li.active {
 
 
 .positions_in_block.active {
-    
+
 }
 .podcast.active::after {
     background-color: rgba(0, 0, 0, 0.5); /* Додано зміну колірного фону псевдоелемента */
+    -webkit-backdrop-filter: blur(2px);
     backdrop-filter: blur(2px);
 }
 .positions_in_block.active .context .title_podcast {
@@ -668,10 +799,20 @@ nav ul li.active {
 
 
 .rating_and_categories {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: flex-start;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
     justify-content: flex-end;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }
 .podcast-rating {
@@ -694,7 +835,11 @@ nav ul li.active {
 }
 
 .positions_in_block.active .podcast-rating {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
 }
 
@@ -705,22 +850,31 @@ footer {
     right: 0;
     height: 100px;
     background: rgba(0, 0, 0, 0.50);
+    -webkit-backdrop-filter: blur(12.5px);
     backdrop-filter: blur(12.5px);
 }
 svg {
-	fill:#ffffff
+    fill:#ffffff
 }
 /*Вспливашка шо показує число на яке зібльшується гучність*/
 input[type=range]+.thumb {
-	display: none;
+    display: none;
 }
 
 
 .audio-player {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
+    -ms-flex-line-pack: center;
     align-content: center;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
     height: 100%;
     padding: 10px 30px;
@@ -728,14 +882,25 @@ input[type=range]+.thumb {
     --volume-before-width: 100%;
 }
 .audio-photo-names {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     width: 200px;
 }
 .audio-photo {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }
 .audio-photo img {
@@ -744,10 +909,20 @@ input[type=range]+.thumb {
     border-radius: 5px;
 }
 .audio-names {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: flex-start;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
     margin-left: 10px;
 }
@@ -755,8 +930,12 @@ input[type=range]+.thumb {
     background: transparent;
 }
 .audio-rating {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     padding: 0 10px 0 0;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
 }
 .audio-rating button svg {
@@ -777,23 +956,49 @@ input[type=range]+.thumb {
     line-height: normal;
 }
 .audio_usage {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -ms-flex-line-pack: center;
     align-content: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
 }
 .audio-controls {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row;
 }
 .audio-track {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -ms-flex-line-pack: center;
     align-content: center;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }
 .time {
@@ -809,14 +1014,18 @@ input[type=range] {
     border: none;
 }
 #seek-slider {
-	width: 400px;
+    width: 400px;
 }
 .audio-prev,
 .audio-play,
 .audio-next {
     background-color: transparent;
     cursor: pointer;
+    -webkit-transition: -webkit-transform 0.5s ease;
+    transition: -webkit-transform 0.5s ease;
+    -o-transition: transform 0.5s ease;
     transition: transform 0.5s ease;
+    transition: transform 0.5s ease, -webkit-transform 0.5s ease;
 }
 .audio-prev:focus,
 .audio-play:focus,
@@ -833,7 +1042,7 @@ input[type=range] {
 }
 .audio-prev svg,
 .audio-next svg {
-	width: 20px;
+    width: 20px;
     height: 20px;
 }
 
@@ -841,10 +1050,18 @@ input[type=range] {
 
 
 .audio-setting {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -ms-flex-line-pack: center;
     align-content: center;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }
 .audio-favorite {
@@ -854,6 +1071,8 @@ input[type=range] {
     border: none;
     background-size: cover;
     cursor: pointer;
+    -webkit-transition: background 0.5s ease;
+    -o-transition: background 0.5s ease;
     transition: background 0.5s ease;
 }
 
@@ -871,16 +1090,24 @@ input[type=range] {
     margin-left: 10px;
 }
 .audio-volume {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -ms-flex-line-pack: center;
     align-content: center;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
     margin: 0 0 0 10px;
 }
 
 #volume-output {
-	color: #FFF;
+    color: #FFF;
     font-size: 14px;
     font-weight: 600;
     line-height: normal;
@@ -889,12 +1116,23 @@ input[type=range] {
 .volume-icons {
     background-color: transparent;
     cursor: pointer;
+    -webkit-transition: -webkit-transform 0.5s ease;
+    transition: -webkit-transform 0.5s ease;
+    -o-transition: transform 0.5s ease;
     transition: transform 0.5s ease;
+    transition: transform 0.5s ease, -webkit-transform 0.5s ease;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -ms-flex-line-pack: center;
     align-content: center;
     width: 27px;
     height: 27px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
 }
 .volume-icons:focus {
@@ -902,24 +1140,24 @@ input[type=range] {
     background-color: transparent;
 }
 #volume-icon-very-low {
-	width: 19px;
-	height: 19px;
+    width: 19px;
+    height: 19px;
 }
 #volume-icon-low {
-	width: 19px;
-	height: 19px;
+    width: 19px;
+    height: 19px;
 }
 #volume-icon-high {
-	width: 23px;
-	height: 23px;
+    width: 23px;
+    height: 23px;
 }
 #volume-icon-mute {
-	width: 21px;
-	height: 21px;
+    width: 21px;
+    height: 21px;
 }
 .volume-icons svg {
-	width: 20px;
-	height: 20px;
+    width: 20px;
+    height: 20px;
 }
 
 input[type="range"] {
@@ -942,6 +1180,7 @@ input[type="range"]::-webkit-slider-thumb {
     z-index: 3;
 }
 input[type="range"]:active::-webkit-slider-thumb {
+    -webkit-transform: scale(1.2);
     transform: scale(1.2);
     background: #56A442;
 }
@@ -965,9 +1204,16 @@ input[type="range"]::before {
     background: #414141;
 }
 .view_all {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     padding-bottom: 15px;
     padding-top: 10px;
@@ -978,35 +1224,66 @@ input[type="range"]::before {
     font-weight: 600;
 }
 .view_all a {
-     color: #FFF;
-     font-size: 20px;
-     font-weight: 500;
-     text-decoration-line: underline;
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 500;
+    -webkit-text-decoration-line: underline;
+    text-decoration-line: underline;
 }
 /*Main page end*/
 
 /*Login & Register pages start*/
 .background_login {
-	background: url(@/assets/photo/login-background.jpg) no-repeat center;
+    background: url(@/assets/photo/login-background.jpg) no-repeat center;
     width: 100vw;
-/*    height: 100vh;*/
+    /*    height: 100vh;*/
     overflow: hidden;
     background-size: cover;
 }
 
 .empty-layout {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     height: 100vh;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
 }
 .auth-card {
     width: 800px;
     color: #fff;
     background: rgba(0, 0, 0, 0.7);
+    -webkit-backdrop-filter: blur(12.5px);
     backdrop-filter: blur(12.5px);
     border-radius: 12px;
+}
+
+.input-field input::-webkit-input-placeholder {
+    font-size: 20px;
+    color: #272D33;
+}
+
+.input-field input::-moz-placeholder {
+    font-size: 20px;
+    color: #272D33;
+}
+
+.input-field input:-ms-input-placeholder {
+    font-size: 20px;
+    color: #272D33;
+}
+
+.input-field input::-ms-input-placeholder {
+    font-size: 20px;
+    color: #272D33;
 }
 
 .input-field input::placeholder {
@@ -1039,17 +1316,29 @@ input[type="range"]::before {
     font-weight: 600;
 }
 input:not([type]):focus:not([readonly])+label, input[type=text]:not(.browser-default):focus:not([readonly])+label, input[type=password]:not(.browser-default):focus:not([readonly])+label, input[type=email]:not(.browser-default):focus:not([readonly])+label, input[type=url]:not(.browser-default):focus:not([readonly])+label, input[type=time]:not(.browser-default):focus:not([readonly])+label, input[type=date]:not(.browser-default):focus:not([readonly])+label, input[type=datetime]:not(.browser-default):focus:not([readonly])+label, input[type=datetime-local]:not(.browser-default):focus:not([readonly])+label, input[type=tel]:not(.browser-default):focus:not([readonly])+label, input[type=number]:not(.browser-default):focus:not([readonly])+label, input[type=search]:not(.browser-default):focus:not([readonly])+label, textarea.materialize-textarea:focus:not([readonly])+label {
-	color: #fff;
+    color: #fff;
 }
 .butt_login {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     padding: 15px;
 }
 .butt_register {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     padding: 15px;
 }
@@ -1072,6 +1361,7 @@ input:not([type]):focus:not([readonly])+label, input[type=text]:not(.browser-def
     color: #56a442;
     margin-right: 0px;
     -webkit-transition: color .3s ease;
+    -o-transition: color .3s ease;
     transition: color .3s ease;
     text-transform: none;
 }
@@ -1080,15 +1370,15 @@ input:not([type]):focus:not([readonly])+label, input[type=text]:not(.browser-def
 }
 
 .background_register {
-	background: url(@/assets/photo/register-background.jpg) no-repeat top;
+    background: url(@/assets/photo/register-background.jpg) no-repeat top;
     width: 100vw;
-/*    height: 100vh;*/
+    /*    height: 100vh;*/
     overflow: hidden;
     background-size: cover;
 }
 .under_butt_auth {
-	font-family: 'Gilroy', sans-serif;
-	font-size: 15px;
+    font-family: 'Gilroy', sans-serif;
+    font-size: 15px;
 }
 label {
     color: #ffff;
@@ -1105,6 +1395,7 @@ label {
     border-radius: 1px;
     margin-top: 3px;
     -webkit-transition: .2s;
+    -o-transition: .2s;
     transition: .2s;
 }
 [type="checkbox"]:checked+span:not(.lever):before {
@@ -1117,10 +1408,12 @@ label {
     border-right: 3px solid #56a442;
     border-bottom: 3px solid #56a442;
     -webkit-transform: rotate(40deg);
+    -ms-transform: rotate(40deg);
     transform: rotate(40deg);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     -webkit-transform-origin: 100% 100%;
+    -ms-transform-origin: 100% 100%;
     transform-origin: 100% 100%;
 }
 input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
@@ -1142,6 +1435,7 @@ input:not([type]), input[type=text]:not(.browser-default), input[type=password]:
     box-sizing: content-box;
     -webkit-transition: border .3s, -webkit-box-shadow .3s;
     transition: border .3s, -webkit-box-shadow .3s;
+    -o-transition: box-shadow .3s, border .3s;
     transition: box-shadow .3s, border .3s;
     transition: box-shadow .3s, border .3s, -webkit-box-shadow .3s;
 }
@@ -1154,10 +1448,10 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 
 /* Додані стилі для іконки на пароль */
 .toggle-password {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
 }
 /*Login & Register pages end*/
 
@@ -1175,10 +1469,18 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
     border-radius: 13px;
     background: #FFF;
     padding: 9px 17px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -ms-flex-line-pack: center;
     align-content: center;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
     cursor: pointer;
 
@@ -1197,9 +1499,17 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 
 }
 .my_profile_input {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: flex-start;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }
 .my_profile_input input {
@@ -1210,11 +1520,19 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
     bottom: 0;
     border-radius: 13px;
     background: #FFF;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
     transition: .3s;
 }
 .logout-link {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
     padding: 8px 17px;
 }
@@ -1228,6 +1546,7 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
     color: #fff;
 }
 .logout-section:hover .logout-link img {
+    -webkit-filter: invert(1);
     filter: invert(1);
 }
 .name-edit:hover {
@@ -1240,12 +1559,14 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
     color: #fff;
 }
 .name-edit:hover img {
+    -webkit-filter: invert(1);
     filter: invert(1);
 }
 .name-edit:focus .edit-link {
     color: #000000;
 }
 .name-edit:focus img {
+    -webkit-filter: invert(0);
     filter: invert(0);
 }
 .user-page-password {
@@ -1260,8 +1581,14 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
     margin: 20px 0 0 0;
 }
 .dropdown {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: flex-start;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
 }
 .dropdown span {
@@ -1270,10 +1597,15 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
     font-size: 18px;
     font-weight: 600;
     padding: 0 10px 0 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
 }
 
 .dropdown-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     background-color: #56a442;
     padding: 8px 8px 3px 8px;
@@ -1284,8 +1616,15 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
     left: 140px;
     top: 130px;
     z-index: 200;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
 }
 .dropdown-content a {
@@ -1299,9 +1638,16 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
     left: 447px;
 }
 .dropdown-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     width: 520px;
     padding-bottom: 25px;
@@ -1354,6 +1700,8 @@ selected-item-filter {
     display: block;
     float: right;
     border-radius: 6px 10px 10px 6px;
+    -webkit-transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+    -o-transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
     transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
     z-index: -1;
 }
@@ -1365,6 +1713,8 @@ selected-item-filter {
     width: 35px;
     height: 10px;
     display: block;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
     transform: rotate(45deg);
     float: right;
     border-radius: 2px;
@@ -1377,6 +1727,8 @@ selected-item-filter {
     display: block;
     float: right;
     border-radius: 10px 6px 6px 10px;
+    -webkit-transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+    -o-transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
     transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
     z-index: -1;
 }
@@ -1430,6 +1782,8 @@ selected-item-filter {
     padding: 8px 20px;
     margin: 5px;
     cursor: pointer;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
     transition: .3s;
 }
 .categories-list-block span:hover {
@@ -1457,14 +1811,26 @@ selected-item-filter {
     position: absolute;
     top: 50%;
     left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     z-index: 100;
     width: 100%;
     height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }
 .blocked-overlay::after {
@@ -1478,6 +1844,8 @@ selected-item-filter {
     left: 0;
     z-index: -1;
     border-radius: 4px;
+    -webkit-transition: background-color 0.3s ease;
+    -o-transition: background-color 0.3s ease;
     transition: background-color 0.3s ease;
 }
 .lock-icon {
@@ -1512,8 +1880,14 @@ selected-item-filter {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     z-index: 130;
 }
@@ -1542,14 +1916,27 @@ selected-item-filter {
     margin: 5px 5px;
 }
 .container_payment {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
 }
 .container_payment label {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     color: #000000;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
 }
 .container_payment label span {
@@ -1562,11 +1949,18 @@ selected-item-filter {
     margin: 10px 0;
 }
 .button_payment {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -ms-flex-line-pack: center;
     align-content: center;
 }
 .ones_payment_metod {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     margin: 15px 0 15px;
 }
@@ -1579,8 +1973,13 @@ selected-item-filter {
 
 /*NavBar start*/
 .username-account {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }
 .username-account img {
@@ -1594,3 +1993,92 @@ selected-item-filter {
     font-size: 18px;
     font-weight: 600;
 }
+
+/*Settings page start*/
+.block-settings {
+    margin: 15px 0 0 0;
+}
+.title-settings p {
+    color: #FFF;
+    font-size: 25px;
+    font-weight: 600;
+}
+.content-settings {
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 15px 0 0 20px;
+}
+.one-language {
+    display: flex;
+}
+.one-language .selected-item-category {
+    margin: 0 0 0 15px;
+    cursor: pointer;
+}
+.dropdown-language {
+    position: relative;
+    left: -190px;
+    top: 40px;
+}
+.arrow-icon-settings {
+    position: relative;
+    border-radius: 4px;
+    top: 4px;
+    left: 20px;
+}
+.left-bar-settings {
+    position: absolute;
+    background-color: transparent;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 10px;
+    display: block;
+    transform: rotate(-45deg);
+    float: right;
+    border-radius: 2px;
+}
+.left-bar-settings:after {
+    content: "";
+    background-color: white;
+    width: 15px;
+    height: 4px;
+    display: block;
+    float: right;
+    border-radius: 6px 10px 10px 6px;
+    transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+    z-index: -1;
+}
+.right-bar-settings {
+     position: absolute;
+     background-color: transparent;
+     top: 0px;
+     left: -17px;
+     width: 28px;
+     height: 10px;
+     display: block;
+     transform: rotate(45deg);
+     float: right;
+     border-radius: 2px;
+ }
+.right-bar-settings:after {
+    content: "";
+    background-color: white;
+    width: 15px;
+    height: 4px;
+    display: block;
+    float: right;
+    border-radius: 10px 6px 6px 10px;
+    transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+    z-index: -1;
+}
+.open .left-bar-settings:after {
+    transform-origin: center center;
+    transform: rotate(90deg);
+}
+.open .right-bar-settings:after {
+    transform-origin: center center;
+    transform: rotate(-90deg);
+}
+/*Settings page end*/

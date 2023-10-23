@@ -9,7 +9,7 @@
       <div class="dropdown">
         <span>Сортування:</span>
         <div class="selected-item-name" @click="toggleDropdown('name')">
-          <span>{{ sortDisplayNames[sortType] }}</span>
+          <span class="selected-item-name-click">{{ sortDisplayNames[sortType] }}</span>
           <a :class="['arrow-icon', { 'open': dropdowns.name }]">
             <span class="left-bar"></span>
             <span class="right-bar"></span>
@@ -499,9 +499,19 @@ export default {
       this.dropdowns.filterPrice = false;
     },
     checkOutsideClick(event) {
+      const selectedItemFilter = document.querySelector('.selected-item-filter');
+      const selectedItemName = document.querySelector('.selected-item-name-click');
       const dropdownContents = document.querySelectorAll('.dropdown-content');
       let isOutside = true;
 
+      // Якщо клік відбувся на selectedItemFilter або всередині його дочірніх елементів
+      if (selectedItemFilter && (selectedItemFilter === event.target || selectedItemFilter.contains(event.target))) {
+        return;  // Ігноруємо такий клік і не закриваємо випадаюче меню
+      }
+      // Якщо клік відбувся на selectedItemFilter або всередині його дочірніх елементів
+      if (selectedItemName && (selectedItemName === event.target || selectedItemName.contains(event.target))) {
+        return;  // Ігноруємо такий клік і не закриваємо випадаюче меню
+      }
       dropdownContents.forEach(dropdown => {
         if (dropdown.contains(event.target)) {
           isOutside = false;
@@ -514,8 +524,56 @@ export default {
     }
   },
   mounted() {
+    this.loading = true;
     this.applyAnimationBasedOnState();
     document.addEventListener('mousedown', this.checkOutsideClick);
+
+    const token = localStorage.getItem('token');
+    // Отримуємо улюблені подкасти
+    Promise.all([
+      apiService.getFavoritePodcasts(token),
+      apiService.AllPodcastPage(token),
+      apiService.allCategories()
+    ])
+        .then(([favoritePodcastsResponse, responseAllPodcast, responseCategories]) => {
+          console.log('favoritePodcastsResponse:', favoritePodcastsResponse);
+          console.log('userPodcastsResponse:', responseAllPodcast.data);
+          const favoritePodcastIds = favoritePodcastsResponse.data
+              ? favoritePodcastsResponse.data.map(podcast => podcast.id)
+              : [];
+          console.log('userPodcastsResponse:', favoritePodcastIds);
+          console.log('Before setting podcasts:', this.podcasts);
+
+          this.podcasts = responseAllPodcast?.data?.map(podcast => ({
+            ...podcast,
+            isVisible: true,
+            isFavorite: favoritePodcastIds.includes(podcast.id)
+          })) || [];
+
+          console.log('After setting podcasts:', this.podcasts);
+          console.log('Number of podcasts:', this.podcasts.length);
+
+          // Зберігаємо первісний список
+          this.initialPodcasts = JSON.parse(JSON.stringify(this.podcasts));
+
+          // Отримання даних всіх категорій
+          this.allcategories = responseCategories?.data?.data || [];
+          console.log('Categories:', this.allcategories);
+
+          // Ініціалізація методу сортування
+          this.sortPodcasts(this.sortType);
+
+          // дістаємо довжину для кожного подкасту:
+          this.$nextTick(() => {
+            this.fetchPodcastDurations();
+          });
+        })
+        .catch(error => {
+          console.error("Error:", error);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
   },
   beforeUnmount() {
     document.removeEventListener('mousedown', this.checkOutsideClick);
@@ -526,41 +584,41 @@ export default {
     const token = localStorage.getItem('token');
     this.isAuthenticated = Boolean(token);
     // Отримуємо улюблені подкасти
-    const favoritePodcastsResponse = await apiService.getFavoritePodcasts(token);
-    //console.log(favoritePodcastsResponse);
-    const DatafavoritePodcasts = favoritePodcastsResponse.data ? favoritePodcastsResponse.data.map(podcast => podcast.id) : [];
-    console.log(DatafavoritePodcasts);
-
-    // отримання даних всіх подкастів
-    const responseAllPodcast = await apiService.AllPodcastPage();
-    // this.podcasts = responseAllPodcast.data.data;
-
-    if(responseAllPodcast && responseAllPodcast.data && responseAllPodcast.data.data) {
-      this.podcasts = responseAllPodcast.data.data.map(podcast => {
-        return {
-          ...podcast,
-          isVisible: true,
-          isFavorite: DatafavoritePodcasts.includes(podcast.id)
-        };
-      });
-
-      console.log(this.podcasts);
-
-      // Зберігаємо первісний список
-      this.initialPodcasts = JSON.parse(JSON.stringify(this.podcasts));
-
-      // Отримання даних всіх категорій
-      const responseCategories = await apiService.allCategories();
-      this.allcategories = responseCategories.data.data;
-
-      console.log(this.allcategories);
-
-      // Ініціалізація методу сортування
-      this.sortPodcasts(this.sortType);
-
-      // дістаємо довжину для кожного подкасту:
-      await this.fetchPodcastDurations();
-    }
+    // const favoritePodcastsResponse = await apiService.getFavoritePodcasts(token);
+    // //console.log(favoritePodcastsResponse);
+    // const DatafavoritePodcasts = favoritePodcastsResponse.data ? favoritePodcastsResponse.data.map(podcast => podcast.id) : [];
+    // console.log(DatafavoritePodcasts);
+    //
+    // // отримання даних всіх подкастів
+    // const responseAllPodcast = await apiService.AllPodcastPage();
+    // // this.podcasts = responseAllPodcast.data.data;
+    //
+    // if(responseAllPodcast && responseAllPodcast.data && responseAllPodcast.data.data) {
+    //   this.podcasts = responseAllPodcast.data.data.map(podcast => {
+    //     return {
+    //       ...podcast,
+    //       isVisible: true,
+    //       isFavorite: DatafavoritePodcasts.includes(podcast.id)
+    //     };
+    //   });
+    //
+    //   console.log(this.podcasts);
+    //
+    //   // Зберігаємо первісний список
+    //   this.initialPodcasts = JSON.parse(JSON.stringify(this.podcasts));
+    //
+    //   // Отримання даних всіх категорій
+    //   const responseCategories = await apiService.allCategories();
+    //   this.allcategories = responseCategories.data.data;
+    //
+    //   console.log(this.allcategories);
+    //
+    //   // Ініціалізація методу сортування
+    //   this.sortPodcasts(this.sortType);
+    //
+    //   // дістаємо довжину для кожного подкасту:
+    //   await this.fetchPodcastDurations();
+    // }
     this.loading = false;
   }
 }
