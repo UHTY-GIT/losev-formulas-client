@@ -11,11 +11,10 @@ export default createStore({
     searchResults: [],
   },
   getters: {
-    //playingAudioSrc: state => state.playingAudioSrc,
     playingPodcast: state => state.playingPodcast,
     isPlaying: state => state.isPlaying,
-    isFavorite: (state) => (podcast) => {
-      return state.favoritePodcasts.includes(podcast);
+    isFavorite: (state) => (podcastId) => {
+      return state.favoritePodcasts.includes(podcastId);
     },
     searchResults: state => state.searchResults,
   },
@@ -23,9 +22,6 @@ export default createStore({
     setUsername(state, username) {
       state.username = username;
     },
-    // setPlayingAudioSrc(state, src) {
-    //   state.playingAudioSrc = src;
-    // },
     setPlayingPodcast(state, podcast) {
       state.playingPodcast = podcast;
     },
@@ -56,9 +52,6 @@ export default createStore({
     },
   },
   actions: {
-    // updatePlayingAudioSrc({commit}, src) { // дія
-    //   commit('setPlayingAudioSrc', src);
-    // },
     updatePlayingPodcast({commit}, podcast) { // дія
       commit('setPlayingPodcast', podcast);
       commit('SET_IS_PLAYING', true);

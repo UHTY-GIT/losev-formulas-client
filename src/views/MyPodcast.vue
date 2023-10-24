@@ -200,16 +200,12 @@ export default {
     },
     // Метод для анімації кнопки лайку на блоці постів
     async handleHeartButtonClick(podcast) {
-      //this.isPodcastFavorite(podcast.id);
       podcast.isFavorite = !podcast.isFavorite;
       console.log(podcast.isFavorite);
-      //
-      // event.target.classList.toggle('active');
 
       this.$store.dispatch('toggleFavorite', podcast.id);
       const token = localStorage.getItem('token');
 
-      //console.log("this.$store.getters.isFavorite(podcast.id)= " + this.$store.getters.isFavorite(podcast.id))
       try {
         const response = await apiService.addAndRemoveToFavorite(token, podcast.id,  `${this.$store.getters.isFavorite(podcast.id)}`);
 
@@ -223,6 +219,11 @@ export default {
             response.error.message === "You need to login before continue"
         ) {
           M.toast({ html: `Ви не авторизовані` });
+        } else if (
+            response.data === null
+        ) {
+          // M.toast({ html: `Спробуйте знову` });
+          console.error('Дані про улюблені подкасти ще не отримано:', response);
         } else {
           console.error('Отримана неочікувана відповідь з сервера:', response);
         }

@@ -63,7 +63,7 @@
         <button
             class="audio-favorite"
             :class="{'active': playingPodcast?.isFavorite}"
-            @click="toggleFavorite"
+            @click="toggleFavorite(playingPodcast)"
             aria-label="favorite"
             :disabled="isPodcastUnavailable">
         </button>
@@ -210,11 +210,35 @@ export default {
       }
     },
     //Сердечко анімація
-    toggleFavorite() {
+    async toggleFavorite(playingPodcast) {
       //this.isFavorite = !this.isFavorite;
-      this.$store.commit('TOGGLE_FAVORITE');
+
+      //this.$store.commit('TOGGLE_FAVORITE');
       if (this.playingPodcast && this.playingPodcast.id) {
-        this.$store.dispatch('toggleFavorite', this.playingPodcast.id);
+        this.$store.dispatch('toggleFavorite', playingPodcast.id);
+      }
+
+      const token = localStorage.getItem('token');
+
+
+      try {
+        const response = await apiService.addAndRemoveToFavorite(token, playingPodcast.id,  `${this.$store.getters.isFavorite(playingPodcast.id)}`);
+
+        if (response.data === true) {
+          console.log('Операція успішна', response);
+
+          this.$store.dispatch('updateIsFavoriteForPlayingPodcast', this.$store.getters.isFavorite(playingPodcast.id));
+        } else if (
+            response.error &&
+            response.error.message &&
+            response.error.message === "You need to login before continue"
+        ) {
+          M.toast({ html: `Ви не авторизовані` });
+        } else {
+          console.error('Отримана неочікувана відповідь з сервера:', response);
+        }
+      } catch (error) {
+        console.error('Помилка при додаванні або видаленні з улюблених:', error);
       }
     },
     formatTime(seconds) {
