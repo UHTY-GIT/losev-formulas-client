@@ -22,12 +22,30 @@ export default {
     NavbarNonLogin, SidebarNonLogin,BottombarNonLogin
   },
   data: () => ({
-    isFull: false
+    isFull: false,
+    isSmall: false
   }),
+  mounted() {
+    this.checkWindowSize();
+    window.addEventListener('resize', this.checkWindowSize);
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.checkWindowSize);
+  },
   methods: {
+    checkWindowSize() {
+      // Update isSmall based on window width
+      this.isSmall = window.innerWidth < 750;
+      // Whenever we check the window size, adjust the isFull property too
+      this.isFull = this.isSmall;
+    },
     toggleSize(isSmall) {
       this.isFull = isSmall;
-    }
+    },
+
+    // toggleSize() {
+    //   this.isFull = !this.isFull;
+    // }
   }
 }
 </script>

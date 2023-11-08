@@ -72,6 +72,24 @@ export default {
     ],
 
   }),
+  methods: {
+    toggleSize() {
+      this.isSmall = !this.isSmall;
+      //Надіслати подію батькові при перемиканні розміру
+      this.$emit('toggle-size', this.isSmall);
+    },
+    // Call this method on window resize
+    checkWindowSize() {
+      this.isSmall = window.innerWidth < 750;
+    }
+  },
+  mounted() {
+    this.checkWindowSize();
+    window.addEventListener('resize', this.checkWindowSize);
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.checkWindowSize);
+  },
   async created() {
     const token = localStorage.getItem('token');
     if (!token) return;
@@ -90,13 +108,6 @@ export default {
       }
     } catch (error) {
       console.log('Помилка при отриманні профілю користувача:', error);
-    }
-  },
-  methods: {
-    toggleSize() {
-      this.isSmall = !this.isSmall;
-      //Надіслати подію батькові при перемиканні розміру
-      this.$emit('toggle-size', this.isSmall);
     }
   }
 }

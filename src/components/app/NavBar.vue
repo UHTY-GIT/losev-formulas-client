@@ -125,7 +125,7 @@ export default {
   display: block;
   position: absolute;
   padding: 10px 0px;
-  width: 573px;
+  width: 500px;
   top: 90px;
   left: 33%;
   background-color: #FFFFFF;
@@ -133,6 +133,7 @@ export default {
   z-index: 20;
   border-radius: 15px;
   overflow: auto;
+  transition: .3s;
 }
 .dropdown-result {
   color: #000000;
