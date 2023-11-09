@@ -16,7 +16,7 @@
             <span class="right-bar"></span>
 					</a>
         </div>
-        <div class="dropdown-content" v-show="dropdowns.name">
+        <div class="dropdown-content dropdown-popular" v-show="dropdowns.name">
           <a href="#" @click="sortPodcasts('default')">За замовчуванням</a>
           <a href="#" @click="sortPodcasts('title')">За назвою</a>
           <a href="#" @click="sortPodcasts('rating')">За популярністю</a>
