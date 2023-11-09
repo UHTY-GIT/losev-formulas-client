@@ -164,8 +164,29 @@ export default {
     }
   },
   methods: {
+    // playPause() {
+    //   this.$store.dispatch('togglePlayStatus');
+    // },
     playPause() {
-      this.$store.dispatch('togglePlayStatus');
+      // Якщо аудіо вже грає, поставимо його на паузу
+      if (this.isPlaying) {
+        this.$refs.audioElement.pause();
+        this.$store.dispatch('togglePlayStatus', false);
+      } else {
+        // Пробуємо відтворити аудіо
+        const playPromise = this.$refs.audioElement.play();
+
+        // У разі помилки, наприклад, якщо аудіо ще не готове, виведемо помилку
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            // Аудіо почало відтворюватися
+            this.$store.dispatch('togglePlayStatus', true);
+          }).catch(error => {
+            console.error('Проблема з відтворенням аудіо:', error);
+            M.toast({ html: `Проблема з відтворенням аудіо` });
+          });
+        }
+      }
     },
     // Завершення аудіо
     handleAudioEnd() {

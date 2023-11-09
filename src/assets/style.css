@@ -10,7 +10,7 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     position: relative;
-    min-height: 100vh;
+    height: 100vh;
     /*padding-bottom: 94px;*/
 }
 a:hover {
@@ -312,7 +312,7 @@ font-face {
 /*Кастомний Скролбар - кінець*/
 body {
     font-family: 'Gilroy', sans-serif;
-    overflow: hidden;
+    overflow: auto;
     padding-top: constant(safe-area-inset-top); /* для iOS < 11.2 */
     padding-top: env(safe-area-inset-top); /* для iOS >= 11.2 */
 
@@ -445,7 +445,7 @@ header {
     display: -ms-flexbox;
     display: flex;
     margin: 10px 15px;
-    height: calc(100vh - 217px);
+    height: calc(100vh - 230px);
 }
 .sidebar-menu {
     width: 230px;
@@ -2464,7 +2464,15 @@ selected-item-filter {
         height: 45px;
         border-radius: 5px;
     }
-
+    .name-edit img {
+        width: 24px;
+    }
+    .edit-link {
+        font-size: 17px;
+    }
+    .logout-link img {
+        width: 27px;
+    }
 }
 @media(max-width: 475px){
     .play-button.expanded svg {
@@ -2595,11 +2603,31 @@ selected-item-filter {
     .podcast_name {
         font-size: 15px;
     }
+    .dropdown-filter {
+        left: 88px;
+        top: 156px;
+    }
+    .dropdown-popular {
+        left: 136px;
+        top: 126px;
+    }
 }
 @media(max-width: 437px){
     .dropdown-content {
         left: 9px;
         top: 10px;
+    }
+    .heart-button {
+        width: 17px;
+        height: 17px;
+    }
+    .dropdown-filter {
+        left: 88px;
+        top: 156px;
+    }
+    .dropdown-popular {
+        left: 136px;
+        top: 126px;
     }
 }
 @media(max-width: 421px){
@@ -2609,6 +2637,14 @@ selected-item-filter {
     }
     .dropdown span {
         font-size: 16px;
+    }
+    .dropdown-filter {
+        left: 88px;
+        top: 156px;
+    }
+    .dropdown-popular {
+        left: 136px;
+        top: 126px;
     }
 }
 @media(max-width: 415px){
@@ -2623,6 +2659,14 @@ selected-item-filter {
     }
     .audio-player {
         padding: 10px 10px;
+    }
+    .dropdown-filter {
+        left: 88px;
+        top: 156px;
+    }
+    .dropdown-popular {
+        left: 136px;
+        top: 126px;
     }
 }
 /*Media settings end*/
