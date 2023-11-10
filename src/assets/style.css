@@ -1201,6 +1201,11 @@ input[type="range"]:active::-webkit-slider-thumb {
     transform: scale(1.2);
     background: #56A442;
 }
+/*#seek-slider::before {*/
+/*    z-index: 1;*/
+/*    width: var(--load-before-width, 0%);*/
+/*    background-color: #fff; !* або будь-який кольоровий відтінок, який ви хочете *!*/
+/*}*/
 input[type="range"]::before {
     position: absolute;
     content: "";
@@ -1212,10 +1217,12 @@ input[type="range"]::before {
     cursor: pointer;
     border-radius: 20px;
     border: 0px solid #56A442;
-    z-index: 1;
+    z-index: 2;
 }
+
 #volume-slider::before {
     width: var(--volume-before-width);
+    z-index: 1;
 }
 #volume-slider::-webkit-slider-runnable-track {
     background: #414141;
@@ -2690,7 +2697,39 @@ selected-item-filter {
         top: 117px;
     }
     .play-button.expanded svg {
-        left: 19px;
+        left: 36px;
+    }
+    .podcast {
+        width: auto;
+        min-width: 270px;
+    }
+    .positions_in_block.active .upper_tittle .context .info_podcast {
+        width: 175px;
+    }
+}
+
+@media(max-width: 380px){
+    .podcast {
+        width: auto;
+        min-width: 260px;
+    }
+    .title_podcast {
+        font-size: 21px;
+    }
+    .author_podcast {
+        font-size: 16px;
+    }
+    .play-button.expanded svg {
+        left: 29px;
+    }
+}
+@media(max-width: 370px){
+    .podcast {
+        width: auto;
+        min-width: 250px;
+    }
+    .play-button.expanded svg {
+        left: 24px;
     }
 }
 /*Media settings end*/

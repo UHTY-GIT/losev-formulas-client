@@ -117,6 +117,7 @@ export default {
       progress: 0,
       selectedRating: 0, // The user's selected rating
       hoveredRating: 0,  // Rating being hovered
+      loadProgress: 0,
     };
   },
   computed: {
@@ -167,6 +168,27 @@ export default {
     // playPause() {
     //   this.$store.dispatch('togglePlayStatus');
     // },
+    // playPause() {
+    //   // Якщо аудіо вже грає, поставимо його на паузу
+    //   if (this.isPlaying) {
+    //     this.$refs.audioElement.pause();
+    //     this.$store.dispatch('togglePlayStatus', false);
+    //   } else {
+    //     // Пробуємо відтворити аудіо
+    //     const playPromise = this.$refs.audioElement.play();
+    //
+    //     // У разі помилки, наприклад, якщо аудіо ще не готове, виведемо помилку
+    //     if (playPromise !== undefined) {
+    //       playPromise.then(() => {
+    //         // Аудіо почало відтворюватися
+    //         this.$store.dispatch('togglePlayStatus', true);
+    //       }).catch(error => {
+    //         console.error('Проблема з відтворенням аудіо:', error);
+    //         M.toast({ html: `Проблема з відтворенням аудіо` });
+    //       });
+    //     }
+    //   }
+    // },
     playPause() {
       // Якщо аудіо вже грає, поставимо його на паузу
       if (this.isPlaying) {
@@ -174,20 +196,22 @@ export default {
         this.$store.dispatch('togglePlayStatus', false);
       } else {
         // Пробуємо відтворити аудіо
-        const playPromise = this.$refs.audioElement.play();
-
-        // У разі помилки, наприклад, якщо аудіо ще не готове, виведемо помилку
-        if (playPromise !== undefined) {
-          playPromise.then(() => {
-            // Аудіо почало відтворюватися
+        try {
+          // Якщо аудіо вже в зоні буферизації, відтворимо його відразу
+          this.$refs.audioElement.play();
+          this.$store.dispatch('togglePlayStatus', true);
+        } catch (error) {
+          console.error('Проблема з відтворенням аудіо:', error);
+          M.toast({ html: `Зачекайте повного завантаження аудіо і спробуйте знову` });
+          // Якщо виникла помилка, спробуємо ще раз, коли аудіо буде готове
+          this.$refs.audioElement.oncanplaythrough = () => {
+            this.$refs.audioElement.play();
             this.$store.dispatch('togglePlayStatus', true);
-          }).catch(error => {
-            console.error('Проблема з відтворенням аудіо:', error);
-            M.toast({ html: `Проблема з відтворенням аудіо` });
-          });
+          };
         }
       }
     },
+
     // Завершення аудіо
     handleAudioEnd() {
       this.$store.dispatch('togglePlayStatus');
@@ -266,6 +290,14 @@ export default {
       const min = Math.floor(seconds / 60);
       const sec = Math.floor(seconds % 60);
       return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+    },
+    updateLoadProgress() {
+      const buffered = this.$refs.audioElement.buffered;
+      if (buffered.length > 0) {
+        const end = buffered.end(buffered.length - 1);
+        this.loadProgress = (end / this.$refs.audioElement.duration) * 100;
+        this.$refs.seekSlider.style.setProperty('--load-before-width', `${this.loadProgress}%`);
+      }
     },
     updateProgress() {
       this.progress = (this.$refs.audioElement.currentTime / this.$refs.audioElement.duration) * 100;
@@ -353,6 +385,7 @@ export default {
       this.$refs.audioElement.addEventListener('timeupdate', this.updateTime);
       this.$refs.audioElement.addEventListener('loadedmetadata', this.updateDuration);
       this.$refs.audioElement.addEventListener('timeupdate', this.updateProgress);
+      this.$refs.audioElement.addEventListener('progress', this.updateLoadProgress);
       //слухач події 'ended' для обробки завершення програвання аудіо
       this.$refs.audioElement.addEventListener('ended', this.handleAudioEnd);
     }
@@ -364,6 +397,7 @@ export default {
       this.$refs.audioElement.removeEventListener('timeupdate', this.updateTime);
       this.$refs.audioElement.removeEventListener('loadedmetadata', this.updateDuration);
       this.$refs.audioElement.removeEventListener('timeupdate', this.updateProgress);
+      this.$refs.audioElement.removeEventListener('progress', this.updateLoadProgress);
       // Видаліть слухач події 'ended'
       this.$refs.audioElement.removeEventListener('ended', this.handleAudioEnd);
     }
