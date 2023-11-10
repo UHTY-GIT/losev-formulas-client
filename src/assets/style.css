@@ -2638,6 +2638,9 @@ selected-item-filter {
     .dropdown span {
         font-size: 16px;
     }
+    .dropdown-content a {
+        font-size: 16px;
+    }
     .dropdown-filter {
         left: 88px;
         top: 156px;
@@ -2657,16 +2660,37 @@ selected-item-filter {
         font-size: 15px;
         padding: 6px 20px;
     }
-    .audio-player {
+        .audio-player {
         padding: 10px 10px;
     }
-    .dropdown-filter {
+        .dropdown-filter {
         left: 88px;
         top: 156px;
     }
-    .dropdown-popular {
+        .dropdown-popular {
         left: 136px;
         top: 126px;
+    }
+    .podcast {
+        width: auto;
+        min-width: 280px;
+    }
+}
+
+@media(max-width: 390px){
+    .dropdown-content a {
+        font-size: 16px;
+    }
+    .dropdown-filter {
+        left: 84px;
+        top: 145px;
+    }
+    .dropdown-popular {
+        left: 124px;
+        top: 117px;
+    }
+    .play-button.expanded svg {
+        left: 19px;
     }
 }
 /*Media settings end*/
