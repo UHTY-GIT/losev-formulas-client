@@ -291,17 +291,36 @@ export default {
       const sec = Math.floor(seconds % 60);
       return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
     },
+    // updateLoadProgress() {
+    //   const buffered = this.$refs.audioElement.buffered;
+    //   if (buffered.length > 0) {
+    //     const end = buffered.end(buffered.length - 1);
+    //     this.loadProgress = (end / this.$refs.audioElement.duration) * 100;
+    //     this.$refs.seekSlider.style.setProperty('--load-before-width', `${this.loadProgress}%`);
+    //   }
+    // },
+    // updateProgress() {
+    //   this.progress = (this.$refs.audioElement.currentTime / this.$refs.audioElement.duration) * 100;
+    //   this.$refs.seekSlider.style.setProperty('--seek-before-width', this.progress + '%');
+    // },
     updateLoadProgress() {
       const buffered = this.$refs.audioElement.buffered;
       if (buffered.length > 0) {
         const end = buffered.end(buffered.length - 1);
         this.loadProgress = (end / this.$refs.audioElement.duration) * 100;
-        this.$refs.seekSlider.style.setProperty('--load-before-width', `${this.loadProgress}%`);
+        this.updateSliderStyles(this.loadProgress, this.progress);
       }
     },
     updateProgress() {
       this.progress = (this.$refs.audioElement.currentTime / this.$refs.audioElement.duration) * 100;
-      this.$refs.seekSlider.style.setProperty('--seek-before-width', this.progress + '%');
+      this.updateSliderStyles(this.loadProgress, this.progress);
+    },
+    updateSliderStyles(loadedPercent, playedPercent) {
+      const slider = this.$refs.seekSlider;
+      if (slider) {
+        slider.style.setProperty('--loaded-width', `${loadedPercent}%`);
+        slider.style.setProperty('--played-width', `${playedPercent}%`);
+      }
     },
     updateTime() {
       if (this.$refs.audioElement) {
@@ -334,6 +353,7 @@ export default {
       //console.log("this.progress= " + this.progress)
       this.$refs.seekSlider.style.setProperty('--seek-before-width', this.progress + '%');
 
+      this.updateSliderStyles(this.loadProgress, this.progress);
     },
     // анімація іконок рейтингу
     fillStar(index) {
