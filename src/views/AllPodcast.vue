@@ -161,13 +161,29 @@ export default {
     }
   },
   watch: {
+    // isPlaying(newVal) {
+    //   if (newVal === true) {
+    //     this.startAnimation();
+    //   } else if (newVal === false) {
+    //     this.stopAnimation();
+    //   }
+    // }
     isPlaying(newVal) {
-      if (newVal === true) {
+      if (newVal) {
         this.startAnimation();
-      } else if (newVal === false) {
+        // Перевірка, чи аудіо повністю завантажене перед його відтворенням
+        if (this.audio.readyState === 4) {
+          this.audio.play();
+        } else {
+          this.audio.oncanplaythrough = () => {
+            this.audio.play();
+          };
+        }
+      } else {
         this.stopAnimation();
+        this.audio.pause();
       }
-    }
+    },
   },
   methods: {
     //відкриття вспливаючого вікна при оплаті і перекидання на сторінку аутентифікації якщо токен не знайдено
@@ -218,7 +234,8 @@ export default {
       const activePodcastElement = document.querySelector(`.podcast.id_${this.playingPodcastId}`);
       //console.log("activePodcastElement = " + activePodcastElement);
       if (activePodcastElement) {
-        this.isPlaying = !this.isPlaying;
+        //this.isPlaying = !this.isPlaying;
+        //this.$store.dispatch('togglePlayStatus');
         this.playingPodcast = this.playingPodcastId;
         activePodcastElement.querySelector('.positions_in_block').classList.add('active');
         activePodcastElement.classList.add('active');
@@ -232,6 +249,7 @@ export default {
       const activePodcastElement = document.querySelector(`.podcast.id_${this.playingPodcast}`);
       if (activePodcastElement) {
         //this.isPlaying = !this.isPlaying;
+        //this.$store.dispatch('togglePlayStatus');
         //this.playingPodcast = this.playingPodcastId;
         activePodcastElement.querySelector('.positions_in_block').classList.remove('active');
         activePodcastElement.classList.remove('active');
