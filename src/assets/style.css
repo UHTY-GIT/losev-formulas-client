@@ -2741,6 +2741,9 @@ selected-item-filter {
 }
 
 @media(max-width: 380px){
+    .podcast-rating {
+        font-size: 18px;
+    }
     .podcast {
         width: auto;
         min-width: 260px;

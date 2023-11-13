@@ -308,12 +308,12 @@ export default {
 
     // Метод для анімації кнопки плей у блоці підкастів
     handlePlayButtonClick(podcast, event) {
-      if (this.playingPodcast === podcast.id) {
+      event.preventDefault();
+      if (this.playingPodcast === podcast.id && this.isPlaying) {
         // Якщо клікнули по вже відтворюваному подкасту, зупиняємо відтворення
-        //this.audio.pause();
         this.$store.dispatch('togglePlayStatus');
 
-        if (!this.isPlaying) {
+        if (this.playingPodcast) {
           // If we stopped playback, run stopPlayingPodcast method
           this.stopPlayingPodcast();
         }
@@ -323,12 +323,8 @@ export default {
         if(this.playingPodcast !== null){
           this.stopPlayingPodcast();
         }
-        //this.audio.src = podcast.audio_url;
-        //this.playAudio(podcast.audio_url); //Передаємо посилання на аудіо
-        //this.playPodcast(); // Використовуємо метод playPodcast
         this.playingPodcast = podcast.id;
         // Передаю через vuex дані про підкаст
-        //console.log("this.$store.getters.isFavorite(podcast.id)= "+this.$store.getters.isFavorite(podcast.id))
         this.$store.dispatch('updatePlayingPodcast', {
           imageUrl: podcast.image_url,
           author: podcast.author,
@@ -336,7 +332,6 @@ export default {
           duration: podcast.duration,
           id: podcast.id,
           audio_url: podcast.audio_url,
-          //isFavorite: this.$store.getters.isFavorite(podcast.id)
           isFavorite: podcast.isFavorite
         });
       }
