@@ -162,7 +162,13 @@ export default {
         this.$refs.audioElement.pause();
         this.$refs.audioElement.currentTime = 0;
       }
-    }
+    },
+    // Додайте це до спостережувачів
+    userHasInteracted(newVal) {
+      if (newVal === true) {
+        this.playPause();
+      }
+    },
   },
   methods: {
     // playPause() {

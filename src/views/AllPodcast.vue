@@ -161,29 +161,13 @@ export default {
     }
   },
   watch: {
-    // isPlaying(newVal) {
-    //   if (newVal === true) {
-    //     this.startAnimation();
-    //   } else if (newVal === false) {
-    //     this.stopAnimation();
-    //   }
-    // }
     isPlaying(newVal) {
-      if (newVal) {
+      if (newVal === true) {
         this.startAnimation();
-        // Перевірка, чи аудіо повністю завантажене перед його відтворенням
-        if (this.audio.readyState === 4) {
-          this.audio.play();
-        } else {
-          this.audio.oncanplaythrough = () => {
-            this.audio.play();
-          };
-        }
-      } else {
+      } else if (newVal === false) {
         this.stopAnimation();
-        this.audio.pause();
       }
-    },
+    }
   },
   methods: {
     //відкриття вспливаючого вікна при оплаті і перекидання на сторінку аутентифікації якщо токен не знайдено
@@ -327,6 +311,9 @@ export default {
     // Метод для анімації кнопки плей у блоці підкастів
     handlePlayButtonClick(podcast, event) {
       event.preventDefault();
+      // Додайте це до обробника кліку
+      this.$store.dispatch('userInitiatedPlay', podcast);
+
       if (this.playingPodcast === podcast.id && this.isPlaying) {
         // Якщо клікнули по вже відтворюваному подкасту, зупиняємо відтворення
         this.$store.dispatch('togglePlayStatus');
