@@ -327,7 +327,32 @@ export default {
       event.preventDefault();
       if (this.isIphone) {
         // Show a toast message and do not change the playing state.
-        M.toast({ html: `Please press the play button at the bottom.` });
+        M.toast({ html: `Натисність на кнопку відтворення у нижній частині екрану` });
+
+        this.$store.dispatch('updatePlayingPodcast', {
+          imageUrl: podcast.image_url,
+          author: podcast.author,
+          title: podcast.title,
+          duration: podcast.duration,
+          id: podcast.id,
+          audio_url: podcast.audio_url,
+          isFavorite: podcast.isFavorite
+        });
+
+        if (this.playingPodcast == podcast.id && this.isPlaying == true) {
+          let podcastBlock = event.target.closest('.positions_in_block');
+          podcastBlock.classList.toggle('active');
+
+          let podcastElement = event.target.closest('.podcast');
+          podcastElement.classList.toggle('active');
+
+          const contextElement = podcastElement.querySelector('.context');
+          contextElement.classList.toggle('reversed');
+
+          const PlayElement = podcastElement.querySelector('.play-button');
+          PlayElement.classList.toggle('expanded');
+        }
+
       } else {
         if (this.playingPodcast === podcast.id && this.isPlaying) {
           // Якщо клікнули по вже відтворюваному подкасту, зупиняємо відтворення
