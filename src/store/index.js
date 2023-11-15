@@ -50,9 +50,6 @@ export default createStore({
     SET_SEARCH_RESULTS(state, results) {
       state.searchResults = results;
     },
-    setUserHasInteracted(state, status) {
-      state.userHasInteracted = status;
-    },
   },
   actions: {
     updatePlayingPodcast({commit}, podcast) { // дія
@@ -68,11 +65,7 @@ export default createStore({
     //оновлення стану лайку у взємодії подкаст - боттомбар
     updateIsFavoriteForPlayingPodcast({ commit }, isFavorite) {
       commit('UPDATE_IS_FAVORITE_FOR_PLAYING_PODCAST', isFavorite);
-    },
-    userInitiatedPlay({ commit }, podcast) {
-      commit('setUserHasInteracted', true);
-      commit('setPlayingPodcast', podcast);
-    },
+    }
   },
   modules: {
   }

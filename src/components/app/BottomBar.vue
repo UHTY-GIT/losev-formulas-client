@@ -162,13 +162,7 @@ export default {
         this.$refs.audioElement.pause();
         this.$refs.audioElement.currentTime = 0;
       }
-    },
-    // Додайте це до спостережувачів
-    userHasInteracted(newVal) {
-      if (newVal === true) {
-        this.playPause();
-      }
-    },
+    }
   },
   methods: {
     // playPause() {
@@ -297,18 +291,6 @@ export default {
       const sec = Math.floor(seconds % 60);
       return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
     },
-    // updateLoadProgress() {
-    //   const buffered = this.$refs.audioElement.buffered;
-    //   if (buffered.length > 0) {
-    //     const end = buffered.end(buffered.length - 1);
-    //     this.loadProgress = (end / this.$refs.audioElement.duration) * 100;
-    //     this.$refs.seekSlider.style.setProperty('--load-before-width', `${this.loadProgress}%`);
-    //   }
-    // },
-    // updateProgress() {
-    //   this.progress = (this.$refs.audioElement.currentTime / this.$refs.audioElement.duration) * 100;
-    //   this.$refs.seekSlider.style.setProperty('--seek-before-width', this.progress + '%');
-    // },
     updateLoadProgress() {
       const buffered = this.$refs.audioElement.buffered;
       if (buffered.length > 0) {

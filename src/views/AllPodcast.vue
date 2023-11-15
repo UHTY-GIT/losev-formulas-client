@@ -57,7 +57,8 @@
             <div class="context">
               <button class="play-button" :disabled="podcast.blocked" aria-label="Play podcast" @click="!podcast.blocked && handlePlayButtonClick(podcast, $event)">
                 <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
-                  <path class="play-path" :d="isPlaying && playingPodcast === podcast.id ? pausePath : playPath" />
+<!--                  <path class="play-path" :d="isPlaying && playingPodcast === podcast.id ? pausePath : playPath" />-->
+                  <path class="play-path" :d="getPlayIconPath(podcast.id)" />
                 </svg>
               </button>
               <div class="info_podcast">
@@ -145,6 +146,7 @@ export default {
       selectedPaymentMethod: '',
       selectedPodcastId: null,
       isAuthenticated: false,
+      isIphone: /iPhone/.test(navigator.userAgent) && !window.MSStream,
     };
   },
   computed: {
@@ -158,7 +160,19 @@ export default {
     },
     isPodcastFavorite() {
       return podcast => this.$store.getters.isFavorite(podcast.id);
-    }
+    },
+    getPlayIconPath() {
+      return (podcastId) => {
+        // If the podcast is currently playing, return the pausePath.
+        // Otherwise, return the playPath.
+        // If the device is an iPhone, always return the playPath since we want to prevent automatic playback.
+        if (this.isIphone) {
+          return this.playPath; // Always show the play icon on iPhones to indicate manual play is required.
+        } else {
+          return this.isPlaying && this.playingPodcast === podcastId ? this.pausePath : this.playPath;
+        }
+      };
+    },
   },
   watch: {
     isPlaying(newVal) {
@@ -311,51 +325,54 @@ export default {
     // Метод для анімації кнопки плей у блоці підкастів
     handlePlayButtonClick(podcast, event) {
       event.preventDefault();
-      // Додайте це до обробника кліку
-      this.$store.dispatch('userInitiatedPlay', podcast);
-
-      if (this.playingPodcast === podcast.id && this.isPlaying) {
-        // Якщо клікнули по вже відтворюваному подкасту, зупиняємо відтворення
-        this.$store.dispatch('togglePlayStatus');
-
-        if (this.playingPodcast) {
-          // If we stopped playback, run stopPlayingPodcast method
-          this.stopPlayingPodcast();
-        }
-        this.playingPodcast = null;
+      if (this.isIphone) {
+        // Show a toast message and do not change the playing state.
+        M.toast({ html: `Please press the play button at the bottom.` });
       } else {
-        // Якщо клікнули по іншому подкасту, змінюємо джерело аудіо та відтворюємо його
-        if(this.playingPodcast !== null){
-          this.stopPlayingPodcast();
+        if (this.playingPodcast === podcast.id && this.isPlaying) {
+          // Якщо клікнули по вже відтворюваному подкасту, зупиняємо відтворення
+          this.$store.dispatch('togglePlayStatus');
+
+          if (this.playingPodcast) {
+            // If we stopped playback, run stopPlayingPodcast method
+            this.stopPlayingPodcast();
+          }
+          this.playingPodcast = null;
+        } else {
+          // Якщо клікнули по іншому подкасту, змінюємо джерело аудіо та відтворюємо його
+          if(this.playingPodcast !== null){
+            this.stopPlayingPodcast();
+          }
+          this.playingPodcast = podcast.id;
+          // Передаю через vuex дані про підкаст
+          this.$store.dispatch('updatePlayingPodcast', {
+            imageUrl: podcast.image_url,
+            author: podcast.author,
+            title: podcast.title,
+            duration: podcast.duration,
+            id: podcast.id,
+            audio_url: podcast.audio_url,
+            isFavorite: podcast.isFavorite
+          });
         }
-        this.playingPodcast = podcast.id;
-        // Передаю через vuex дані про підкаст
-        this.$store.dispatch('updatePlayingPodcast', {
-          imageUrl: podcast.image_url,
-          author: podcast.author,
-          title: podcast.title,
-          duration: podcast.duration,
-          id: podcast.id,
-          audio_url: podcast.audio_url,
-          isFavorite: podcast.isFavorite
-        });
+        console.log("this.playingPodcast= "+ this.playingPodcast)
+        console.log("this.isPlaying= "+ this.isPlaying)
+
+        if (this.playingPodcast == podcast.id && this.isPlaying == true) {
+          let podcastBlock = event.target.closest('.positions_in_block');
+          podcastBlock.classList.toggle('active');
+
+          let podcastElement = event.target.closest('.podcast');
+          podcastElement.classList.toggle('active');
+
+          const contextElement = podcastElement.querySelector('.context');
+          contextElement.classList.toggle('reversed');
+
+          const PlayElement = podcastElement.querySelector('.play-button');
+          PlayElement.classList.toggle('expanded');
+        }
       }
-      console.log("this.playingPodcast= "+ this.playingPodcast)
-      console.log("this.isPlaying= "+ this.isPlaying)
 
-      if (this.playingPodcast == podcast.id && this.isPlaying == true) {
-        let podcastBlock = event.target.closest('.positions_in_block');
-        podcastBlock.classList.toggle('active');
-
-        let podcastElement = event.target.closest('.podcast');
-        podcastElement.classList.toggle('active');
-
-        const contextElement = podcastElement.querySelector('.context');
-        contextElement.classList.toggle('reversed');
-
-        const PlayElement = podcastElement.querySelector('.play-button');
-        PlayElement.classList.toggle('expanded');
-      }
     },
     // Метод що витягує з метаданих аудіо час, скільки йде подкаст
     async fetchPodcastDurations() {
