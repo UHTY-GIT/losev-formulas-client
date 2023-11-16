@@ -190,53 +190,33 @@ export default {
     //     }
     //   }
     // },
-    // playPause() {
-    //   // Якщо аудіо вже грає, поставимо його на паузу
-    //   if (this.isPlaying) {
-    //     this.$refs.audioElement.pause();
-    //     this.$store.dispatch('togglePlayStatus', false);
-    //   } else {
-    //     // Пробуємо відтворити аудіо
-    //     try {
-    //       // Якщо аудіо вже в зоні буферизації, відтворимо його відразу
-    //       this.$refs.audioElement.play();
-    //       this.$store.dispatch('togglePlayStatus', true);
-    //     } catch (error) {
-    //       console.error('Проблема з відтворенням аудіо:', error);
-    //       M.toast({ html: `Зачекайте повного завантаження аудіо і спробуйте знову` });
-    //       // Якщо виникла помилка, спробуємо ще раз, коли аудіо буде готове
-    //       this.$refs.audioElement.oncanplaythrough = () => {
-    //         this.$refs.audioElement.play();
-    //         this.$store.dispatch('togglePlayStatus', true);
-    //       };
-    //     }
-    //   }
-    // },
     playPause() {
       // Якщо аудіо вже грає, поставимо його на паузу
-      if (this.isPlaying) {
-        this.$refs.audioElement.pause();
-        this.$store.dispatch('togglePlayStatus', false);
+      if (this.isPlaying && this.isIphone) {
+        this.$refs.audioElement.play();
+        this.$store.dispatch('togglePlayStatus', true);
       } else {
-        // Для iPhone встановлюємо іконку на паузу, щоб користувач натиснув на неї
-        if (this.isIphone) {
-          this.$store.dispatch('togglePlayStatus', true); // Встановлюємо статус відтворення як активний
-          // Не викликаємо play() для елемента аудіо, щоб не порушувати політику автовідтворення
+        if (this.isPlaying) {
+          this.$refs.audioElement.pause();
+          this.$store.dispatch('togglePlayStatus', false);
         } else {
           // Пробуємо відтворити аудіо
-          const playPromise = this.$refs.audioElement.play();
-
-          // У разі успіху, змінюємо статус відтворення
-          if (playPromise !== undefined) {
-            playPromise.then(() => {
+          try {
+            // Якщо аудіо вже в зоні буферизації, відтворимо його відразу
+            this.$refs.audioElement.play();
+            this.$store.dispatch('togglePlayStatus', true);
+          } catch (error) {
+            console.error('Проблема з відтворенням аудіо:', error);
+            M.toast({ html: `Зачекайте повного завантаження аудіо і спробуйте знову` });
+            // Якщо виникла помилка, спробуємо ще раз, коли аудіо буде готове
+            this.$refs.audioElement.oncanplaythrough = () => {
+              this.$refs.audioElement.play();
               this.$store.dispatch('togglePlayStatus', true);
-            }).catch(error => {
-              console.error('Проблема з відтворенням аудіо:', error);
-              M.toast({ html: `Проблема з відтворенням аудіо` });
-            });
+            };
           }
         }
       }
+
     },
 
     // Завершення аудіо

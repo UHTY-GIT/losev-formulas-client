@@ -161,26 +161,16 @@ export default {
     isPodcastFavorite() {
       return podcast => this.$store.getters.isFavorite(podcast.id);
     },
-    // getPlayIconPath() {
-    //   return (podcastId) => {
-    //     // If the podcast is currently playing, return the pausePath.
-    //     // Otherwise, return the playPath.
-    //     // If the device is an iPhone, always return the playPath since we want to prevent automatic playback.
-    //     if (this.isIphone) {
-    //       return this.playPath; // Always show the play icon on iPhones to indicate manual play is required.
-    //     } else {
-    //       return this.isPlaying && this.playingPodcast === podcastId ? this.pausePath : this.playPath;
-    //     }
-    //   };
-    // },
     getPlayIconPath() {
       return (podcastId) => {
-        // Для iPhone завжди показуємо іконку паузи, коли стан відтворення активний
-        if (this.isIphone && this.isPlaying) {
-          return this.pausePath;
+        // If the podcast is currently playing, return the pausePath.
+        // Otherwise, return the playPath.
+        // If the device is an iPhone, always return the playPath since we want to prevent automatic playback.
+        if (this.isIphone) {
+          return this.playPath; // Always show the play icon on iPhones to indicate manual play is required.
+        } else {
+          return this.isPlaying && this.playingPodcast === podcastId ? this.pausePath : this.playPath;
         }
-        // Для інших пристроїв використовуємо логіку відтворення/паузи
-        return this.isPlaying && this.playingPodcast === podcastId ? this.pausePath : this.playPath;
       };
     },
   },
